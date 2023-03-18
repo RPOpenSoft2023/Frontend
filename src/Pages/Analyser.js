@@ -5,7 +5,7 @@ import ColumnData from "../Data/ColumnData";
 import AccountData from "../Data/AccountData";
 import UserData from "../Data/UserData";
 import { Row, Col, Card, Table } from 'antd'
-const Dashboard = () => {
+const Analyser = () => {
     return (
         <div>
             <div style={{ display: 'flex' }}>
@@ -47,4 +47,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default Analyser;
