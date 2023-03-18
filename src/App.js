@@ -6,7 +6,7 @@ import Navbar from './Components/Navbar/navbar';
 import BankingDetails from './Pages/BankingDetails';
 function App() {
   return (
-    <div className="App bg-gray-200 h-screen">
+    <div className="App">
       <Navbar/>
       <Routes>
         <Route path='/' element={<Dashboard />}></Route>
