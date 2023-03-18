@@ -3,10 +3,12 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "./Pages/DashBoard";
 import BankingDetails from "./Pages/BankingDetails";
+import Navbar from "./Components/Navbar/navbar";
 
 function App() {
   return (
     <div className="App">
+      <Navbar/>
       <Routes>
         <Route path='/' element={<Dashboard />}></Route>
         <Route path='/banking' element={<BankingDetails />}></Route>
