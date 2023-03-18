@@ -2,7 +2,7 @@ import React from "react";
 
 const RightMenu = () => {
   return (
-    <div className="flex">
+    <div className="">
       <div>
         <i class="bx bx-home"></i>
       </div>
