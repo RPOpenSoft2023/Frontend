@@ -43,11 +43,11 @@ const columns = [
 
 const BankTransaction = ({ transaction }) => {
   return (
-    <Card title="Transaction Details" bordered={false} style={{ width: '100%', height: '100%' }}>
+    <Card title="Transaction Details" className='text-center'  bordered={false} style={{ width: '100%', height: '100%' }}>
         <Table columns={columns} dataSource={transaction} pagination={{ pageSize: 5 }} />
         <Space wrap>
-            <Button type="primary" className=''> Add Transaction </Button>
-            <Button type="primary"> Analyse </Button> 
+            <Button type="primary" className='rounded hover:rounded-lg'> Add Transaction </Button>
+            <Button type="primary" className='rounded hover:rounded-lg'> Analyse </Button> 
         </Space>
     </Card>
   )

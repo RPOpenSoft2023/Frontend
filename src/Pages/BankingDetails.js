@@ -84,14 +84,14 @@ import BankTransaction from '../Components/BankingDetails/BankTransaction';
 const BankingDetails = () => {
     return (
         <div>
-            <Row justify="space-between">
-                <Col span={8}>
+            <div className='m-auto grid grid-cols-2 lg:grid-cols-3 '>
+                <div className='col-span-2 lg:col-span-1 md:text-center lg:text-left mx-2 ml-3'>
                     <BankDetails account={account} user={user} />
-                </Col>
-                <Col span={16}>
+                </div>
+                <div className='col-span-2 mx-2 mr-3'>
                     <BankTransaction transaction={transaction} />
-                </Col>
-            </Row>
+                </div>
+            </div>
         </div>
     );
 }
