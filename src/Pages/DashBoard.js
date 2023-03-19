@@ -82,7 +82,9 @@ const Dashboard = () => {
     // </div>
     <>
       <DashboardTabs/>
+      <hr className="block bg-orange-300 w-3/5 m-auto" style={{height: "1.5px"}}></hr>
       <Reports />
+      <hr className="block bg-orange-300 w-3/5 m-auto" style={{height: "1.5px"}}></hr>
       <BankNames />
     </>
   );

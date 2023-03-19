@@ -1,6 +1,6 @@
 import { Card } from "antd";
 const Reports = () => (
-  <div className="grid grid-cols-3">
+  <div className="grid grid-cols-2 md:grid-cols-3">
     <Card title="Quick Links" size="large" className="text-center m-4">
       <div className="flex">
         <i className="bx bx-plus bx-sm mt-1 mr-3"></i>
@@ -37,7 +37,7 @@ const Reports = () => (
         <p>0</p>
       </div>
     </Card>
-    <Card title="Transactions" size="large" className="text-center m-4">
+    <Card title="Transactions" size="large" className="text-center m-4 col-span-2 md:col-span-1">
       <div className="flex justify-between">
         <div className="text-left">
           <p>Canara Bank</p>
