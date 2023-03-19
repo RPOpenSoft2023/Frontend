@@ -9,13 +9,13 @@ import Analyser from './Pages/Analyser';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       <Navbar/>
       <Routes>
-        <Route path='/' element={<Dashboard />}></Route>
+        <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/login' element={<LoginPage />}></Route>
         <Route path='/signup' element={<SignupPage />}></Route>
-        <Route path='/Analyser' element={<Analyser />}></Route>
+        <Route path='/analyser' element={<Analyser />}></Route>
       </ Routes>
     </div>
   );
