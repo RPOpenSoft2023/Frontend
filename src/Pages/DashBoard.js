@@ -12,7 +12,7 @@ const Dashboard = () => {
                 <p>
                     Lorem, ipsum dolor.
                 </p>
-                <Link to="/">
+                <Link to="/banking">
                 <i class='bx bxs-send bx-sm' ></i>
                 </Link>
               </div>
@@ -20,7 +20,7 @@ const Dashboard = () => {
                 <p>
                     Lorem, ipsum dolor.
                 </p>
-                <Link>
+                <Link to="/banking">
                 <i class='bx bxs-send bx-sm' ></i>
                 </Link>
               </div>
@@ -28,7 +28,7 @@ const Dashboard = () => {
                 <p>
                     Lorem, ipsum dolor.
                 </p>
-                <Link>
+                <Link to="/banking">
                 <i class='bx bxs-send bx-sm' ></i>
                 </Link>
               </div>
@@ -36,7 +36,7 @@ const Dashboard = () => {
                 <p>
                     Lorem, ipsum dolor.
                 </p>
-                <Link>
+                <Link to="/banking">
                 <i class='bx bxs-send bx-sm' ></i>
                 </Link>
               </div>
@@ -44,7 +44,7 @@ const Dashboard = () => {
                 <p>
                     Lorem, ipsum dolor.
                 </p>
-                <Link>
+                <Link to="/banking">
                 <i class='bx bxs-send bx-sm' ></i>
                 </Link>
               </div>
@@ -52,7 +52,7 @@ const Dashboard = () => {
                 <p>
                     Lorem, ipsum dolor.
                 </p>
-                <Link>
+                <Link to="/banking">
                 <i class='bx bxs-send bx-sm' ></i>
                 </Link>
               </div>
