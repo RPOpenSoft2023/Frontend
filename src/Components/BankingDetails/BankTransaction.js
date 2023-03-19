@@ -50,7 +50,7 @@ const BankTransaction = ({ transaction }) => {
   return (
     <Card title="Transaction Details" className='text-center'  bordered={false} style={{ width: '100%', height: '100%' }}>
         <Card.Grid  style={{width: '100%'}} className='col-span-2 overflow-x-auto break-normal	'>
-          <Table columns={columns} className='' dataSource={transaction} pagination={{ pageSize: 5 }} />
+          <Table columns={columns} className='' dataSource={transaction} pagination={{ pageSize: 10 }} />
         </Card.Grid>
             <div className='py-5 mx-auto space-x-5'>
               <Button type="primary" className='bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl hover:bg-blue-800 hover:rounded-full mx-auto'> Add Transaction </Button>

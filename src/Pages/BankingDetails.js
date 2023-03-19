@@ -3,24 +3,9 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import BankDetails from '../Components/BankingDetails/BankDetails';
 import BankTransaction from '../Components/BankingDetails/BankTransaction';
-  const user = {
-    name: 'John Doe',
-    address: 'Kolkata, West Bengal, India',
-    phone: '9876543210',
-    email: 'johndoe@gmail.com',
-    aadharNumber: '123456789012',
-    age: 30,
-  }
-  const account = {
-    bankName: 'HDFC',
-    accountNumber: '1234567890',
-    accountType: 'Savings',
-    branchName: 'Kolkata',
-    branchAddress: 'Kolkata, West Bengal, India',
-    accountOpenDate: '2021-01-01',
-    ifscCode: 'HDFC1234',
-  }
-
+import user from '../Data/UserData';
+import account from '../Data/AccountData';
+// import transaction from '../Data/ColumnData';
   const transaction = [
     {
         key: '1',
