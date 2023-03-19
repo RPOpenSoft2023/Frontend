@@ -43,13 +43,11 @@ function Navbar() {
           flex flex-wrap
           items-center
           justify-between
-          w-full
           py-4
         sm:py-0
           px-4
           text-xl text-gray-700
           font-bold
-          fixed
           bg-gray-300
           bg-gradient-to-r from-cyan-500 to-blue-500
         "

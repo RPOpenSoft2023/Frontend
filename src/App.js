@@ -5,7 +5,7 @@ import Dashboard from "./Pages/DashBoard";
 import SignupPage from './Pages/Signup';
 import LoginPage from './Pages/Login';
 import Navbar from './Components/Navbar/navbar';
-
+import BankingDetails from './Pages/BankingDetails';
 function App() {
   return (
     <div className="App">
@@ -14,6 +14,7 @@ function App() {
         <Route path='/' element={<Dashboard />}></Route>
         <Route path='/login' element={<LoginPage />}></Route>
         <Route path='/signup' element={<SignupPage />}></Route>
+        <Route path='/banking' element={<BankingDetails />}></Route>
       </ Routes>
     </div>
   );
