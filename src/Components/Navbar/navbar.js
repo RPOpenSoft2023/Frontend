@@ -43,7 +43,6 @@ function Navbar() {
           flex flex-wrap
           items-center
           justify-between
-          w-full
           py-4
         sm:py-0
           px-4
