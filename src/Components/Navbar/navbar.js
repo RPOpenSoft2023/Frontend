@@ -47,7 +47,8 @@ function Navbar() {
           py-4
         sm:py-0
           px-4
-          text-lg text-gray-700
+          text-xl text-gray-700
+          font-bold
           bg-gray-300
           bg-gradient-to-r from-cyan-500 to-blue-500
         "
