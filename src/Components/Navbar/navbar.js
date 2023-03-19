@@ -89,25 +89,25 @@ function Navbar() {
               md:pt-0"
           >
             <li>
-              <Link class="md:p-4 py-2 block hover:text-purple-400" to="/dashboard">
+              <Link class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono" to="/dashboard">
                 {!matches ? <p>Home</p>:<i class='bx bx-home-alt-2 bx-sm text-white'></i>}
               </Link>
             </li>
             <li>
-              <Link class="md:p-4 py-2 block hover:text-purple-400" to="/">
+              <Link class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono" to="/">
               {!matches ? <p>Add</p>:<i class='bx bx-plus-circle bx-sm text-white' ></i>}
               </Link>
             </li>
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <li>
-                <Link class="md:p-4 py-2 block hover:text-purple-400" to="/">
+                <Link class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono" to="/">
               {!matches ? <p>Profile</p>:<i class='bx bx-user bx-sm text-white' ></i>}
                 </Link>
               </li>
             </Dropdown>
             <li>
               <Link
-                class="md:p-4 py-2 block hover:text-purple-400"
+                class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
                 to="/"
                 >
                   {!matches ? <p>Logout</p>:<i class='bx bx-log-out-circle bx-sm text-white' ></i>}
