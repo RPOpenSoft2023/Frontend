@@ -6,6 +6,9 @@ import AccountData from "../Data/AccountData";
 import UserData from "../Data/UserData";
 import { Badge, Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
+import PieChart from "../Components/PieChart";
+import Plot from "../Components/Plot";
+
 const Analyser = () => {
     return (
         <div>
@@ -22,7 +25,7 @@ const Analyser = () => {
             <div>
                 <Row justify="space-between" className="mx-3">
                     <Col span={8}>
-                        <Card title={<b className="text-lg">Bank Details</b>} bordered={true} style={{ width: 'auto', height: '100%', fontSize: "16px",textAlign:"center" }}>
+                        <Card title={<b className="text-lg">Bank Details</b>} bordered={true} style={{ width: 'auto', height: '100%', fontSize: "16px", textAlign: "center" }}>
                             <Descriptions
                                 bordered
                                 column={{
@@ -58,6 +61,18 @@ const Analyser = () => {
                             />
                         </Card>
                     </Col>
+                </Row>
+                <Row justify="space-between" className="mx-3">
+                <Col span={8}>
+                <Card title={<b className="text-lg">PIE CHART</b>} bordered={false} style={{ width: 'auto', height: 'auto', textAlign: "left" }}>
+                    <PieChart />
+                </Card>
+                </Col>
+                <Col span={15}>
+                <Card title={<b className="text-lg">BAR GRAPH</b>} bordered={false} style={{ width: 'auto', height: 'auto', textAlign: "left" }}>
+                    <Plot />
+                </Card>
+                </Col>
                 </Row>
             </div>
         </div>
