@@ -54,9 +54,9 @@ function Navbar() {
           bg-gradient-to-r from-cyan-500 to-blue-500
         "
       >
-        <div>
+        <div className="font-['Lora']">
           <Link to="/">
-            OPENSOFT
+            RedShift
           </Link>
         </div>
 

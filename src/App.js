@@ -10,7 +10,7 @@ import Analyser from './Pages/Analyser';
 
 function App() {
   return (
-    <div className="App mx-0 my-0 bg-gray-200 min-h-screen">
+    <div className="App mx-0 my-0 bg-gray-200 min-h-screen font-['Lora']">
       <Navbar/>
       <Routes>
         <Route path='/' element={<Dashboard />}></Route>
