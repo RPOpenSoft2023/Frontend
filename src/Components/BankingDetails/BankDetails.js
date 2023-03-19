@@ -4,29 +4,36 @@ import { Card, Button } from 'antd'
 const BankDetails = ({ account, user }) => {
   return (
     <Card title="Bank Details" className='text-center' bordered={false} style={{ width: '100%', height: '100%' }}>
-        <div className='grid grid-cols-2 gap-4'>
-        <div className='col-span-1 text-left'>Bank Name: </div>
-        <div className='col-span-1 text-left'>{account.bankName}</div>
-        <div className='col-span-1 text-left'>Account Number: </div>
-        <div className='col-span-1 text-left'>{account.accountNumber}</div>
-        <div className='col-span-1 text-left'>Account Type: </div>
-        <div className='col-span-1 text-left'>{account.accountType}</div>
-        <div className='col-span-1 text-left'>Branch Name: </div>
-        <div className='col-span-1 text-left'>{account.branchName}</div>
-        <div className='col-span-1 text-left'>Branch Address: </div>
-        <div className='col-span-1 text-left'>{account.branchAddress}</div>
-        <div className='col-span-1 text-left'>IFSC Code: </div>
-        <div className='col-span-1 text-left'>{account.ifscCode}</div>
-        <div className='col-span-1 text-left'>Account Holder Name: </div>
-        <div className='col-span-1 text-left'>{user.name}</div>
-        <div className='col-span-1 text-left'>Account Holder Address: </div>
-        <div className='col-span-1 text-left'>{user.address}</div>
-        <div className='col-span-1 text-left'>Account Holder Phone Number: </div>
-        <div className='col-span-1 text-left'>{user.phone}</div>
-        <div className='col-span-1 text-left'>Account Holder Email: </div>
-        <div className='col-span-1 text-left'>{user.email}</div>
+        <Card.Grid style={{width:'100%'}} className='col-span-2 text-left whitespace-nowrap overflow-x-auto'>
+        <div className='grid xs:grid-cols-1 sm:grid-cols-2 gap-4'>
+          <div className='col-span-1 font-semibold overflow-hidden'>Bank Name: </div>
+          <div className='col-span-1'>{account.bankName}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Account Number: </div>
+          <div className='col-span-1'>{account.accountNumber}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Account Type: </div>
+          <div className='col-span-1'>{account.accountType}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Branch Name: </div>
+          <div className='col-span-1'>{account.branchName}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Branch Address: </div>
+          <div className='col-span-1'>{account.branchAddress}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>IFSC Code: </div>
+          <div className='col-span-1'>{account.ifscCode}</div>
         </div>
-        <Button type="primary" className='rounded hover:rounded-lg my-2' danger>
+        </Card.Grid>
+        <Card.Grid style={{width:'100%'}} className='col-span-2 text-left whitespace-nowrap overflow-x-auto'>
+        <div className='grid xs:grid-cols-1 sm:grid-cols-2 gap-4'>
+          <div className='col-span-1 font-semibold overflow-hidden'>Account Holder Name: </div>
+          <div className='col-span-1'>{user.name}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Account Holder Address: </div>
+          <div className='col-span-1'>{user.address}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Account Holder Phone Number: </div>
+          <div className='col-span-1'>{user.phone}</div>
+          <div className='col-span-1 font-semibold overflow-hidden'>Account Holder Email: </div>
+          <div className='col-span-1'>{user.email}</div>
+        </div>
+        </Card.Grid>
+
+        <Button type="primary" className='bg-gradient-to-r from-pink-500 to-red-500 hover:bg-gradient-to-l hover:rounded-full mx-auto my-5' danger>
             Delete Account
         </Button>
     </Card>
