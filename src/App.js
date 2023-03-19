@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App bg-gray-200">
       <Routes>
-        <Route path='' element={<Analyser />}></Route>
+        <Route path='Analyser' element={<Analyser />}></Route>
       </ Routes>
     </div>
   );
