@@ -4,8 +4,9 @@ import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
 import AccountData from "../Data/AccountData";
 import UserData from "../Data/UserData";
-import { Badge, Descriptions } from 'antd';
+import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
+import PieChart from '../Components/PieChart';
 const Analyser = () => {
     return (
         <div>
@@ -22,7 +23,7 @@ const Analyser = () => {
             <div>
                 <Row justify="space-between" className="mx-3">
                     <Col span={8}>
-                        <Card title={<b className="text-lg">Bank Details</b>} bordered={true} style={{ width: 'auto', height: '100%', fontSize: "16px",textAlign:"center" }}>
+                        <Card title={<b className="text-lg">Bank Details</b>} bordered={true} style={{ width: 'auto', height: 'auto', fontSize: "16px", textAlign: "center" }}>
                             <Descriptions
                                 bordered
                                 column={{
@@ -57,9 +58,16 @@ const Analyser = () => {
                                 pagination={{ pageSize: 9 }}
                             />
                         </Card>
+
                     </Col>
+
                 </Row>
+                <Card title={<b className="text-lg">PIE CHART</b>} bordered={false} style={{ width: '30%', height: '30%', textAlign: "left" }}>
+                    <PieChart />
+                </Card>
+
             </div>
+
         </div>
     );
 }
