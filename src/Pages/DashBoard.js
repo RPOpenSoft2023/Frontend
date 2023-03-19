@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 
 const Dashboard = () => {
   return (
-      <div className="grid grid-cols-3 gap-4 h-screen pr-2 pl-2">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 h-screen pr-4 p-2">
         <div className="col-span-2">
           <div class="grid grid-rows-6 grid-flow-col gap-2 h-screen">
             <div className="row-span-2 grid grid-cols-2 gap-4 h-auto">
@@ -66,8 +66,8 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div>
-          <div class="grid grid-rows-5 grid-flow-col gap-4 h-full">
+        <div className="col-span-2 md:col-span-1 h-screen">
+          <div class="grid grid-rows-5 grid-flow-col gap-4 min-h-full">
             <div className="row-span-3 bg-slate-100 opacity-80 rounded-lg hover:scale-102">
               Graph space
             </div>
