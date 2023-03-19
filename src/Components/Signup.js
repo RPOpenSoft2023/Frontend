@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { signupFields } from "../constants/formFields"
 import FormAction from "./FormAction";
 import Input from "./Input";
+import SignUpPopUp from "./SignUpPopUp"
 
 const fields = signupFields;
 let fieldsState = {};
@@ -26,7 +27,7 @@ export default function Signup() {
 
     return (
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-            <div className="">
+            <div>
                 {
                     fields.map(field =>
                         <Input
@@ -44,7 +45,10 @@ export default function Signup() {
 
                     )
                 }
-                <FormAction handleSubmit={handleSubmit} text="Signup" />
+                <div className="text-center">
+                    <SignUpPopUp />
+                </div>
+                <FormAction handleSubmit={handleSubmit} text="Signup"/>
             </div>
 
 
