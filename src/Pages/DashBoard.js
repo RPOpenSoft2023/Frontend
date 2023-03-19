@@ -1,7 +1,7 @@
 const Dashboard = () => {
     return (
-        <div className="container p-2 pr-4">
-            <div className="grid grid-cols-3 gap-4 h-screen w-screen">
+        <div className=" p-2 pr-4">
+            <div className="grid grid-cols-3 gap-4 h-screen">
                 <div className="col-span-2">
                     <div class="grid grid-rows-6 grid-flow-col gap-2 h-screen">
                         <div className="row-span-2 grid grid-cols-2 gap-4 h-auto">
