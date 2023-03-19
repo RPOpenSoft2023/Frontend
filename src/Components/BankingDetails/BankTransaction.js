@@ -57,21 +57,21 @@ const BankTransaction = ({ transaction }) => {
   return (
     <>
       <div className='w-3/5 mx-auto my-2'>
-        <Tabs defaultActiveKey='0'>
+        <Tabs defaultActiveKey='0' className='text-center'>
           <Tabs.TabPane tab="Account Details" key="0">
-            <Typography.Title level={5} className=" text-center">
+            <Typography.Title level={5}>
               Account Details
             </Typography.Title>
             {/* <div className="flex justify-center"> */}
-              <Typography.Text className=" text-center">
+              <Typography.Text>
                 Account Number: {account.accountNumber}
               </Typography.Text>
               <br />
-              <Typography.Text className=" text-center">
+              <Typography.Text>
                 Account Type: {account.accountType}
               </Typography.Text>
               <br />
-              <Typography.Text className=" text-center">
+              <Typography.Text>
                 IFSC Code: {account.ifscCode}
               </Typography.Text>
               <br />
