@@ -49,7 +49,6 @@ function Navbar() {
           px-4
           text-xl text-gray-700
           font-bold
-          fixed
           bg-gray-300
           bg-gradient-to-r from-cyan-500 to-blue-500
         "
