@@ -1,6 +1,6 @@
 const Dashboard = () => {
     return (
-        <div className="container bg-blue-200 p-2 pr-4">
+        <div className="container p-2 pr-4">
             <div className="grid grid-cols-3 gap-4 h-screen w-screen">
                 <div className="col-span-2">
                     <div class="grid grid-rows-6 grid-flow-col gap-2 h-screen">
