@@ -5,11 +5,12 @@ import Dashboard from "./Pages/DashBoard";
 import SignupPage from './Pages/Signup';
 import LoginPage from './Pages/Login';
 import Navbar from './Components/Navbar/navbar';
+import BankingDetails from './Pages/BankingDetails';
 import Analyser from './Pages/Analyser';
 
 function App() {
   return (
-    <div className="App ">
+    <div className="App mx-0 my-0 bg-gray-200 min-h-screen">
       <Navbar/>
       <Routes>
         <Route path='/dashboard' element={<Dashboard />}></Route>
