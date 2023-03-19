@@ -14,6 +14,21 @@ const data=[
         key:3,
         num:"0.5",
         title:"volatility"
+    },
+    {
+        key:4,
+        num:"0.5",
+        title:"volatility"
+    },
+    {
+        key:5,
+        num:"0.5",
+        title:"volatility"
+    },
+    {
+        key:6,
+        num:"0.5",
+        title:"volatility"
     }
 ]
 export default data;

@@ -13,11 +13,11 @@ function App() {
     <div className="App mx-0 my-0 bg-gray-200 min-h-screen">
       <Navbar/>
       <Routes>
-        <Route path='/' element={<Dashboard />}></Route>
+        <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/login' element={<LoginPage />}></Route>
         <Route path='/signup' element={<SignupPage />}></Route>
+        <Route path='/analyser' element={<Analyser />}></Route>
         <Route path='/banking' element={<BankingDetails />}></Route>
-        <Route path='/Analyser' element={<Analyser />}></Route>
       </ Routes>
     </div>
   );
