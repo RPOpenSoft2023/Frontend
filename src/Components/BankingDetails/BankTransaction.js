@@ -11,7 +11,7 @@ const columns = [
         key: 'date',
         align : "center",
                 // sorter: (a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0,
-        render: (text) => <div className='text-center whitespace-nowrap	'>{text}</div>,
+        render: (text) => <div className='text-center whitespace-nowrap	overflow-hidden'>{text}</div>,
         // ellipsis: true,
     },
     {
@@ -27,7 +27,7 @@ const columns = [
       dataIndex: 'debit',
       key: 'debit',
       // sorter: (a, b) => a.debit - b.debit,
-      render: (text) => <div className='text-center whitespace-nowrap	'>{text}</div>,
+      render: (text) => <div className='text-center whitespace-nowrap	overflow-hidden'>{text}</div>,
       align : "center",
       // ellipsis: true,
     },
@@ -36,7 +36,7 @@ const columns = [
       dataIndex: 'credit',
       key: 'credit',
       sorter: (a, b) => a.credit - b.credit,
-      render: (text) => <div className='text-center whitespace-nowrap	'>{text}</div>,
+      render: (text) => <div className='text-center whitespace-nowrap	overflow-hidden'>{text}</div>,
       align : "center",
       // ellipsis: true,
     },
@@ -45,7 +45,7 @@ const columns = [
       dataIndex: 'balance',
       key: 'balance',
       sorter: (a, b) => a.balance - b.balance,
-      render: (text) => <div className='text-center whitespace-nowrap	'>{text}</div>,
+      render: (text) => <div className='text-center whitespace-nowrap	overflow-hidden'>{text}</div>,
       align : "center",
       // ellipsis: true,
     },
@@ -59,10 +59,6 @@ const BankTransaction = ({ transaction }) => {
       <div >
         <Tabs defaultActiveKey='0' className='text-center'>
           <Tabs.TabPane tab="Account Details" key="0">
-            <Typography.Title level={5}>
-              Account Details
-            </Typography.Title>
-            {/* <div className="flex justify-center"> */}
               <Typography.Text>
                 Account Number: {account.accountNumber}
               </Typography.Text>
@@ -77,12 +73,28 @@ const BankTransaction = ({ transaction }) => {
               <br />
             {/* </div> */}
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Bank Details" key="1"></Tabs.TabPane>
+          <Tabs.TabPane tab="Bank Details" key="1">
+            {/* <Typography.Title level={5} className=" text-center">
+              Bank Details
+            </Typography.Title> */}
+            <Typography.Text className=" text-center">
+              Bank Name: {account.bankName}
+            </Typography.Text>
+            <br />
+            <Typography.Text className=" text-center">
+              Branch Name: {account.branchName}
+            </Typography.Text>
+            <br />
+            <Typography.Text className=" text-center">
+              Branch Address: {account.branchAddress}
+            </Typography.Text>
+            <br />
+          </Tabs.TabPane>
           <Tabs.TabPane tab="Transaction History" key="2">
-            <Typography.Title level={5} className=" text-center">
+            {/* <Typography.Title level={5} className=" text-center">
               Transaction History
-            </Typography.Title>
-            <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} />
+            </Typography.Title> */}
+            <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} pagination={false} />
           </Tabs.TabPane>
           {/* <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane> */}
         </Tabs>
