@@ -20,7 +20,6 @@ function App() {
         <Route path='/signup' element={<SignupPage />}></Route>
         <Route path='/analyser' element={<Analyser />}></Route>
         <Route path='/banking' element={<BankingDetails />}></Route>
-        
         <Route path='/join' element={<Join />}></Route>
       </ Routes>
     </div>
