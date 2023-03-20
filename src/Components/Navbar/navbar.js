@@ -14,11 +14,7 @@ function Navbar() {
     {
       key: "1",
       label: (
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          to=""
-        >
+        <Link target="_blank" rel="noopener noreferrer" to="">
           1st menu item
         </Link>
       ),
@@ -26,11 +22,7 @@ function Navbar() {
     {
       key: "2",
       label: (
-        <Link
-          target="_blank"
-          rel="noopener noreferrer"
-          to=""
-        >
+        <Link target="_blank" rel="noopener noreferrer" to="">
           2nd menu item
         </Link>
       ),
@@ -50,13 +42,11 @@ function Navbar() {
           text-xl text-white
           font-bold
           z-10
-          bg-blue-800
+          bg-blue-600
         "
       >
         <div className="font-mono text-2xl tracking-wide">
-          <Link to="/">
-            RedShift
-          </Link>
+          <Link to="/">RedShift</Link>
         </div>
 
         <svg
@@ -78,7 +68,10 @@ function Navbar() {
           />
         </svg>
 
-        <div class="hidden w-full md:flex md:items-center md:w-auto mt-1" id="menu">
+        <div
+          class="hidden w-full md:flex md:items-center md:w-auto mt-1"
+          id="menu"
+        >
           <ul
             class="
               pt-4
@@ -88,19 +81,40 @@ function Navbar() {
               md:pt-0"
           >
             <li>
-              <Link class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono" to="/dashboard">
-                {!matches ? <p>Home</p>:<i class='bx bx-home-alt-2 bx-sm text-white'></i>}
+              <Link
+                class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
+                to="/"
+              >
+                {!matches ? (
+                  <p>Home</p>
+                ) : (
+                  <i class="bx bx-home-alt-2 bx-sm text-white"></i>
+                )}
               </Link>
             </li>
             <li>
-              <Link class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono" to="/">
-              {!matches ? <p>Add</p>:<i class='bx bx-plus-circle bx-sm text-white' ></i>}
+              <Link
+                class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
+                to="/"
+              >
+                {!matches ? (
+                  <p>Add</p>
+                ) : (
+                  <i class="bx bx-plus-circle bx-sm text-white"></i>
+                )}
               </Link>
             </li>
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <li>
-                <Link class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono" to="/">
-              {!matches ? <p>Profile</p>:<i class='bx bx-user bx-sm text-white' ></i>}
+                <Link
+                  class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
+                  to="/"
+                >
+                  {!matches ? (
+                    <p>Profile</p>
+                  ) : (
+                    <i class="bx bx-user bx-sm text-white"></i>
+                  )}
                 </Link>
               </li>
             </Dropdown>
@@ -108,8 +122,12 @@ function Navbar() {
               <Link
                 class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
                 to="/"
-                >
-                  {!matches ? <p>Logout</p>:<i class='bx bx-log-out-circle bx-sm text-white' ></i>}
+              >
+                {!matches ? (
+                  <p>Logout</p>
+                ) : (
+                  <i class="bx bx-log-out-circle bx-sm text-white"></i>
+                )}
               </Link>
             </li>
           </ul>

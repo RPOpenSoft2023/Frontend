@@ -33,7 +33,7 @@ const Reports = () => (
         <p>3</p>
       </div>
       <div className="flex justify-between font-semibold mt-2 mb-2">
-        <p>Analysis on hold</p>
+        <p>On hold</p>
         <p>0</p>
       </div>
     </Card>
