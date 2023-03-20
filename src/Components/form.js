@@ -114,10 +114,10 @@ const FormCom = () => {
             </Form.Item>
 
             <Form.Item /*{...tailLayout}*/ >
-                <Button htmlType="button" onClick={onReset} style={{marginLeft:'3rem', width:'10rem'}}>
+                <Button htmlType="button" onClick={onReset} style={{marginLeft:'3rem', width:'10rem'}} className="bg-blue-500 text-white">
                     Reset
                 </Button>
-                <Button type="primary" htmlType="submit" style={{marginLeft:'3rem', width:'10rem'}}>
+                <Button type="primary" htmlType="submit" style={{marginLeft:'3rem', width:'10rem'}} className="bg-blue-500">
                     Add Bank
                 </Button>
             </Form.Item>

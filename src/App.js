@@ -8,7 +8,6 @@ import Navbar from "./Components/Navbar/navbar";
 import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
 import Join from "./Components/join";
-import Add from "./Components/add";
 
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
         <Route path='/banking' element={<BankingDetails />}></Route>
         
         <Route path='/join' element={<Join />}></Route>
-        <Route path='/add' element={<Add />}></Route>
       </ Routes>
     </div>
   );
