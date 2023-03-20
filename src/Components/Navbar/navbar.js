@@ -1,5 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Dropdown } from "antd";
+import { Link } from "react-router-dom";
+import Join from "../join";
 function Navbar() {
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
@@ -13,25 +15,17 @@ function Navbar() {
     {
       key: "1",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <Link target="_blank" rel="noopener noreferrer" to="">
           1st menu item
-        </a>
+        </Link>
       ),
     },
     {
       key: "2",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
+        <Link target="_blank" rel="noopener noreferrer" to="">
           2nd menu item
-        </a>
+        </Link>
       ),
     },
   ];
@@ -46,16 +40,14 @@ function Navbar() {
           py-4
         sm:py-0
           px-4
-          text-xl text-gray-700
+          text-xl text-white
           font-bold
-          bg-gray-300
-          bg-gradient-to-r from-cyan-500 to-blue-500
+          z-10
+          bg-blue-600
         "
       >
-        <div>
-          <a href="#">
-            OPENSOFT
-          </a>
+        <div className="font-mono text-2xl tracking-wide">
+          <Link to="/">RedShift</Link>
         </div>
 
         <svg
@@ -77,7 +69,10 @@ function Navbar() {
           />
         </svg>
 
-        <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+        <div
+          class="hidden w-full md:flex md:items-center md:w-auto mt-1"
+          id="menu"
+        >
           <ul
             class="
               pt-4
@@ -87,29 +82,43 @@ function Navbar() {
               md:pt-0"
           >
             <li>
-              <a class="md:p-4 py-2 block hover:text-purple-400" href="#">
-                {!matches ? <p>Home</p>:<i class='bx bx-home-alt-2 bx-sm'></i>}
-              </a>
+              <Link
+                class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
+                to="/dashboard"
+              >
+                {!matches ? (
+                  <p>Home</p>
+                ) : (
+                  <i class="bx bx-home-alt-2 bx-sm text-white"></i>
+                )}
+              </Link>
             </li>
-            <li>
-              <a class="md:p-4 py-2 block hover:text-purple-400" href="#">
-              {!matches ? <p>Add</p>:<i class='bx bx-plus-circle bx-sm' ></i>}
-              </a>
-            </li>
+            <Join matches={matches}/>
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <li>
-                <a class="md:p-4 py-2 block hover:text-purple-400" href="#">
-              {!matches ? <p>Profile</p>:<i class='bx bx-user bx-sm' ></i>}
-                </a>
+                <Link
+                  class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
+                  to="/"
+                >
+                  {!matches ? (
+                    <p>Profile</p>
+                  ) : (
+                    <i class="bx bx-user bx-sm text-white"></i>
+                  )}
+                </Link>
               </li>
             </Dropdown>
             <li>
-              <a
-                class="md:p-4 py-2 block hover:text-purple-400"
-                href="#"
-                >
-                  {!matches ? <p>Logout</p>:<i class='bx bx-log-out-circle bx-sm' ></i>}
-              </a>
+              <Link
+                class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
+                to="/"
+              >
+                {!matches ? (
+                  <p>Logout</p>
+                ) : (
+                  <i class="bx bx-log-out-circle bx-sm text-white"></i>
+                )}
+              </Link>
             </li>
           </ul>
         </div>
