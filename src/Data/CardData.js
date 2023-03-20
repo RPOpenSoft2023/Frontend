@@ -8,12 +8,12 @@ const data=[
     {
         key:2,
         num:"0.5",
-        title:"volatility"
+        title:"Volatility"
     },
     {
         key:3,
         num:"0.5",
-        title:"volatility"
+        title:"Price"
     },
     {
         key:4,
