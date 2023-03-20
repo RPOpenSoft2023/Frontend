@@ -49,7 +49,6 @@ function Navbar() {
           px-4
           text-xl text-white
           font-bold
-          bg-gray-300
           z-10
           bg-blue-800
         "
