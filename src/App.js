@@ -7,6 +7,9 @@ import LoginPage from "./Pages/Login";
 import Navbar from "./Components/Navbar/navbar";
 import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
+import Join from "./components/join";
+import Add from "./components/add";
+
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path='/signup' element={<SignupPage />}></Route>
         <Route path='/analyser' element={<Analyser />}></Route>
         <Route path='/banking' element={<BankingDetails />}></Route>
+        
+        <Route path='/join' element={<Join />}></Route>
+        <Route path='/add' element={<Add />}></Route>
       </ Routes>
     </div>
   );
