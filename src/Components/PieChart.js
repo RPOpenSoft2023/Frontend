@@ -21,8 +21,8 @@ const PieChart = () => {
         datasets: [
             {
                 data: data.map((d) => d.value),
-                backgroundColor: colors,
-                hoverBackgroundColor: colors,
+                backgroundcolor: colors,
+                hoverBackgroundcolor: colors,
             },
         ],
     };

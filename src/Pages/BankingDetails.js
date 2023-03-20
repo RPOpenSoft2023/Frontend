@@ -75,15 +75,15 @@ import account from '../Data/AccountData';
 
 const BankingDetails = () => {
     return (
-        <div>
-            <div className='m-auto grid grid-cols-2 lg:grid-cols-3 '>
-                <div className='col-span-2 lg:col-span-1 md:text-center lg:text-left md:mx-2 lg:mx-2 lg:ml-4 my-2'>
+        <div className='w-3/5 mx-auto my-2'>
+            {/* <div className='m-auto grid grid-cols-2 lg:grid-cols-3 '>
+                <div className='col-span-2 lg:col-span-1 md:text-center lg:text-left md:mx-2 lg:mx-2 lg:ml-4 my-2'> */}
                     <BankDetails account={account} user={user} />
-                </div>
-                <div className='col-span-2 md:mx-2 lg:mx-2 lg:mr-4 my-2'>
+                {/* </div>
+                <div className='col-span-2 md:mx-2 lg:mx-2 lg:mr-4 my-2'> */}
                     <BankTransaction transaction={transaction} />
-                </div>
-            </div>
+                {/* </div>
+            </div> */}
         </div>
     );
 }

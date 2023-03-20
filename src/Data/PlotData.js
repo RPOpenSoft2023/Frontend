@@ -4,8 +4,8 @@ const PlotData = {
       {
         label: "Sales",
         data: [12, 19, 3, 5, 2, 3, 6],
-        backgroundColor: "rgba(75,192,192,1)",
-        hoverBackgroundColor: "rgba(75,192,192,0.8)",
+        backgroundcolor: "rgba(75,192,192,1)",
+        hoverBackgroundcolor: "rgba(75,192,192,0.8)",
       },
     ],
    };
