@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Dropdown } from "antd";
 import { Link } from "react-router-dom";
+import Join from "../join";
 function Navbar() {
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
@@ -92,18 +93,7 @@ function Navbar() {
                 )}
               </Link>
             </li>
-            <li>
-              <Link
-                class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
-                to="/"
-              >
-                {!matches ? (
-                  <p>Add</p>
-                ) : (
-                  <i class="bx bx-plus-circle bx-sm text-white"></i>
-                )}
-              </Link>
-            </li>
+            <Join matches={matches}/>
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <li>
                 <Link

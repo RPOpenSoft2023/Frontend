@@ -7,8 +7,8 @@ import LoginPage from "./Pages/Login";
 import Navbar from "./Components/Navbar/navbar";
 import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
-import Join from "./components/join";
-import Add from "./components/add";
+import Join from "./Components/join";
+import Add from "./Components/add";
 
 
 function App() {
