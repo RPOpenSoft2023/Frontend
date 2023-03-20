@@ -95,8 +95,8 @@ const BankTransaction = ({ transaction }) => {
               Transaction History
             </Typography.Title> */}
             <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} pagination={false} />
-            <Button type="primary" className="m-5">Analyse</Button>
-            <Button type="primary" className="m-5">Add Transaction</Button>
+            <Button type="primary" className="m-5 bg-blue-600 hover:bg-blue-900">Analyse</Button>
+            <Button type="primary" className="m-5  bg-blue-600  hover:bg-blue-900">Add Transaction</Button>
 
           </Tabs.TabPane>
           {/* <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane> */}
