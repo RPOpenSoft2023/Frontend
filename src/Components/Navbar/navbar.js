@@ -47,7 +47,7 @@ function Navbar() {
        
         "
       >
-        <div className="font-mono text-2xl tracking-wide font-['Kanit']">
+        <div className=" text-2xl tracking-wide font-['Kanit']">
           <Link to="/">RedShift</Link>
         </div>
 
