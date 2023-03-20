@@ -57,7 +57,7 @@ const BankTransaction = ({ transaction }) => {
   return (
     <>
       <div >
-        <Tabs defaultActiveKey='0' className='text-center'>
+        <Tabs defaultActiveKey='2' className='text-center'>
           <Tabs.TabPane tab="Account Details" key="0">
               <Typography.Text>
                 Account Number: {account.accountNumber}
