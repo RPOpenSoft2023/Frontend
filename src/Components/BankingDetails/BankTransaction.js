@@ -56,7 +56,7 @@ const BankTransaction = ({ transaction }) => {
   transaction.sort((a, b) => new Date(b.date) - new Date(a.date));
   return (
     <>
-      <div className='w-3/5 mx-auto my-2'>
+      <div >
         <Tabs defaultActiveKey='0' className='text-center'>
           <Tabs.TabPane tab="Account Details" key="0">
             <Typography.Title level={5}>
