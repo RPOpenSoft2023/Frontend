@@ -48,7 +48,7 @@ const Plus = () => (
                 offset: 17,
             }}
         >
-            <Button type="primary" htmlType="submit" style={{width:'8rem'}} >
+            <Button type="primary" htmlType="submit" style={{width:'8rem'}} className="bg-blue-500" >
                 Analyze
             </Button>
         </Form.Item>
