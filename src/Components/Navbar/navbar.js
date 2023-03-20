@@ -42,7 +42,7 @@ function Navbar() {
           text-xl text-white
           font-bold
           z-10
-          bg-amber-900
+          bg-blue-600
         "
       >
         <div className="font-mono text-2xl tracking-wide">
@@ -83,7 +83,7 @@ function Navbar() {
             <li>
               <Link
                 class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
-                to="/dashboard"
+                to="/"
               >
                 {!matches ? (
                   <p>Home</p>
