@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Card, Table, Button, Space, Typography, Avatar, Tabs} from 'antd'
+import { Table, Typography, Tabs} from 'antd'
 import account from '../../Data/AccountData';
 
 
