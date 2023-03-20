@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Typography, Tabs} from 'antd'
+import { Table, Typography, Tabs, Button } from 'antd'
 import account from '../../Data/AccountData';
 
 
@@ -90,11 +90,14 @@ const BankTransaction = ({ transaction }) => {
             </Typography.Text>
             <br />
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Transaction History" key="2">
+          <Tabs.TabPane tab="Transaction History" className='mx-auto' key="2">
             {/* <Typography.Title level={5} className=" text-center">
               Transaction History
             </Typography.Title> */}
             <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} pagination={false} />
+            <Button type="primary" className="m-5">Analyse</Button>
+            <Button type="primary" className="m-5">Add Transaction</Button>
+
           </Tabs.TabPane>
           {/* <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane> */}
         </Tabs>
