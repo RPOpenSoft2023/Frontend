@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Typography, Tabs, Button } from 'antd'
+import { Table, Tabs, Button, Card, Descriptions } from 'antd'
 import account from '../../Data/AccountData';
 
 
@@ -57,40 +57,31 @@ const BankTransaction = ({ transaction }) => {
   return (
     <>
       <div >
-        <Tabs defaultActiveKey='2' className='text-center'>
-          <Tabs.TabPane tab="Account Details" key="0">
-              <Typography.Text>
-                Account Number: {account.accountNumber}
-              </Typography.Text>
-              <br />
-              <Typography.Text>
-                Account Type: {account.accountType}
-              </Typography.Text>
-              <br />
-              <Typography.Text>
-                IFSC Code: {account.ifscCode}
-              </Typography.Text>
-              <br />
-            {/* </div> */}
+        <Tabs defaultActiveKey='0' className='mx-auto text-center'>
+          <Tabs.TabPane tab="Bank Details" key="0">
+              <Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px" }} className="mx-auto my-4">
+                <Descriptions
+                    bordered
+                    column={{
+                        xxl: 4,
+                        xl: 1,
+                        lg: 3,
+                        md: 3,
+                        sm: 2,
+                        xs: 1,
+                    }}
+                >
+                    <Descriptions.Item label={<b>Bank Name</b>} >{account.bankName}</Descriptions.Item>
+                    <Descriptions.Item label={<b>Account Number</b>} >{account.accountNumber}</Descriptions.Item>
+                    <Descriptions.Item label={<b>Account Type</b>} >{account.accountType}</Descriptions.Item>
+                    <Descriptions.Item label={<b>Branch Name</b>} >{account.branchName}</Descriptions.Item>
+                    <Descriptions.Item label={<b>Branch Address</b>} >{account.branchAddress}</Descriptions.Item>
+                    <Descriptions.Item label={<b>IFSC Code</b>} >{account.ifscCode}</Descriptions.Item>
+                </Descriptions>
+
+            </Card>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Bank Details" key="1">
-            {/* <Typography.Title level={5} className=" text-center">
-              Bank Details
-            </Typography.Title> */}
-            <Typography.Text className=" text-center">
-              Bank Name: {account.bankName}
-            </Typography.Text>
-            <br />
-            <Typography.Text className=" text-center">
-              Branch Name: {account.branchName}
-            </Typography.Text>
-            <br />
-            <Typography.Text className=" text-center">
-              Branch Address: {account.branchAddress}
-            </Typography.Text>
-            <br />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="Transaction History" className='mx-auto' key="2">
+          <Tabs.TabPane tab="Transaction History" className='mx-auto' key="1">
             {/* <Typography.Title level={5} className=" text-center">
               Transaction History
             </Typography.Title> */}
