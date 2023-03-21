@@ -5,7 +5,7 @@ import ColumnData from "../Data/ColumnData";
 import AccountData from "../Data/AccountData";
 import UserData from "../Data/UserData";
 import { Descriptions } from 'antd';
-import { Descriptions } from 'antd';
+// import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
 import PieChart from "../Components/PieChart";
 import Plot from "../Components/Plot";
