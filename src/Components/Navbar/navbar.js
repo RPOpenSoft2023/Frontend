@@ -2,7 +2,16 @@ import { React, useState, useEffect } from "react";
 import { Dropdown } from "antd";
 import { Link } from "react-router-dom";
 import Join from "../join";
+import { showToastMessage } from "../Toast";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 function Navbar() {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+    showToastMessage("Logged Out Successfully");
+  };
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches
   );
@@ -94,7 +103,7 @@ function Navbar() {
                 )}
               </Link>
             </li>
-            <Join matches={matches}/>
+            <Join matches={matches} />
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <li>
                 <Link
@@ -109,7 +118,11 @@ function Navbar() {
                 </Link>
               </li>
             </Dropdown>
-            <li>
+            <li
+              onClick={() => {
+                logout();
+              }}
+            >
               <Link
                 class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
                 to="/"
@@ -124,6 +137,7 @@ function Navbar() {
           </ul>
         </div>
       </nav>
+      <ToastContainer/>
     </div>
   );
 }

@@ -8,9 +8,8 @@ import Navbar from "./Components/Navbar/navbar";
 import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
 import Join from "./Components/join";
-
-
 function App() {
+
   return (
     <div className="App mx-0 my-0 bg-gray-200 min-h-screen font-['Lora']">
       <Navbar />
