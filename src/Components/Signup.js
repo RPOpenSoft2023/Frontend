@@ -3,12 +3,17 @@ import { signupFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
 import axios from "axios";
+import { useLocation,useNavigate } from "react-router";
+import { showToastMessage } from "./Toast";
+import { ToastContainer } from "react-toastify";
 const fields = signupFields;
 let fieldsState = {};
 
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Signup() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [signupState, setSignupState] = useState(fieldsState);
 
   const handleChange = (e) =>
@@ -22,14 +27,19 @@ export default function Signup() {
   //handle Signup API Integration here
   const createAccount = () => {
     axios
-      .post("http://34.105.83.175:8080/api/register/", {
+      .post("http://34.105.83.175:8080/user/api/register/", {
+        phone_number: location.state,
+        first_name: signupState.name,
+        password: signupState.password,
+        email_id: signupState.email,
+        age: signupState.Age,
+        aadhar_no: signupState.aadhar,
       })
       .then((res) => {
         console.log(res);
-        localStorage.setItem("logstat", true);
-        localStorage.setItem("jwt_token", res.data.jwt_token);
-        console.log("logstat", localStorage.getItem("logstat"));
-        console.log("logstat", localStorage.getItem("jwt_token"));
+        localStorage.clear();
+        navigate("/login");
+        showToastMessage("Successfully Registered");
       })
       .catch((error) => {
         console.log("error.message", error.message);
@@ -53,6 +63,7 @@ export default function Signup() {
           />
         ))}
         <FormAction handleSubmit={handleSubmit} text="Signup" />
+        <ToastContainer/>
       </div>
     </form>
   );

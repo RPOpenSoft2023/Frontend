@@ -45,7 +45,7 @@ export default function ForgotPassword(prop) {
     })
       .then((res) => {
         localStorage.setItem("jwt_token", res.data.token);
-        navigate("/signup/profile");
+        navigate("/signup/profile",{state:phoneNo});
         setIsOtpVerified(true);
       })
       .catch((error) => {

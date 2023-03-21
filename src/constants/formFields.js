@@ -23,16 +23,6 @@ const loginFields = [
 
 const signupFields = [
     {
-        labelText: "Phone number",
-        labelFor: "phone_number",
-        id: "phone_number",
-        name: "phone",
-        type: "phone",
-        autoComplete: "phone",
-        isRequired: true,
-        placeholder: "Phone number"
-    },
-    {
         labelText: "First Name",
         labelFor: "first_name",
         id: "first_name",
@@ -92,16 +82,6 @@ const signupFields = [
         isRequired: true,
         placeholder: "Confirm Password"
     },
-    // {
-    //     labelText: "Phone number",
-    //     labelFor: "phone-number",
-    //     id: "phone-number",
-    //     name: "phone",
-    //     type: "phone",
-    //     autoComplete: "Phone-number",
-    //     isRequired: true,
-    //     placeholder: "Phone-number"
-    // }
 ]
 
 export { loginFields, signupFields }
