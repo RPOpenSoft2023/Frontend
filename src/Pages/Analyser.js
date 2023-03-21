@@ -81,7 +81,7 @@ const items = [
 const Analyser = () => {
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
+            <div style={{ display: 'flex', justifyContent: 'start' }} className="my-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                 {CardData.map((data) =>
                     <AnalyserCard
                         key={data.key}
