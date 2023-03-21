@@ -39,7 +39,7 @@ function Navbar() {
   return (
     <div>
       <nav
-        class="
+        className="
           flex flex-wrap
           items-center
           justify-between
@@ -54,7 +54,7 @@ function Navbar() {
         "
       >
         <div>
-          <a href="#">
+          <a href="/home">
             OPENSOFT
           </a>
         </div>
@@ -62,7 +62,7 @@ function Navbar() {
         <svg
           xmlns="http://www.w3.org/2000/svg"
           id="menu-button"
-          class="h-6 w-6 cursor-pointer md:hidden block"
+          className="h-6 w-6 cursor-pointer md:hidden block"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -71,16 +71,16 @@ function Navbar() {
           }}
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="M4 6h16M4 12h16M4 18h16"
           />
         </svg>
 
-        <div class="hidden w-full md:flex md:items-center md:w-auto" id="menu">
+        <div className="hidden w-full md:flex md:items-center md:w-auto" id="menu">
           <ul
-            class="
+            className="
               pt-4
               text-base text-gray-700
               md:flex
@@ -88,28 +88,28 @@ function Navbar() {
               md:pt-0"
           >
             <li>
-              <a class="md:p-4 py-2 block hover:text-purple-400" href="#">
-                {!matches ? <p>Home</p>:<i class='bx bx-home-alt-2 bx-sm'></i>}
+              <a className="md:p-4 py-2 block hover:text-purple-400" href="/home">
+                {!matches ? <p>Home</p>:<i className='bx bx-home-alt-2 bx-sm'></i>}
               </a>
             </li>
             <li>
-              <a class="md:p-4 py-2 block hover:text-purple-400" href="#">
-              {!matches ? <p>Add</p>:<i class='bx bx-plus-circle bx-sm' ></i>}
+              <a className="md:p-4 py-2 block hover:text-purple-400" href="#">
+              {!matches ? <p>Add</p>:<i className='bx bx-plus-circle bx-sm' ></i>}
               </a>
             </li>
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <li>
-                <a class="md:p-4 py-2 block hover:text-purple-400" href="#">
-              {!matches ? <p>Profile</p>:<i class='bx bx-user bx-sm' ></i>}
+                <a className="md:p-4 py-2 block hover:text-purple-400" href="#">
+              {!matches ? <p>Profile</p>:<i className='bx bx-user bx-sm' ></i>}
                 </a>
               </li>
             </Dropdown>
             <li>
               <a
-                class="md:p-4 py-2 block hover:text-purple-400"
-                href="#"
+                className="md:p-4 py-2 block hover:text-purple-400"
+                href="/login"
                 >
-                  {!matches ? <p>Logout</p>:<i class='bx bx-log-out-circle bx-sm' ></i>}
+                  {!matches ? <p>Logout</p>:<i className='bx bx-log-out-circle bx-sm' ></i>}
               </a>
             </li>
           </ul>
