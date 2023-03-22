@@ -5,7 +5,7 @@ import ColumnData from "../Data/ColumnData";
 import AccountData from "../Data/AccountData";
 import UserData from "../Data/UserData";
 import { Descriptions } from 'antd';
-import { Card, Table } from 'antd'
+import { Row, Col, Card, Table } from 'antd'
 import PieChart from "../Components/PieChart";
 import Plot from "../Components/Plot";
 import { Tabs } from 'antd';
@@ -18,7 +18,7 @@ const items = [
     {
         key: '1',
         label: `Bank details`,
-        children: <Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+        children: <div className='bg-white' style={{ display: 'flex', justifyContent: 'center' }}><Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
             <Descriptions
                 bordered
                 column={{
@@ -45,7 +45,8 @@ const items = [
 
             </Descriptions>
 
-        </Card>,
+        </Card>
+        </div>,
     },
     {
         key: '2',
@@ -59,25 +60,28 @@ const items = [
     {
         key: '3',
         label: `Pie Chart`,
-        children: <div className='bg-white' style={{ display: 'flex', justifyContent: 'center' }}><Card bordered={false} style={{ width: '40%', height: '50%', textAlign: "center" }}>
-            <PieChart />
-        </Card>
-        </div>,
+        children: <Row justify="space-between" className="mx-3">
+            <Col span={11}>
+                <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '100%' }}>
+                    <PieChart></PieChart>
+                </div>
+            </Col>
+            <Col span={13} >
+                <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', widht: '100%', height: '100%' }}><Card bordered={false} style={{ width: '100%', height: '100%', textAlign: "center" }}>
+                    <Plot />
+                </Card>
+                </div>
+            </Col>
+        </Row>
+        ,
     },
-    {
-        key: '4',
-        label: `Bar Graph`,
-        children: <div style={{ display: 'flex', justifyContent: 'center' }}><Card className="border-none" bordered={false} style={{ width: '50%', height: '60%', textAlign: "center" }}>
-            <Plot />
-        </Card>
-        </div>,
-    }
+
 ];
 
 const Analyser = () => {
     return (
         <div>
-            <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3">
+            <div style={{ display: 'flex', justifyContent: 'start' }} className="my-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
                 {CardData.map((data) =>
                     <AnalyserCard
                         key={data.key}
