@@ -14,14 +14,14 @@ function App() {
 
   return (
     <div className="App mx-0 my-0 bg-gray-200 min-h-screen font-['Lora']">
-
+      <Navbar />
       <Routes>
         <Route path='/' element={<LoginPage />}></Route>
-        <Route path='/dashboard' element={<Private><Navbar /><Dashboard /></Private>}></Route>
+        <Route path='/dashboard' element={<Private><Dashboard /></Private>}></Route>
         <Route path='/signup' element={<BeforeSignUpPage />}></Route>
         <Route path='/signup/profile' element={<SignupPage />}></Route>
-        <Route path='/analyser' element={<Private><Navbar /><Analyser /></Private>}></Route>
-        <Route path='/banking' element={<Private><Navbar /><BankingDetails /></Private>}></Route>
+        <Route path='/analyser' element={<Analyser />}></Route>
+        <Route path='/banking' element={<Private><BankingDetails /></Private>}></Route>
         <Route path='/join' element={<Join />}></Route>
       </ Routes>
     </div>
