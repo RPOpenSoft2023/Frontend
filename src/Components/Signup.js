@@ -52,7 +52,7 @@ export default function Signup() {
           <Input
             key={field.id}
             handleChange={handleChange}
-            value={signupState[field.id]}
+            value={(field.id=="phone_number" ? location.state : signupState[field.id])}
             labelText={field.labelText}
             labelFor={field.labelFor}
             id={field.id}
@@ -60,6 +60,7 @@ export default function Signup() {
             type={field.type}
             isRequired={field.isRequired}
             placeholder={field.placeholder}
+            isDisabled={field.isDisabled}
           />
         ))}
         <FormAction handleSubmit={handleSubmit} text="Signup" />

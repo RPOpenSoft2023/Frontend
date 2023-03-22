@@ -1,3 +1,5 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils"
+
 const loginFields = [
     {
         labelText: "Phone number",
@@ -23,6 +25,17 @@ const loginFields = [
 
 const signupFields = [
     {
+        labelText: "Phone number",
+        labelFor: "phone_number",
+        id: "phone_number",
+        name: "phone",
+        type: "phone",
+        autoComplete: "phone",
+        isRequired: true,
+        placeholder: "Phone number",
+        isDisabled:true
+    },
+    {
         labelText: "First Name",
         labelFor: "first_name",
         id: "first_name",
@@ -30,7 +43,8 @@ const signupFields = [
         type: "text",
         autoComplete: "name",
         isRequired: true,
-        placeholder: "First Name"
+        placeholder: "First Name",
+        isDisabled:false
     },
     {
         labelText: "Email address",
@@ -40,7 +54,8 @@ const signupFields = [
         type: "email",
         autoComplete: "email",
         isRequired: true,
-        placeholder: "Email address"
+        placeholder: "Email address",
+        isDisabled:false
     },
     {
         labelText: "Aadhar Number",
@@ -50,7 +65,8 @@ const signupFields = [
         type: "text",
         autoComplete: "aadhar",
         isRequired: true,
-        placeholder: "Aadhar Number"
+        placeholder: "Aadhar Number",
+        isDisabled:false
     },
     {
         labelText: "Age",
@@ -60,7 +76,8 @@ const signupFields = [
         type: "Number",
         autoComplete: "Age",
         isRequired: true,
-        placeholder: "Age"
+        placeholder: "Age",
+        isDisabled:false
     },
     {
         labelText: "Password",
@@ -70,7 +87,8 @@ const signupFields = [
         type: "password",
         autoComplete: "current-password",
         isRequired: true,
-        placeholder: "Password"
+        placeholder: "Password",
+        isDisabled:false
     },
     {
         labelText: "Confirm Password",
@@ -80,8 +98,19 @@ const signupFields = [
         type: "password",
         autoComplete: "confirm-password",
         isRequired: true,
-        placeholder: "Confirm Password"
+        placeholder: "Confirm Password",
+        isDisabled:false
     },
+    // {
+    //     labelText: "Phone number",
+    //     labelFor: "phone-number",
+    //     id: "phone-number",
+    //     name: "phone",
+    //     type: "phone",
+    //     autoComplete: "Phone-number",
+    //     isRequired: true,
+    //     placeholder: "Phone-number"
+    // }
 ]
 
 export { loginFields, signupFields }
