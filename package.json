@@ -21,10 +21,10 @@
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
-    "web-vitals": "^2.1.4",
-    "yup": "^1.0.2",
     "recharts": "^2.5.0",
-    "styled-components": "^5.3.9"
+    "styled-components": "^5.3.9",
+    "web-vitals": "^2.1.4",
+    "yup": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
