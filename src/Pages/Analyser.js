@@ -17,6 +17,7 @@ import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
+import AnalyseChart from "../Components/AnalyseChart";
 const change = (key) => {
     console.log(key)
 }
@@ -27,7 +28,7 @@ const Analyser = () => {
             key: '1',
             label: `Bank details`,
             children: <div >
-                <Container className='my-3' style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', }}>
+                <Container className='my-3' style={{ display: 'flex', justifyContent: '', flexWrap: 'wrap', }}>
                     {CardData.map((data) =>
                         <AnalyserCard
                             key={data.key}
@@ -41,7 +42,7 @@ const Analyser = () => {
 
                 <div className='bg-white' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card title="Bank account details" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <Descriptions
+                        {/* <Descriptions
                             bordered
                             column={{
                                 xxl: 4,
@@ -73,15 +74,16 @@ const Analyser = () => {
 
 
 
-                        </Descriptions>
+                        </Descriptions> */}
+                        <AnalyseChart/>
 
                     </Card>
                     <Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <StackedPlot data={freqData} />
                     </Card>
                 </div>
-                <Row justify="space-between" className="mx-3">
-                    <Col span={12}>
+                <Row justify="space-between" className="mx-3 m-4">
+                    <Col span={12} className="bg-white p-4">
                         {/* <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '100%' }}> */}
                             <StackedPlot data={categoryData} />
                         {/* </div> */}
@@ -121,7 +123,7 @@ const Analyser = () => {
         {
             key: '4',
             label: `categories`,
-            children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+            children: <div style={{ display: 'flex', justifyContent: 'center' }} className="p-10">
                 <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
                     <Table columns={ColumnData} dataSource={TableData}
                         pagination={{ pageSize: 9 }}
@@ -132,7 +134,7 @@ const Analyser = () => {
 
     ];
     return (
-        <div>
+        <div className="p-10">
             {/* <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3">
                 {CardData.map((data) =>
                     <AnalyserCard

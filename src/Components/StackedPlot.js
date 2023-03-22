@@ -22,6 +22,7 @@ const StackedPlot = (props) => {
     isStack: true,
     xField: 'month',
     yField: 'value',
+    padding:30,
     seriesField: 'type',
     label: {
       // 可手动配置 label 数据标签位置
