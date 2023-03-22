@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Avatar, Typography } from 'antd'
-const BankDetails = ({ account, user }) => {
+const BankDetails = ({ user }) => {
+  // console.log(user)
+  if(!user.loading){
   return (
     <div className='flex flex-wrap'>
       <Avatar
@@ -15,7 +17,7 @@ const BankDetails = ({ account, user }) => {
       >
         <div className='h-44 flex items-center'>
           <div className='w-full text-center text-7xl'>
-            {user.name[0]}
+            {user.first_name[0]}
           </div>
         </div>
       </Avatar>
@@ -27,7 +29,7 @@ const BankDetails = ({ account, user }) => {
           </Typography.Title>
 
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.name}
+            {user.first_name} {user.last_name}
           </Typography.Title>
         </div>
         <div className="flex">
@@ -50,20 +52,19 @@ const BankDetails = ({ account, user }) => {
         </div>
         <div className="flex">
           <Typography.Title level={4} style={{ margin: '0.5rem' }}>
-            {/* Address svg*/}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" /></svg>
           </Typography.Title>
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.address}
+            {user.city}, {user.state}
           </Typography.Title>
         </div>
       </div>
     </div>
   )
+  }
 }
 
 BankDetails.propTypes = {
-  account: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
 }
 

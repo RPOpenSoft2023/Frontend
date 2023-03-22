@@ -16,8 +16,8 @@ const columns = [
     },
     {
       title: 'Description',
-      dataIndex: 'desc',
-      key: 'desc',
+      dataIndex: 'description',
+      key: 'description',
       align : "center",
       render: (text) => <div className='text-center whitespace-nowrap overflow-hidden	'>{text}</div>,
       ellipsis: true,
@@ -52,8 +52,10 @@ const columns = [
   ];
 
 
-const BankTransaction = ({ transaction }) => {
-  transaction.sort((a, b) => new Date(b.date) - new Date(a.date));
+const BankTransaction = ({ account, transaction }) => {
+  if(!account.loading && !transaction.loading){
+    transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // console.log([...transaction.result])
   return (
     <>
       <div >
@@ -71,18 +73,18 @@ const BankTransaction = ({ transaction }) => {
                         xs: 1,
                     }}
                 >
-                    <Descriptions.Item className='overflow-hidden' label={<b>Account Number</b>} >{account.accountNumber}</Descriptions.Item>
-                    <Descriptions.Item className='overflow-hidden' label={<b>Account Type</b>} >{account.accountType}</Descriptions.Item>
-                    <Descriptions.Item className='overflow-hidden' label={<b>IFSC Code</b>} >{account.ifscCode}</Descriptions.Item>
-                    <Descriptions.Item className='overflow-hidden' label={<b>Bank Name</b>} >{account.bankName}</Descriptions.Item>
-                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Name</b>} >{account.branchName}</Descriptions.Item>
-                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Address</b>} >{account.branchAddress}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Account Number</b>} >{account.account_number}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Account Type</b>} >{account.account_type}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>IFSC Code</b>} >{account.ifsc}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Bank Name</b>} >{account.bank_name}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Name</b>} >{account.branch_name}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Address</b>} >{account.branch_address}</Descriptions.Item>
                 </Descriptions>
                 <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900">Delete Account</Button>
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Transaction History" className='mx-auto' key="1">
-            <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} pagination={false} />
+            <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction.result} pagination={false} />
             <Button type="primary" className="m-5 bg-blue-600 hover:bg-blue-900">Analyse</Button>
             <Button type="primary" className="m-5  bg-blue-600  hover:bg-blue-900">Add Transaction</Button>
           </Tabs.TabPane>
@@ -93,10 +95,12 @@ const BankTransaction = ({ transaction }) => {
     </>
       
   )
+  }
 }
 
 BankTransaction.propTypes = {
-    transaction: PropTypes.array.isRequired,
+  account: PropTypes.object.isRequired,
+  transaction: PropTypes.array.isRequired,
 }
 
 export default BankTransaction
