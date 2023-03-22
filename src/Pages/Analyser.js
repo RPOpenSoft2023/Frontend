@@ -10,14 +10,13 @@ import UserData from "../Data/UserData";
 import { Descriptions } from 'antd';
 // import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
-import PieChart from "../Components/PieChart";
+import MonthlySummaryData from '../Data/MonthlySummaryData';
+import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
 import Plot from "../Components/Plot";
 import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
-const change = (key) => {
-    console.log(key)
-}
+import LineChart from '../Components/LineChart';
 
 const Analyser = () => {
     const items = [
@@ -131,16 +130,6 @@ const Analyser = () => {
     ];
     return (
         <div>
-            {/* <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3">
-                {CardData.map((data) =>
-                    <AnalyserCard
-                        key={data.key}
-                        id={data.key}
-                        data={data.num}
-                        title={data.title}
-                    />
-                )}
-            </div> */}
             <Tabs animated defaultActiveKey="1" centered items={items} />
 
         </div>
