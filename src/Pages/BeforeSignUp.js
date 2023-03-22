@@ -1,8 +1,9 @@
+import ForgotPassword from "../Components/ForgotPassword";
 import Header from "../Components/Header";
-import Signup from "../Components/Signup";
-const SignupPage = () => {
+
+const BeforeSignUpPage = () => {
     return (
-        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-['Kanit']">
+        <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8">
                 <Header
                     heading="Signup to create an account"
@@ -10,11 +11,10 @@ const SignupPage = () => {
                     linkName="Login"
                     linkUrl="/login"
                 />
-                <Signup />
-
+                <ForgotPassword text="/signup/profile"/>
             </div>
         </div>
     );
 }
 
-export default SignupPage;
+export default BeforeSignUpPage;
