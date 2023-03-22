@@ -14,11 +14,7 @@ export default function FormExtra() {
             </div>
 
             <div className="text-sm">
-<<<<<<< HEAD
-                <a href="/" className="font-medium text-sky-600 hover:text-sky-500">
-=======
                 <a href="/forgotpassword" className="font-medium text-sky-600 hover:text-sky-500">
->>>>>>> 7e8d15ff351a55918f0d8c13533c2d7987af522d
                     Forgot your password?
                 </a>
             </div>

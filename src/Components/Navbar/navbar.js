@@ -57,11 +57,7 @@ function Navbar() {
         "
       >
         <div className=" text-2xl tracking-wide font-['Kanit']">
-<<<<<<< HEAD
-          <Link to="/dashboard">RedShift</Link>
-=======
           <Link>RedShift</Link>
->>>>>>> 7e8d15ff351a55918f0d8c13533c2d7987af522d
         </div>
 
         <svg
