@@ -59,38 +59,33 @@ const BankTransaction = ({ transaction }) => {
       <div >
         <Tabs defaultActiveKey='0' className='mx-auto text-center'>
           <Tabs.TabPane tab="Bank Details" key="0">
-              <Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px" }} className="mx-auto my-4">
+              <Card bordered={true} style={{ width: '100%', height: '50%', fontSize: "16px" }} className="mx-auto my-4">
                 <Descriptions
                     bordered
                     column={{
-                        xxl: 4,
-                        xl: 1,
-                        lg: 3,
-                        md: 3,
-                        sm: 2,
+                        xxl: 2,
+                        xl: 2,
+                        lg: 1,
+                        md: 1,
+                        sm: 1,
                         xs: 1,
                     }}
                 >
-                    <Descriptions.Item label={<b>Bank Name</b>} >{account.bankName}</Descriptions.Item>
-                    <Descriptions.Item label={<b>Account Number</b>} >{account.accountNumber}</Descriptions.Item>
-                    <Descriptions.Item label={<b>Account Type</b>} >{account.accountType}</Descriptions.Item>
-                    <Descriptions.Item label={<b>Branch Name</b>} >{account.branchName}</Descriptions.Item>
-                    <Descriptions.Item label={<b>Branch Address</b>} >{account.branchAddress}</Descriptions.Item>
-                    <Descriptions.Item label={<b>IFSC Code</b>} >{account.ifscCode}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Account Number</b>} >{account.accountNumber}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Account Type</b>} >{account.accountType}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>IFSC Code</b>} >{account.ifscCode}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Bank Name</b>} >{account.bankName}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Name</b>} >{account.branchName}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Address</b>} >{account.branchAddress}</Descriptions.Item>
                 </Descriptions>
-
+                <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900">Delete Account</Button>
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Transaction History" className='mx-auto' key="1">
-            {/* <Typography.Title level={5} className=" text-center">
-              Transaction History
-            </Typography.Title> */}
             <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} pagination={false} />
             <Button type="primary" className="m-5 bg-blue-600 hover:bg-blue-900">Analyse</Button>
             <Button type="primary" className="m-5  bg-blue-600  hover:bg-blue-900">Add Transaction</Button>
-
           </Tabs.TabPane>
-          {/* <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane> */}
         </Tabs>
       
 
