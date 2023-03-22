@@ -3,7 +3,7 @@ import { signupFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import Input from "./Input";
 import axios from "axios";
-import { useLocation,useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { showToastMessage } from "./Toast";
 import { ToastContainer } from "react-toastify";
 const fields = signupFields;
@@ -38,7 +38,7 @@ export default function Signup() {
       .then((res) => {
         console.log(res);
         localStorage.clear();
-        navigate("/login");
+        navigate("/");
         showToastMessage("Successfully Registered");
       })
       .catch((error) => {
@@ -63,7 +63,7 @@ export default function Signup() {
           />
         ))}
         <FormAction handleSubmit={handleSubmit} text="Signup" />
-        <ToastContainer/>
+        <ToastContainer />
       </div>
     </form>
   );
