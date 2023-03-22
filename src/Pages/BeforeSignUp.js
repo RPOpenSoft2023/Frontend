@@ -9,9 +9,9 @@ const BeforeSignUpPage = () => {
                     heading="Signup to create an account"
                     paragraph="Already have an account? "
                     linkName="Login"
-                    linkUrl="/login"
+                    linkUrl="/"
                 />
-                <ForgotPassword text="/signup/profile"/>
+                <ForgotPassword text="/signup/profile" />
             </div>
         </div>
     );
