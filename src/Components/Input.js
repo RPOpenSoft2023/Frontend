@@ -10,6 +10,7 @@ export default function Input({
     type,
     isRequired = false,
     placeholder,
+    isDisabled = false,
     customClass
 }) {
     return (
@@ -26,6 +27,7 @@ export default function Input({
                 required={isRequired}
                 className={fixedInputClass + customClass}
                 placeholder={placeholder}
+                disabled={isDisabled}
             />
         </div>
     )
