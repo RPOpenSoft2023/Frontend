@@ -6,7 +6,7 @@ function AnalyserCard(props) {
     <div>
       <Card
         style={{ width: 200 }}
-        className="ml-3 mr-3 bg-zinc-300 text-center text-base font-semibold"
+        className="ml-3 mr-3 bg-zinc-300 text-center text-base font-semibold shadow-md"
       >
         <h1>
           <b>{props.title}</b>

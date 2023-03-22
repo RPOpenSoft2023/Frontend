@@ -12,6 +12,7 @@ import Plot from "../Components/Plot";
 import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 const change = (key) => {
     console.log(key)
 }
@@ -173,6 +174,16 @@ const Analyser = () => {
                     />
                 )}
             </div> */}
+            <div className="my-3">
+                <div className="grid grid-cols-10 gap-4 font-sans">
+                    <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">{">"} REPORT ANALYSIS</div>
+                    <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
+                        <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white"><i class='bx bx-calendar mr-2'></i><span>22/09/2022</span></div>
+                        <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white"><i class='bx bx-calendar mr-2'></i><span>23/03/2023</span></div>
+                    </div>
+                    <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4"><Link><i class='bx bx-download mx-2'></i><span>Analysis</span></Link></div>
+                </div>
+            </div>
             <Tabs animated defaultActiveKey="1" centered items={items} />
 
         </div>
@@ -188,7 +199,7 @@ const Container = styled.div`
     align-items: left;
 
 
-    & > * {
+    & > * { 
       margin: 0.5rem 0;
     }
   }
