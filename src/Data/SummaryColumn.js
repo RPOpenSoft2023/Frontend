@@ -36,6 +36,13 @@ const data=[
         align:'center'
       },
       {
+        title: 'TotalMonthlyIncome',
+        width: 50,
+        dataIndex: 'totalMonthIncome',
+        key: 'totalMonthIncome',
+        align:'center'
+      },
+      {
         title: 'spendingExpenseRatio',
         width: 50,
         dataIndex: 'spendingExpenseRatio',
