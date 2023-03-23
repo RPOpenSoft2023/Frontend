@@ -4,7 +4,7 @@ function AnalyserCard(props) {
   return (
     <div>
       <Card
-        style={{ width: 190 }}
+        style={{ width: 190,height:120 }}
         className="ml-3 mr-3 bg-zinc-300 text-center text-sm font-semibold shadow-md"
       >
         <h1 style={{color:"#2563EB"}}><b>{props.data}</b></h1>

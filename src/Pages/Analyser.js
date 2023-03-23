@@ -59,21 +59,6 @@ const Analyser = () => {
 
                     </Card>
                 </div>
-                {/* <Row justify="space-between" className="mx-3 m-4">
-                    <Col span={12} className="bg-white p-4">
-                        <Card title="Category Chart">
-                            <StackedPlot data={categoryData} />
-                            <PieChart/>
-                        </Card>
-                    </Col>
-                    <Col span={12} >
-                        <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', widht: '100%', height: '100%' }}>
-                            <Card title="Expenditure" bordered={false} style={{ width: '100%', height: '100%', textAlign: "center" }}>
-                                <Plot />
-                            </Card>
-                        </div>
-                    </Col>
-                </Row> */}
             </div>,
         },
         {
@@ -134,7 +119,6 @@ const Analyser = () => {
                 </div>
             </div>
             <Tabs animated defaultActiveKey="1" centered items={items} />
-
         </div>
     );
 }
