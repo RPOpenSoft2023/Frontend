@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
-const FormCom = () => {
+const UpdateForm = () => {
     // const layout = {
     //     labelCol: {
     //         span: 8,
@@ -117,10 +117,10 @@ const FormCom = () => {
                     Reset
                 </Button>
                 <Button type="primary" htmlType="submit" style={{marginLeft:'3rem', width:'10rem'}} className="bg-blue-500">
-                    Add Bank
+                    Update
                 </Button>
             </Form.Item>
         </Form>
     );
 };
-export default FormCom;
+export default UpdateForm;

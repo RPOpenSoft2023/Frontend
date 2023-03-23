@@ -1,12 +1,11 @@
 import React from "react";
 import { Card } from "antd";
-import styled from "styled-components";
 function AnalyserCard(props) {
   return (
     <div>
       <Card
-        style={{ width: 200 }}
-        className="ml-3 mr-3 bg-zinc-300 text-center text-base font-semibold shadow-md"
+        style={{ width: 190 }}
+        className="ml-3 mr-3 bg-zinc-300 text-center text-sm font-semibold shadow-md"
       >
         <h1 style={{color:"#2563EB"}}><b>{props.data}</b></h1>
         <h3>

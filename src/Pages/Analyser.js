@@ -4,21 +4,22 @@ import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
 import categoryData from "../Data/CategoryData";
-import AccountData from "../Data/AccountData";
+// import AccountData from "../Data/AccountData";
 import freqData from '../Data/freqData'
-import UserData from "../Data/UserData";
-import { Descriptions } from 'antd';
+// import UserData from "../Data/UserData";
+// import { Descriptions } from 'antd';
 // import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
 import MonthlySummaryData from '../Data/MonthlySummaryData';
 import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
 import SummaryTab from "../Components/SummaryTab";
 import Plot from "../Components/Plot";
-import Line from "../Components/Line"
+// import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
+import PieChart from "@ant-design/plots/es/components/pie";
 const change = (key) => {
     console.log(key)
 }
@@ -27,7 +28,7 @@ const Analyser = () => {
     const items = [
         {
             key: '1',
-            label: `Bank details`,
+            label: `Overview`,
             children: <div >
                 <Container className='my-3' style={{ display: 'flex', justifyContent: '', flexWrap: 'wrap', }}>
                     {CardData.map((data) =>
@@ -41,20 +42,35 @@ const Analyser = () => {
                     )}
                 </Container>
 
+<<<<<<< HEAD
                 <div className='bg-white' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card title="Bank account details" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+=======
+                <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+>>>>>>> eff151139c7a46970ab66b3dac8e0e7bcfb3bbdc
                         <AnalyseChart/>
 
                     </Card>
-                    <Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                    <Card title="Credit Vs Debit Frequency" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <StackedPlot data={freqData} />
                     </Card>
                 </div>
-                <Row justify="space-between" className="mx-3 m-4">
+                <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                        <StackedPlot data={freqData} />
+                    </Card>
+                    <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                        <AnalyseChart/>
+
+                    </Card>
+                </div>
+                {/* <Row justify="space-between" className="mx-3 m-4">
                     <Col span={12} className="bg-white p-4">
-                        {/* <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '100%' }}> */}
+                        <Card title="Category Chart">
                             <StackedPlot data={categoryData} />
-                        {/* </div> */}
+                            <PieChart/>
+                        </Card>
                     </Col>
                     <Col span={12} >
                         <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', widht: '100%', height: '100%' }}>
@@ -63,7 +79,7 @@ const Analyser = () => {
                             </Card>
                         </div>
                     </Col>
-                </Row>
+                </Row> */}
             </div>,
         },
         {
@@ -100,7 +116,7 @@ const Analyser = () => {
 
     ];
     return (
-        <div className="p-10">
+        <div className="p-0">
             {/* <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3">
                 {CardData.map((data) =>
                     <AnalyserCard
