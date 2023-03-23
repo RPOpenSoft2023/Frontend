@@ -4,16 +4,9 @@ import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
 import categoryData from "../Data/CategoryData";
-// import AccountData from "../Data/AccountData";
 import freqData from '../Data/freqData'
-// import UserData from "../Data/UserData";
-// import { Descriptions } from 'antd';
-// import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
-// import MonthlySummaryData from '../Data/MonthlySummaryData';
-// import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
 import Plot from "../Components/Plot";
-// import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
@@ -43,7 +36,7 @@ const Analyser = () => {
 
                 <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <AnalyseChart/>
+                        <AnalyseChart />
 
                     </Card>
                     <Card title="Credit Vs Debit Frequency" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
@@ -55,7 +48,7 @@ const Analyser = () => {
                         <StackedPlot data={freqData} />
                     </Card>
                     <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <AnalyseChart/>
+                        <AnalyseChart />
 
                     </Card>
                 </div>
