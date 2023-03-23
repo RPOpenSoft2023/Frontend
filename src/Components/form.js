@@ -3,7 +3,6 @@ import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 const FormCom = () => {
-    const { Option } = Select;
     // const layout = {
     //     labelCol: {
     //         span: 8,

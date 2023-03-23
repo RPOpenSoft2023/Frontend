@@ -1,5 +1,3 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils"
-
 const loginFields = [
     {
         labelText: "Phone number",

@@ -1,5 +1,5 @@
 import { Modal, Table, Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import UpdateForm from "../Components/UpdateForm";
 
@@ -64,7 +64,7 @@ export default function BankNames() {
       dataIndex: "Bank",
       key: "Bank",
       width: "30%",
-      render: (text) => <a>{text}</a>,
+      render: (text) => <Link to="/">{text}</Link>,
     },
     {
       title: "Account number",

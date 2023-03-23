@@ -145,7 +145,7 @@ const BankingDetails = () => {
         // console.log(user);
             
         // console.log(data);
-    }, []);
+    },[]);
         
 
     return (

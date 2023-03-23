@@ -4,23 +4,23 @@ import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
 import categoryData from "../Data/CategoryData";
-import AccountData from "../Data/AccountData";
+// import AccountData from "../Data/AccountData";
 import freqData from '../Data/freqData'
-import UserData from "../Data/UserData";
-import { Descriptions } from 'antd';
+// import UserData from "../Data/UserData";
+// import { Descriptions } from 'antd';
 // import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
-import MonthlySummaryData from '../Data/MonthlySummaryData';
-import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
+// import MonthlySummaryData from '../Data/MonthlySummaryData';
+// import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
 import Plot from "../Components/Plot";
-import Line from "../Components/Line"
+// import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
-const change = (key) => {
-    console.log(key)
-}
+// const change = (key) => {
+//     console.log(key)
+// }
 
 const Analyser = () => {
     const items = [

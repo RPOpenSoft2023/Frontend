@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Tabs, Button, Card, Descriptions } from 'antd'
-import account from '../../Data/AccountData';
+// import account from '../../Data/AccountData';
 
 
 const columns = [

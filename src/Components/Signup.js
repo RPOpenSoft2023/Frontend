@@ -59,7 +59,7 @@ export default function Signup() {
             key={field.id}
             handleChange={handleChange}
             value={
-              field.id == "Phone Number"
+              field.id === "Phone Number"
                 ? location.state
                 : signupState[field.id]
             }

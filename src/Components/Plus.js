@@ -1,16 +1,16 @@
 import React from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import {  Button, Form, Select, Upload } from 'antd';
+import {  Button, Form, Upload } from 'antd';
 
-const { Option } = Select;
-const formItemLayout = {
-    labelCol: {
-        span: 6,
-    },
-    wrapperCol: {
-        span: 14,
-    },
-};
+// const { Option } = Select;
+// const formItemLayout = {
+//     labelCol: {
+//         span: 6,
+//     },
+//     wrapperCol: {
+//         span: 14,
+//     },
+// };
 const normFile = (e) => {
     if (Array.isArray(e)) {
         return e;

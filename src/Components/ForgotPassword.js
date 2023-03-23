@@ -10,7 +10,7 @@ export default function ForgotPassword(prop) {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
   const [isOtpSent, setIsOtpSent] = useState(false);
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
+  // const [isOtpVerified, setIsOtpVerified] = useState(false);
 
   const handlePhoneNoChange = (e) => {
     setPhoneNo(e.target.value);
@@ -45,7 +45,7 @@ export default function ForgotPassword(prop) {
       .then((res) => {
         localStorage.setItem("jwt_token", res.data.token);
         navigate("/signup/profile", { state: phoneNo });
-        setIsOtpVerified(true);
+        // setIsOtpVerified(true);
       })
       .catch((error) => {
         console.log("error", error);
