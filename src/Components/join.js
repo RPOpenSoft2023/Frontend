@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Button, Modal, Dropdown } from "antd";
+import {Modal, Dropdown } from "antd";
 import { useState } from "react";
 import Plus from "./Plus";
 import FormCom from './form';

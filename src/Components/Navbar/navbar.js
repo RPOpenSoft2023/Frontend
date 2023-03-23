@@ -10,7 +10,7 @@ function Navbar() {
   const logout = () => {
     localStorage.clear();
     navigate("/");
-    showToastMessage("Logged Out Successfully");
+    showToastMessage("Logged Out Successfully","positive");
   };
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 768px)").matches

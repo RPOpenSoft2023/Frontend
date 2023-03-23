@@ -1,57 +1,55 @@
-import PieChartData from '../Data/PieChartData';
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
-ChartJS.register(ArcElement, Tooltip, Legend);
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { Pie } from '@ant-design/plots';
+import data from '../Data/CategoryData'
 
-const generateColors = (count) => {
-    // generate an array of colors based on the count of data points
-    const colors = [];
-    for (let i = 0; i < count; i++) {
-        const hue = (i * 360) / count; // distribute the colors evenly in the color wheel
-        colors.push(`hsl(${hue}, 70%, 50%)`);
-    }
-    return colors;
-};
 const PieChart = () => {
-    const data = PieChartData;
-    const colors = generateColors(data.length); // generates an array of colors
-    const chartData = {
-        labels: data.map((d) => d.label),
-        datasets: [
-            {
-                data: data.map((d) => d.value),
-                backgroundcolor: colors,
-                hoverBackgroundcolor: colors,
-            },
-        ],
-    };
-    const options = {
-        title: {
-            display: true,
-            text: 'Pie Chart with Labels',
-        },
-        legend: {
-            position: 'right',
-        },
-        tooltips: {
-            callbacks: {
-                label: (tooltipItem, data) => {
-                    const label = data.labels[tooltipItem.index];
-                    const value = data.datasets[0].data[tooltipItem.index];
-                    return `${label}: ${value}`;
-                },
-            },
-        },
-    };
-
-    return (
-        <div>
-            <Pie data={chartData} options={options} />
-        </div>
-    )
-}
+  const data = [
+    {
+      type: '分类一',
+      value: 27,
+    },
+    {
+      type: '分类二',
+      value: 25,
+    },
+    {
+      type: '分类三',
+      value: 18,
+    },
+    {
+      type: '分类四',
+      value: 15,
+    },
+    {
+      type: '分类五',
+      value: 10,
+    },
+    {
+      type: '其他',
+      value: 5,
+    },
+  ];
+  const config = {
+    appendPadding: 10,
+    data,
+    angleField: 'value',
+    colorField: 'type',
+    radius: 0.8,
+    label: {
+      type: 'outer',
+      content: '{name} {percentage}',
+    },
+    interactions: [
+      {
+        type: 'pie-legend-active',
+      },
+      {
+        type: 'element-active',
+      },
+    ],
+  };
+  return <Pie {...config} />;
+};
 
 export default PieChart
-
-

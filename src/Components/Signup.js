@@ -15,31 +15,37 @@ export default function Signup() {
   const location = useLocation();
   const navigate = useNavigate();
   const [signupState, setSignupState] = useState(fieldsState);
-
   const handleChange = (e) =>
     setSignupState({ ...signupState, [e.target.id]: e.target.value });
-
+  console.log(signupState);
   const handleSubmit = (e) => {
     e.preventDefault();
-    createAccount();
+    if (signupState.confirm_password === signupState.password) {
+      createAccount();
+    } else {
+      showToastMessage("Confirm Password is not matching the Password","negative");
+    }
   };
 
   //handle Signup API Integration here
   const createAccount = () => {
-    axios
-      .post("http://34.105.83.175:8080/user/api/register/", {
-        phone_number: location.state,
-        first_name: signupState.name,
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_USER_API}/register/`,
+      data: {
+        first_name: signupState.first_name,
         password: signupState.password,
-        email_id: signupState.email,
-        age: signupState.Age,
-        aadhar_no: signupState.aadhar,
-      })
+        email: signupState.email_address,
+        age: Number(signupState.Age),
+        aadhar_no: signupState.Aadhar_Number,
+      },
+      headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
+    })
       .then((res) => {
         console.log(res);
         localStorage.clear();
         navigate("/");
-        showToastMessage("Successfully Registered");
+        showToastMessage("Successfully Registered","positive");
       })
       .catch((error) => {
         console.log("error.message", error.message);
@@ -52,7 +58,11 @@ export default function Signup() {
           <Input
             key={field.id}
             handleChange={handleChange}
-            value={(field.id=="phone_number" ? location.state : signupState[field.id])}
+            value={
+              field.id === "Phone Number"
+                ? location.state
+                : signupState[field.id]
+            }
             labelText={field.labelText}
             labelFor={field.labelFor}
             id={field.id}
