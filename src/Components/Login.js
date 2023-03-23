@@ -46,7 +46,7 @@ export default function Login() {
       .then((res) => {
         console.log(res);
         localStorage.setItem("logstat", true);
-        localStorage.setItem("jwt_token", res.data.jwt_token);
+        localStorage.setItem("jwt_token", res.data.login_token);
         navigate("/dashboard");
       })
       .catch((error) => {
