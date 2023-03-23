@@ -6,8 +6,8 @@ import BankTransaction from '../Components/BankingDetails/BankTransaction';
 // import account from '../Data/AccountData';
 import { useState, useEffect } from 'react';
 // import transaction from '../Data/ColumnData';
-const BANKING_API='http://34.82.1.149:8080' // this is the URL for the banking API
-const USER_API='http://34.105.83.175:8080' // this is the URL for the user API
+const BANKING_API=process.env.REACT_APP_BANKING_API // this is the URL for the banking API
+const USER_API=process.env.REACT_APP_USER_API // this is the URL for the user API
 //   const transaction = [
 //     {
 //         key: '1',
@@ -87,7 +87,7 @@ const BankingDetails = () => {
                 'Authorization': `Bearer ${token}`
             }
         }
-        axios.get(`${USER_API}/user/api/verify_token/`, config)
+        axios.get(`${USER_API}/verify_token/`, config)
             .then(res => {
                 console.log(res.data);
                 setUser({
