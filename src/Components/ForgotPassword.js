@@ -43,7 +43,7 @@ export default function ForgotPassword(prop) {
       },
     })
       .then((res) => {
-        localStorage.setItem("jwt_token", res.data.token);
+        localStorage.setItem("jwt_token", res.data.register_token);
         navigate("/signup/profile", { state: phoneNo });
         localStorage.setItem("phone_verified", true);
         // setIsOtpVerified(true);
