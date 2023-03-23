@@ -1,6 +1,5 @@
 import React from "react";
 import { Card } from "antd";
-import styled from "styled-components";
 function AnalyserCard(props) {
   return (
     <div>
