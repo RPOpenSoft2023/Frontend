@@ -1,84 +1,17 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import BankDetails from '../Components/BankingDetails/BankDetails';
 import BankTransaction from '../Components/BankingDetails/BankTransaction';
-// import user from '../Data/UserData';
-// import account from '../Data/AccountData';
-import { useState, useEffect } from 'react';
-// import transaction from '../Data/ColumnData';
-const BANKING_API='http://34.82.1.149:8080' // this is the URL for the banking API
-const USER_API='http://34.105.83.175:8080' // this is the URL for the user API
-//   const transaction = [
-//     {
-//         key: '1',
-//         date: '2021-01-01',
-//         desc: 'Salary',
-//         debit: 0,
-//         credit: 10000,
-//         balance: 10000,
-//     },
-//     {
-//         key: '2',
-//         date: '2021-01-02',
-//         desc: 'Rent',
-//         debit: 1000,
-//         credit: 0,
-//         balance: 9000,
-//     },
-//     {
-//         key: '3',
-//         date: '2021-01-03',
-//         desc: 'Electricity Bill',
-//         debit: 500,
-//         credit: 0,
-//         balance: 8500,
-//     },
-//     {
-//         key: '4',
-//         date: '2021-01-04',
-//         desc: 'Grocery',
-//         debit: 1000,
-//         credit: 0,
-//         balance: 7500,
-//     },
-//     {
-//         key: '5',
-//         date: '2021-01-05',
-//         desc: 'Shopping',
-//         debit: 2000,
-//         credit: 0,
-//         balance: 5500,
-//     },
-//     {
-//         key: '6',
-//         date: '2021-01-06',
-//         desc: 'Food',
-//         debit: 500,
-//         credit: 0,
-//         balance: 5000,
-//     },
-//     {
-//         key: '7',
-//         date: '2021-01-07',
-//         desc: 'Shopping',
-//         debit: 2000,
-//         credit: 0,
-//         balance: 3000,
-//     },
-//     {
-//         key: '8',
-//         date: '2021-01-08',
-//         desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-//         debit: 1000,
-//         credit: 0,
-//         balance: 2000,
-//     }
-// ];
+import { useNavigate } from 'react-router';
+const BANKING_API='http://35.227.179.26:80' // this is the URL for the banking API
+const USER_API='http://35.247.79.215:80' // this is the URL for the user API
 
 const BankingDetails = () => {
     const [user, setUser] = useState({loading:true});
     const [account, setAccount] = useState({loading:true});
     const [transaction, setTransaction] = useState({loading:true});
+    const navigate = useNavigate();
     useEffect(() => {
         const token = localStorage.getItem('jwt_token');
         const config = {
@@ -97,6 +30,7 @@ const BankingDetails = () => {
             })
             .catch(err => {
                 console.log(err);
+                // navigate('/dashboard');
             })
         
         const accountConfig = {
@@ -107,7 +41,7 @@ const BankingDetails = () => {
         }
 
         // const account_number = localStorage.getItem('account_number');
-        const account_number = 87654319010;
+        const account_number = 12345678910;
         axios.get(`${BANKING_API}/banking/api/accounts?account_number=${account_number}`, accountConfig)
             .then(res => {
                 setAccount({
@@ -117,6 +51,7 @@ const BankingDetails = () => {
             })
             .catch(err => {
                 console.log(err);
+                // navigate('/dashboard');
             })
         
         const transactionConfig = {
@@ -127,7 +62,6 @@ const BankingDetails = () => {
         }
 
         
-        // console.log(account)
         const start_date = '2020-01-01';
         const end_date = '2020-11-24';
         axios.get(`${BANKING_API}/banking/api/transactions?account_number=${account_number}&start_date=${start_date}&end_date=${end_date}`, transactionConfig)
@@ -140,12 +74,10 @@ const BankingDetails = () => {
             })
             .catch(err => {
                 console.log(err);
+                // navigate('/dashboard');
             })
         console.log(transaction)
-        // console.log(user);
-            
-        // console.log(data);
-    },[]);
+    }, []);
         
 
     return (

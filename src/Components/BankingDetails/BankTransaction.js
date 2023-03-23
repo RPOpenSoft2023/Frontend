@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Table, Tabs, Button, Card, Descriptions } from 'antd'
-// import account from '../../Data/AccountData';
-
+import { useNavigate } from 'react-router';
+import axios from 'axios';
+const BANKING_API='http://35.227.179.26:80' // this is the URL for the banking API
 
 const columns = [
     {
@@ -53,6 +54,35 @@ const columns = [
 
 
 const BankTransaction = ({ account, transaction }) => {
+  const navigate = useNavigate();
+  const deleteAccount = () => {
+    console.log(account.account_number);
+    const token = localStorage.getItem('jwt_token');
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    }
+    
+    // const body = JSON.stringify({ account_number: account.account_number });
+    const body = { account_number: `${account.account_number}` };
+    // console.log(config);
+    axios.delete(`${BANKING_API}/banking/api/delete_account`,{
+        headers: config.headers,
+        data: body
+      })
+      .then(res => {
+        console.log(res.data);
+        navigate('/dashboard');
+      })
+      .catch(err => {
+        console.log(err);
+        // navigate('/dashboard');
+      })
+    
+
+  }
   if(!account.loading && !transaction.loading){
     transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
     // console.log([...transaction.result])
@@ -80,7 +110,7 @@ const BankTransaction = ({ account, transaction }) => {
                     <Descriptions.Item className='overflow-hidden' label={<b>Branch Name</b>} >{account.branch_name}</Descriptions.Item>
                     <Descriptions.Item className='overflow-hidden' label={<b>Branch Address</b>} >{account.branch_address}</Descriptions.Item>
                 </Descriptions>
-                <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900">Delete Account</Button>
+                <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900" onClick={deleteAccount}>Delete Account</Button>
             </Card>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Transaction History" className='mx-auto' key="1">
