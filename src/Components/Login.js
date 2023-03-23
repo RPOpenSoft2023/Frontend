@@ -39,7 +39,7 @@ export default function Login() {
   //Handle Login API Integration here
   const authenticateUser = () => {
     axios
-      .post("http://34.105.83.175:8080/user/api/login/", {
+      .post(`${process.env.REACT_APP_USER_API}/login/`, {
         phone_number: loginState.phone_number,
         password: loginState.password,
       })
