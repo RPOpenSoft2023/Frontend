@@ -19,6 +19,7 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import PieChart from "@ant-design/plots/es/components/pie";
+import SummaryTab from "../Components/SummaryTab";
 const change = (key) => {
     console.log(key)
 }
@@ -92,9 +93,7 @@ const Analyser = () => {
             label: `Monthly Summary`,
             children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
+                    <SummaryTab/>
                 </Card>
             </div>,
         },
