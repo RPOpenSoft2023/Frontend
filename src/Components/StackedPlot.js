@@ -1,38 +1,33 @@
-import React from 'react';
-import { Column } from '@ant-design/plots';
-import data from "../Data/freqData"
-
+import React, { useState, useEffect } from 'react';
+import { Bar } from '@ant-design/plots';
+import data from '../Data/TransactionTypeData'
 const StackedPlot = () => {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   asyncFetch();
-  // }, []);
-
-  // const asyncFetch = () => {
-  //   fetch('https://gw.alipayobjects.com/os/antfincdn/PC3daFYjNw/column-data.json')
-  //     .then((response) => response.json())
-  //     .then((json) => setData(json))
-  //     .catch((error) => {
-  //       console.log('fetch data failed', error);
-  //     });
-  // };
   const config = {
-    data,
-    xField: 'month',
-    yField: 'value',
+    data: data.reverse(),
+    isStack: true,
+    xField: 'value',
+    yField: 'year',
     seriesField: 'type',
-    isGroup: true,
-    legend: {
-      position: "right-top",
-    },
-    columnStyle: {
-      radius: [20, 20, 0, 0],
+    label: {
+      // 可手动配置 label 数据标签位置
+      position: 'middle',
+      // 'left', 'middle', 'right'
+      // 可配置附加的布局方法
+      layout: [
+        // 柱形图数据标签位置自动调整
+        {
+          type: 'interval-adjust-position',
+        }, // 数据标签防遮挡
+        {
+          type: 'interval-hide-overlap',
+        }, // 数据标签文颜色自动调整
+        {
+          type: 'adjust-color',
+        },
+      ],
     },
   };
-
-  return <Column {...config} />;
+  return <Bar {...config} />;
 };
 
-export default StackedPlot;
-
+export default StackedPlot

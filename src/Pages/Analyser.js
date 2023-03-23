@@ -3,22 +3,14 @@ import StackedPlot from "../Components/StackedPlot";
 import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
-import categoryData from "../Data/CategoryData";
-// import AccountData from "../Data/AccountData";
 import freqData from '../Data/freqData'
-// import UserData from "../Data/UserData";
-// import { Descriptions } from 'antd';
-// import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
-// import MonthlySummaryData from '../Data/MonthlySummaryData';
-// import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
-import Plot from "../Components/Plot";
-// import Line from "../Components/Line"
 import { Tabs } from 'antd';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
-import PieChart from "@ant-design/plots/es/components/pie";
+import CategoryChart from "../Components/CategoryChart";
+import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 const change = (key) => {
     console.log(key)
 }
@@ -42,39 +34,22 @@ const Analyser = () => {
                 </Container>
 
                 <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                    <Card title="Income & Expenditure" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <AnalyseChart/>
 
                     </Card>
-                    <Card title="Credit Vs Debit Frequency" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                    <Card title="Transaction Types" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <StackedPlot data={freqData} />
                     </Card>
                 </div>
                 <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <StackedPlot data={freqData} />
-                        {/* <PieChart/> */}
+                        <CategoryChart/>
                     </Card>
-                    <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <AnalyseChart/>
-
+                    <Card title="Loan details" className="shadow-lg h-inherit" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                        <LoanAnalysisChart/>
                     </Card>
                 </div>
-                {/* <Row justify="space-between" className="mx-3 m-4">
-                    <Col span={12} className="bg-white p-4">
-                        <Card title="Category Chart">
-                            <StackedPlot data={categoryData} />
-                            <PieChart/>
-                        </Card>
-                    </Col>
-                    <Col span={12} >
-                        <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', widht: '100%', height: '100%' }}>
-                            <Card title="Expenditure" bordered={false} style={{ width: '100%', height: '100%', textAlign: "center" }}>
-                                <Plot />
-                            </Card>
-                        </div>
-                    </Col>
-                </Row> */}
             </div>,
         },
         {
@@ -114,16 +89,6 @@ const Analyser = () => {
     ];
     return (
         <div className="p-0">
-            {/* <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3">
-                {CardData.map((data) =>
-                    <AnalyserCard
-                        key={data.key}
-                        id={data.key}
-                        data={data.num}
-                        title={data.title}
-                    />
-                )}
-            </div> */}
             <div className="my-3">
                 <div className="grid grid-cols-10 gap-4 font-sans">
                     <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">{">"} REPORT ANALYSIS</div>
