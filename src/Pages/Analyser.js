@@ -18,15 +18,16 @@ import { Tabs } from 'antd';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
-// const change = (key) => {
-//     console.log(key)
-// }
+import PieChart from "@ant-design/plots/es/components/pie";
+const change = (key) => {
+    console.log(key)
+}
 
 const Analyser = () => {
     const items = [
         {
             key: '1',
-            label: `Bank details`,
+            label: `Overview`,
             children: <div >
                 <Container className='my-3' style={{ display: 'flex', justifyContent: '', flexWrap: 'wrap', }}>
                     {CardData.map((data) =>
@@ -40,53 +41,30 @@ const Analyser = () => {
                     )}
                 </Container>
 
-                <div className='bg-white' style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Card title="Bank account details" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        {/* <Descriptions
-                            bordered
-                            column={{
-                                xxl: 4,
-                                xl: 1,
-                                lg: 3,
-                                md: 3,
-                                sm: 2,
-                                xs: 1,
-                            }}
-                            responsive={{
-                                xxl: 'undefined',
-                                xl: 2,
-                                lg: 2,
-                                md: 2,
-                                sm: 1,
-                                xs: 1,
-                            }}
-                        >
-                            <Descriptions.Item label={<b>Bank Name</b>} >{AccountData.bankName}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Number</b>} >{AccountData.accountNumber}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Type</b>} >{AccountData.accountType}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Branch Name</b>} >{AccountData.branchName}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Branch Address</b>} >{AccountData.branchAddress}</Descriptions.Item>
-                            <Descriptions.Item label={<b>IFSC Code</b>} >{AccountData.ifscCode}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Holder's Name</b>} >{UserData.name}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Holder's Address</b>} >{UserData.address}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Phone Number</b>} >{UserData.phone}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Email</b>} >{UserData.email}</Descriptions.Item>
-
-
-
-                        </Descriptions> */}
+                <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <AnalyseChart/>
 
                     </Card>
-                    <Card bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                    <Card title="Credit Vs Debit Frequency" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <StackedPlot data={freqData} />
                     </Card>
                 </div>
-                <Row justify="space-between" className="mx-3 m-4">
+                <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                        <StackedPlot data={freqData} />
+                    </Card>
+                    <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                        <AnalyseChart/>
+
+                    </Card>
+                </div>
+                {/* <Row justify="space-between" className="mx-3 m-4">
                     <Col span={12} className="bg-white p-4">
-                        {/* <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', width: '100%', height: '100%' }}> */}
+                        <Card title="Category Chart">
                             <StackedPlot data={categoryData} />
-                        {/* </div> */}
+                            <PieChart/>
+                        </Card>
                     </Col>
                     <Col span={12} >
                         <div className='bg-white' style={{ display: 'flex', justifyContent: 'center', widht: '100%', height: '100%' }}>
@@ -95,7 +73,7 @@ const Analyser = () => {
                             </Card>
                         </div>
                     </Col>
-                </Row>
+                </Row> */}
             </div>,
         },
         {
@@ -134,7 +112,7 @@ const Analyser = () => {
 
     ];
     return (
-        <div className="p-10">
+        <div className="p-0">
             {/* <div style={{ display: 'flex', justifyContent: 'center' }} className="my-3">
                 {CardData.map((data) =>
                     <AnalyserCard
