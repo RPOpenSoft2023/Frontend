@@ -1,32 +1,17 @@
-import React from 'react';
-import { Column } from '@ant-design/plots';
-import data from "../Data/freqData"
-const StackedPlot = (props) => {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   asyncFetch();
-  // }, []);
-
-  // const asyncFetch = () => {
-  //   fetch('https://gw.alipayobjects.com/os/antfincdn/8elHX%26irfq/stack-column-data.json')
-  //     .then((response) => response.json())
-  //     .then((json) => setData(json))
-  //     .catch((error) => {
-  //       console.log('fetch data failed', error);
-  //     });
-  // };
+import React, { useState, useEffect } from 'react';
+import { Bar } from '@ant-design/plots';
+import data from '../Data/TransactionTypeData'
+const StackedPlot = () => {
   const config = {
-    data,
+    data: data.reverse(),
     isStack: true,
-    xField: 'month',
-    yField: 'value',
-    padding:30,
+    xField: 'value',
+    yField: 'year',
     seriesField: 'type',
     label: {
       // 可手动配置 label 数据标签位置
       position: 'middle',
-      // 'top', 'bottom', 'middle'
+      // 'left', 'middle', 'right'
       // 可配置附加的布局方法
       layout: [
         // 柱形图数据标签位置自动调整
@@ -42,8 +27,7 @@ const StackedPlot = (props) => {
       ],
     },
   };
-
-  return <Column {...config} />;
+  return <Bar {...config} />;
 };
 
-export default StackedPlot;
+export default StackedPlot

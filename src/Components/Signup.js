@@ -23,7 +23,7 @@ export default function Signup() {
     if (signupState.confirm_password === signupState.password) {
       createAccount();
     } else {
-      showToastMessage("Confirm Password is not matching the Password");
+      showToastMessage("Confirm Password is not matching the Password","negative");
     }
   };
 
@@ -45,7 +45,7 @@ export default function Signup() {
         console.log(res);
         localStorage.clear();
         navigate("/");
-        showToastMessage("Successfully Registered");
+        showToastMessage("Successfully Registered","positive");
       })
       .catch((error) => {
         console.log("error.message", error.message);

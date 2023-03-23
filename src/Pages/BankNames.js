@@ -90,7 +90,7 @@ export default function BankNames() {
       width: "15%",
       render: (text, record) => (
         <>
-          <Button
+          {/* <Button
             type="primary"
             className="mx-1 my-1"
             style={{ backgroundColor: "#ff8400" }}
@@ -135,7 +135,7 @@ export default function BankNames() {
             }}
           >
             <p>Are you sure you want to delete this item?</p>
-          </Modal>
+          </Modal> */}
           <Button
             type="primary"
             className="mx-3 my-1"

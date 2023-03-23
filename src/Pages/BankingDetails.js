@@ -4,8 +4,8 @@ import axios from 'axios';
 import BankDetails from '../Components/BankingDetails/BankDetails';
 import BankTransaction from '../Components/BankingDetails/BankTransaction';
 import { useNavigate } from 'react-router';
-const BANKING_API='http://35.227.179.26:80' // this is the URL for the banking API
-const USER_API='http://35.247.79.215:80' // this is the URL for the user API
+const BANKING_API=process.env.REACT_APP_BANKING_API // this is the URL for the banking API
+const USER_API=process.env.REACT_APP_USER_API // this is the URL for the user API
 
 const BankingDetails = () => {
     const [user, setUser] = useState({loading:true});
@@ -20,7 +20,7 @@ const BankingDetails = () => {
                 'Authorization': `Bearer ${token}`
             }
         }
-        axios.get(`${USER_API}/user/api/verify_token/`, config)
+        axios.get(`${USER_API}/verify_token/`, config)
             .then(res => {
                 console.log(res.data);
                 setUser({

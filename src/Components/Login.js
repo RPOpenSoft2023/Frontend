@@ -28,7 +28,7 @@ export default function Login() {
     })
     .then(function (valid) {
         if(!valid){
-            showToastMessage("Enter a valid phone number");
+            showToastMessage("Enter a valid phone number","negative");
         }
         else{
             authenticateUser();
@@ -39,14 +39,14 @@ export default function Login() {
   //Handle Login API Integration here
   const authenticateUser = () => {
     axios
-      .post("http://34.105.83.175:8080/user/api/login/", {
+      .post(`${process.env.REACT_APP_USER_API}/login/`, {
         phone_number: loginState.phone_number,
         password: loginState.password,
       })
       .then((res) => {
         console.log(res);
         localStorage.setItem("logstat", true);
-        localStorage.setItem("jwt_token", res.data.jwt_token);
+        localStorage.setItem("jwt_token", res.data.login_token);
         navigate("/dashboard");
       })
       .catch((error) => {
