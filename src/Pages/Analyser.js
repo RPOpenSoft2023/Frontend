@@ -58,7 +58,7 @@ const Analyser = () => {
             key: '2',
             label: `Recent Transactions`,
             children: <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
+                <Card bordered={true} style={{ width: '70%', height: 'auto', textAlign: "center" }}>
                     <Table columns={ColumnData} dataSource={TableData}
                         pagination={{ pageSize: 9 }}
                     />
@@ -69,8 +69,8 @@ const Analyser = () => {
             key: '3',
             label: `Monthly Summary`,
             children: <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <SummaryTab/>
+                <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
+                    <SummaryTab />
                 </Card>
             </div>,
         },
