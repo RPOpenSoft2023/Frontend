@@ -53,6 +53,7 @@ const Analyser = () => {
                 <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <StackedPlot data={freqData} />
+                        {/* <PieChart/> */}
                     </Card>
                     <Card title="Bank account details" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                         <AnalyseChart/>
