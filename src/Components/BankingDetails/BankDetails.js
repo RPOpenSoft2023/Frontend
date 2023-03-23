@@ -17,7 +17,7 @@ const BankDetails = ({ user }) => {
       >
         <div className='h-44 flex items-center'>
           <div className='w-full text-center text-7xl'>
-            {user.first_name[0]}
+            {"Test"}
           </div>
         </div>
       </Avatar>
