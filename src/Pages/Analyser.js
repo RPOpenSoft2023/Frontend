@@ -70,9 +70,7 @@ const Analyser = () => {
             label: `Monthly Summary`,
             children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
+                    <SummaryTab/>
                 </Card>
             </div>,
         },
