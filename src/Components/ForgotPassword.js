@@ -23,29 +23,28 @@ export default function ForgotPassword(prop) {
   const handleSendOtpClick = (e) => {
     e.preventDefault();
     axios
-      .post("http://34.105.83.175:8080/user/api/generate_otp/", {
+      .post(`${process.env.REACT_APP_USER_API}/generate_otp/verify_phone/`, {
         phone_number: phoneNo,
       })
       .then((res) => {
-        localStorage.setItem("jwt_token", res.data.jwt_token);
+        console.log("res", res);
         setIsOtpSent(true);
       });
   };
 
   const handleVerifyOtpClick = (e) => {
-    e.preventDefault();   
+    e.preventDefault();
     axios({
       method: "post",
-      url: "http://34.105.83.175:8080/user/api/verify_otp/",
-      data:{
-        phone_number:phoneNo,
-        otp: Number(otp),
+      url: `http://35.227.179.26:80/user/api/verify_otp/`,
+      data: {
+        phone_number: phoneNo,
+        otp: otp,
       },
-      headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
         localStorage.setItem("jwt_token", res.data.token);
-        navigate("/signup/profile",{state:phoneNo});
+        navigate("/signup/profile", { state: phoneNo });
         setIsOtpVerified(true);
       })
       .catch((error) => {

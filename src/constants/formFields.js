@@ -48,9 +48,9 @@ const signupFields = [
     },
     {
         labelText: "Email address",
-        labelFor: "email-address",
-        id: "email-address",
-        name: "email",
+        labelFor: "email_address",
+        id: "email_address",
+        name: "email_address",
         type: "email",
         autoComplete: "email",
         isRequired: true,
@@ -61,7 +61,7 @@ const signupFields = [
         labelText: "Aadhar Number",
         labelFor: "Aadhar_number",
         id: "Aadhar_Number",
-        name: "aadhar",
+        name: "Aadhar_Number",
         type: "text",
         autoComplete: "aadhar",
         isRequired: true,
@@ -92,25 +92,15 @@ const signupFields = [
     },
     {
         labelText: "Confirm Password",
-        labelFor: "confirm-password",
-        id: "confirm-password",
-        name: "confirm-password",
+        labelFor: "confirm_password",
+        id: "confirm_password",
+        name: "confirm_password",
         type: "password",
-        autoComplete: "confirm-password",
+        autoComplete: "confirm_password",
         isRequired: true,
         placeholder: "Confirm Password",
         isDisabled:false
     },
-    // {
-    //     labelText: "Phone number",
-    //     labelFor: "phone-number",
-    //     id: "phone-number",
-    //     name: "phone",
-    //     type: "phone",
-    //     autoComplete: "Phone-number",
-    //     isRequired: true,
-    //     placeholder: "Phone-number"
-    // }
 ]
 
 export { loginFields, signupFields }
