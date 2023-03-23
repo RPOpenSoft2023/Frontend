@@ -14,14 +14,14 @@ const ColumnData=[
       ellipsis: true,
     },
     {
-      title: 'Debit',
+      title: <span className="text-red-500">Debit</span>,
       dataIndex: 'debit',
       key: 'debit',
       sorter: (a, b) => a.debit - b.debit,
       ellipsis: true,
     },
     {
-      title: 'Credit',
+      title: <span className="text-green-500">Credit</span>,
       dataIndex: 'credit',
       key: 'credit',
       sorter: (a, b) => a.credit - b.credit,

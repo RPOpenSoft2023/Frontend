@@ -10,7 +10,9 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
+import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
+import SummaryTab from "../Components/SummaryTab";
 const change = (key) => {
     console.log(key)
 }
@@ -68,20 +70,7 @@ const Analyser = () => {
             label: `Monthly Summary`,
             children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
-                </Card>
-            </div>,
-        },
-        {
-            key: '4',
-            label: `categories`,
-            children: <div style={{ display: 'flex', justifyContent: 'center' }} className="p-10">
-                <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
+                    <SummaryTab/>
                 </Card>
             </div>,
         },
@@ -100,7 +89,6 @@ const Analyser = () => {
                 </div>
             </div>
             <Tabs animated defaultActiveKey="1" centered items={items} />
-
         </div>
     );
 }
