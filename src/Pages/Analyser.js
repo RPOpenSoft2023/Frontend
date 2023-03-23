@@ -12,6 +12,7 @@ import { Descriptions } from 'antd';
 import { Row, Col, Card, Table } from 'antd'
 import MonthlySummaryData from '../Data/MonthlySummaryData';
 import MonthlySummaryTableData from '../Data/MonthlySummaryTable';
+import SummaryTab from "../Components/SummaryTab";
 import Plot from "../Components/Plot";
 import Line from "../Components/Line"
 import { Tabs } from 'antd';
@@ -42,39 +43,6 @@ const Analyser = () => {
 
                 <div className='bg-white' style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card title="Bank account details" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        {/* <Descriptions
-                            bordered
-                            column={{
-                                xxl: 4,
-                                xl: 1,
-                                lg: 3,
-                                md: 3,
-                                sm: 2,
-                                xs: 1,
-                            }}
-                            responsive={{
-                                xxl: 'undefined',
-                                xl: 2,
-                                lg: 2,
-                                md: 2,
-                                sm: 1,
-                                xs: 1,
-                            }}
-                        >
-                            <Descriptions.Item label={<b>Bank Name</b>} >{AccountData.bankName}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Number</b>} >{AccountData.accountNumber}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Type</b>} >{AccountData.accountType}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Branch Name</b>} >{AccountData.branchName}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Branch Address</b>} >{AccountData.branchAddress}</Descriptions.Item>
-                            <Descriptions.Item label={<b>IFSC Code</b>} >{AccountData.ifscCode}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Holder's Name</b>} >{UserData.name}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Account Holder's Address</b>} >{UserData.address}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Phone Number</b>} >{UserData.phone}</Descriptions.Item>
-                            <Descriptions.Item label={<b>Email</b>} >{UserData.email}</Descriptions.Item>
-
-
-
-                        </Descriptions> */}
                         <AnalyseChart/>
 
                     </Card>
@@ -114,9 +82,7 @@ const Analyser = () => {
             label: `Monthly Summary`,
             children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
+                    <SummaryTab/>
                 </Card>
             </div>,
         },
