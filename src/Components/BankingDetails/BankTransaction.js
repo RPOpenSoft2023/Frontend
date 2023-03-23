@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Typography, Tabs, Button } from 'antd'
+import { Table, Tabs, Button, Card, Descriptions } from 'antd'
 import account from '../../Data/AccountData';
 
 
@@ -16,8 +16,8 @@ const columns = [
     },
     {
       title: 'Description',
-      dataIndex: 'desc',
-      key: 'desc',
+      dataIndex: 'description',
+      key: 'description',
       align : "center",
       render: (text) => <div className='text-center whitespace-nowrap overflow-hidden	'>{text}</div>,
       ellipsis: true,
@@ -52,65 +52,53 @@ const columns = [
   ];
 
 
-const BankTransaction = ({ transaction }) => {
-  transaction.sort((a, b) => new Date(b.date) - new Date(a.date));
+const BankTransaction = ({ account, transaction }) => {
+  if(!account.loading && !transaction.loading){
+    transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // console.log([...transaction.result])
   return (
     <>
       <div >
-        <Tabs defaultActiveKey='2' className='text-center'>
-          <Tabs.TabPane tab="Account Details" key="0">
-              <Typography.Text>
-                Account Number: {account.accountNumber}
-              </Typography.Text>
-              <br />
-              <Typography.Text>
-                Account Type: {account.accountType}
-              </Typography.Text>
-              <br />
-              <Typography.Text>
-                IFSC Code: {account.ifscCode}
-              </Typography.Text>
-              <br />
-            {/* </div> */}
+        <Tabs defaultActiveKey='0' className='mx-auto text-center'>
+          <Tabs.TabPane tab="Bank Details" key="0">
+              <Card bordered={true} style={{ width: '100%', height: '50%', fontSize: "16px" }} className="mx-auto my-4">
+                <Descriptions
+                    bordered
+                    column={{
+                        xxl: 2,
+                        xl: 2,
+                        lg: 1,
+                        md: 1,
+                        sm: 1,
+                        xs: 1,
+                    }}
+                >
+                    <Descriptions.Item className='overflow-hidden' label={<b>Account Number</b>} >{account.account_number}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Account Type</b>} >{account.account_type}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>IFSC Code</b>} >{account.ifsc}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Bank Name</b>} >{account.bank_name}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Name</b>} >{account.branch_name}</Descriptions.Item>
+                    <Descriptions.Item className='overflow-hidden' label={<b>Branch Address</b>} >{account.branch_address}</Descriptions.Item>
+                </Descriptions>
+                <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900">Delete Account</Button>
+            </Card>
           </Tabs.TabPane>
-          <Tabs.TabPane tab="Bank Details" key="1">
-            {/* <Typography.Title level={5} className=" text-center">
-              Bank Details
-            </Typography.Title> */}
-            <Typography.Text className=" text-center">
-              Bank Name: {account.bankName}
-            </Typography.Text>
-            <br />
-            <Typography.Text className=" text-center">
-              Branch Name: {account.branchName}
-            </Typography.Text>
-            <br />
-            <Typography.Text className=" text-center">
-              Branch Address: {account.branchAddress}
-            </Typography.Text>
-            <br />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="Transaction History" className='mx-auto' key="2">
-            {/* <Typography.Title level={5} className=" text-center">
-              Transaction History
-            </Typography.Title> */}
-            <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction} pagination={false} />
+          <Tabs.TabPane tab="Transaction History" className='mx-auto' key="1">
+            <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction.result} pagination={false} />
             <Button type="primary" className="m-5 bg-blue-600 hover:bg-blue-900">Analyse</Button>
             <Button type="primary" className="m-5  bg-blue-600  hover:bg-blue-900">Add Transaction</Button>
-
           </Tabs.TabPane>
-          {/* <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane> */}
         </Tabs>
-      
-
       </div>
     </>
       
   )
+  }
 }
 
 BankTransaction.propTypes = {
-    transaction: PropTypes.array.isRequired,
+  account: PropTypes.object.isRequired,
+  transaction: PropTypes.array.isRequired,
 }
 
-export default BankTransaction
+export default BankTransaction;
