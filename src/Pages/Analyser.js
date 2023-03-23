@@ -74,17 +74,6 @@ const Analyser = () => {
                 </Card>
             </div>,
         },
-        {
-            key: '4',
-            label: `categories`,
-            children: <div style={{ display: 'flex', justifyContent: 'center' }} className="p-10">
-                <Card bordered={true} style={{ width: '60%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
-                </Card>
-            </div>,
-        },
 
     ];
     return (
