@@ -28,7 +28,7 @@ export default function Login() {
     })
     .then(function (valid) {
         if(!valid){
-            showToastMessage("Enter a valid phone number");
+            showToastMessage("Enter a valid phone number","negative");
         }
         else{
             authenticateUser();

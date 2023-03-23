@@ -36,7 +36,7 @@ export default function ForgotPassword(prop) {
     e.preventDefault();
     axios({
       method: "post",
-      url: `http://35.227.179.26:80/user/api/verify_otp/`,
+      url: `${process.env.REACT_APP_USER_API}/verify_otp/`,
       data: {
         phone_number: phoneNo,
         otp: otp,
@@ -45,6 +45,7 @@ export default function ForgotPassword(prop) {
       .then((res) => {
         localStorage.setItem("jwt_token", res.data.token);
         navigate("/signup/profile", { state: phoneNo });
+        localStorage.setItem("phone_verified", true);
         // setIsOtpVerified(true);
       })
       .catch((error) => {
