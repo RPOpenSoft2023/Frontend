@@ -9,6 +9,7 @@ import Navbar from "./Components/Navbar/navbar";
 import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
 import Join from "./Components/join";
+import ForgotPasswordPage from "./Pages/ForgotPassword";
 import Private from "./Components/private";
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/analyser' element={<Analyser />}></Route>
         <Route path='/banking' element={<Private><BankingDetails /></Private>}></Route>
         <Route path='/join' element={<Join />}></Route>
+        <Route path='/forgotpassword' element={<ForgotPasswordPage />}></Route>
       </ Routes>
     </div>
   );
