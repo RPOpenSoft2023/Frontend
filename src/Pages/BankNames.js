@@ -10,18 +10,12 @@ import {
 } from "@ant-design/icons";
 export default function BankNames(props) {
   const navigate = useNavigate();
-  const onMore = (record) => {
-    console.log(`Updating record with key: ${record.key}`);
-    navigate("/banking");
-    // Handle update action here
-  };
   const columns = [
     {
       title: "Bank Name",
       dataIndex: "Bank",
       key: "Bank",
       width: "30%",
-      render: (text) => <Link to="/">{text}</Link>,
     },
     {
       title: "Account number",
@@ -45,7 +39,7 @@ export default function BankNames(props) {
       title: "Actions",
       key: "action",
       width: "15%",
-      render: (text, record) => (
+      render: (_,record) => (
         <>
           <Button
             type="primary"
@@ -59,7 +53,7 @@ export default function BankNames(props) {
               boxShadow: "none",
             }}
             icon={<RightOutlined />}
-            onClick={() => onMore(record)}
+            onClick={() => navigate("/banking",{state:record.AccountNo})}
           ></Button>
         </>
       ),
@@ -68,7 +62,7 @@ export default function BankNames(props) {
 
   return (
     <div className="m-1 ">
-      <Table columns={columns} dataSource={props.bankNames} pagination={false} />
+      <Table columns={columns} dataSource={props.bankNames} pagination={false} className="m-3"/>
     </div>
   );
 }
