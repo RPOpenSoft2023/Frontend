@@ -1,8 +1,20 @@
 import React from "react";
 import { Card } from "antd";
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
+import axios from "axios";
 function DashboardTabs() {
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_ANALYSER_API}/analyse/api/Dashboard/GrossSummary`,{
+      access_token:localStorage.getItem("jwt_token")
+    }).then((res)=>{
+      console.log('res', res);
+    }).catch((error)=>{
+      console.log('error.message', error.message);
+    })
+  
+  }, [])
+  
   return (
     <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-7 gap-4 flex my-4">
       <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-start">
