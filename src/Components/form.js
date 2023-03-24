@@ -3,7 +3,7 @@ import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from 'axios';
 
-const FormCom = () => {
+const FormCom = ({ func }) => {
     const [form] = Form.useForm();
     const onFinish = (values) => {
         // console.log('Success:', values);
@@ -32,6 +32,7 @@ const FormCom = () => {
         .then((response) => {
             console.log(response);
             form.resetFields();
+            func();
         })
         .catch((error) => {
             console.log(error);

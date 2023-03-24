@@ -65,20 +65,6 @@ const BankTransaction = ({ account, transaction }) => {
       'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${localStorage.getItem('jwt_token')}`
     }
-    // const account_number = 
-    // const formData = new FormData();
-    // formData.append('transactions', selectedFile);
-    // formData.append('account_number', account.account_number);
-    // console.log(formData.get('transactions'));
-    // console.log(formData.get('account_number'))
-    // showToastMessage('File uploaded successfully', 'positive');
-    // axios.post(`${BANKING_API}/banking/api/add_transactions`, {
-    //   headers: headers,
-    //   data: {
-    //     'account_number': account.account_number,
-    //     'transactions': selectedFile
-    //   }
-    // })
     axios({
       method: 'post',
       url: `${BANKING_API}/banking/api/add_transactions/`,
@@ -182,8 +168,8 @@ const BankTransaction = ({ account, transaction }) => {
                     <Descriptions.Item className='overflow-hidden' label={<b>Branch Name</b>} >{account.branch_name}</Descriptions.Item>
                     <Descriptions.Item className='overflow-hidden' label={<b>Branch Address</b>} >{account.branch_address}</Descriptions.Item>
                 </Descriptions>
-                <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900" onClick={deleteAccount}>Delete Account</Button>
             </Card>
+                <Button type="primary" danger className="m-5  bg-red-600 hover:bg-red-900" onClick={deleteAccount}>Delete Account</Button>
           </Tabs.TabPane>
           <Tabs.TabPane tab="Transaction History" className='mx-auto' key="1">
             <Table size = {"middle"} columns={columns} bordered = {false}  dataSource={transaction.result} pagination={false} />
