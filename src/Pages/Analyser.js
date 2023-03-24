@@ -15,6 +15,7 @@ import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import useAuth from "../Components/Auth";
 const change = (key) => {
     console.log(key)
 }
@@ -55,6 +56,7 @@ const Analyser = () => {
 
     }, []);
 
+    useAuth();
     const items = [
         {
             key: '1',
