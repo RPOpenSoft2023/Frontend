@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Avatar, Typography } from 'antd'
 const BankDetails = ({ user }) => {
-  // console.log(user)
   if(!user.loading){
   return (
     <div className='flex flex-wrap'>
@@ -17,7 +16,7 @@ const BankDetails = ({ user }) => {
       >
         <div className='h-44 flex items-center'>
           <div className='w-full text-center text-7xl'>
-            {"Test"}
+            {(user.first_name)?user.first_name[0]:'A'}
           </div>
         </div>
       </Avatar>
@@ -47,7 +46,7 @@ const BankDetails = ({ user }) => {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 20h3q.2 0 .35-.15q.15-.15.15-.35q0-.2-.15-.35q-.15-.15-.35-.15h-3q-.2 0-.35.15q-.15.15-.15.35q0 .2.15.35q.15.15.35.15ZM7 23q-.825 0-1.412-.587Q5 21.825 5 21V3q0-.825.588-1.413Q6.175 1 7 1h10q.825 0 1.413.587Q19 2.175 19 3v18q0 .825-.587 1.413Q17.825 23 17 23Zm0-7h10V6H7Z" /></svg>
           </Typography.Title>
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.phone}
+            {user.phone_number}
           </Typography.Title>
         </div>
         <div className="flex">
