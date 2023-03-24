@@ -13,11 +13,13 @@ import CategoryChart from "../Components/CategoryChart";
 import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
+import useAuth from "../Components/Auth";
 const change = (key) => {
     console.log(key)
 }
 
 const Analyser = () => {
+    useAuth();
     const items = [
         {
             key: '1',
