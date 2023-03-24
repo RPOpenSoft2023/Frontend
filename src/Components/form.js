@@ -33,7 +33,7 @@ const FormCom = () => {
         })
         .then((response) => {
             console.log(response);
-            // setBankingDetails([]);
+            setBankingDetails([]);
             form.resetFields();
         })
         .catch((error) => {
