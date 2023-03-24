@@ -5,10 +5,10 @@ import BankTransaction from "../Components/BankingDetails/BankTransaction";
 // import user from '../Data/UserData';
 // import account from '../Data/AccountData';
 import { useState, useEffect } from "react";
+import useAuth from "../Components/Auth";
 // import transaction from '../Data/ColumnData';
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
 const USER_API = process.env.REACT_APP_USER_API; // this is the URL for the user API
-import useAuth from "../Components/Auth";
 //   const transaction = [
 //     {
 //         key: '1',
