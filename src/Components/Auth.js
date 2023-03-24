@@ -10,7 +10,6 @@ const useAuth = () => {
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
-        console.log(res);
       })
       .catch((error) => {
         console.log("error.message", error.message);
