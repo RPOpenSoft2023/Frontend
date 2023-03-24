@@ -7,6 +7,7 @@ import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/banking
 import { useEffect } from "react";
 import axios from "axios";
 const Dashboard = () => {
+  const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [accounts_array, setAccounts_array] = useState([]);
   useEffect(() => {
     axios({
@@ -15,6 +16,7 @@ const Dashboard = () => {
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
+        setBankingDetails(res.data.results);
         const data = [];
         res.data.results.map((element, index) => {
           const dataobj = {
@@ -31,9 +33,8 @@ const Dashboard = () => {
       .catch((error) => {
         console.log("error.message", error.message);
       });
-  }, []);
+  }, [bankingDetails]);
   useAuth();
-  const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   return (
     <>
       <DashboardTabs />
@@ -50,5 +51,4 @@ const Dashboard = () => {
     </>
   );
 };
-
 export default Dashboard;

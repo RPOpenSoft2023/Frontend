@@ -2,9 +2,11 @@ import React from 'react';
 import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from 'axios';
-
+import { useContext } from "react";
+import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 const FormCom = () => {
     const [form] = Form.useForm();
+    const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
     const onFinish = (values) => {
         // console.log('Success:', values);
         // console.log(`${values.DOP.date()}/${values.DOP.month()+1}/${values.DOP.year()}`);
@@ -31,6 +33,7 @@ const FormCom = () => {
         })
         .then((response) => {
             console.log(response);
+            // setBankingDetails([]);
             form.resetFields();
         })
         .catch((error) => {
