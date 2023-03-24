@@ -1,5 +1,5 @@
 import Header from "../Components/Header"
-import ForgotPassword from "../Components/ForgotPassword"
+import ResetPassword from "../Components/ResetPassword"
 const ForgotPasswordPage = () => {
     return (
         <div className="min-h-full h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -8,7 +8,7 @@ const ForgotPasswordPage = () => {
                     heading="Account Recovery"
                     paragraph="To help keep your account safe, we need to make sure it’s really you trying to sign in"
                 />
-                <ForgotPassword text="resetpassword"/>
+                <ResetPassword text="resetpassword"/>
             </div>
         </div>
 
