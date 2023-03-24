@@ -1,9 +1,9 @@
-import {React,useEffect} from "react";
+import { React, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Avatar, Typography } from "antd";
 import { useLocation } from "react-router";
 const BankDetails = ({ user }) => {
-  const location=useLocation();
+  const location = useLocation();
   //account_no = location.state
   if (!user.loading) {
     return (
