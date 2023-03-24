@@ -1,7 +1,6 @@
 import React from "react";
 import { Card } from "antd";
 import { Link } from "react-router-dom";
-
 function DashboardTabs() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-7 gap-4 flex my-4">

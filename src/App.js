@@ -11,6 +11,7 @@ import Analyser from "./Pages/Analyser";
 import Private_Signup from "./Components/Private_Signup"
 import Join from "./Components/join";
 import ForgotPassword from "./Components/ForgotPassword";
+import { BankingDetailsProvider } from "./Contexts/bankingDetailsContext/bankingDetailsContext";
 function App() {
 
   return (
@@ -18,7 +19,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<LoginPage />}></Route>
-        <Route path='/dashboard' element={<Dashboard />}></Route>
+        <Route path='/dashboard' element={<BankingDetailsProvider><Dashboard /></BankingDetailsProvider>}></Route>
         <Route path='/signup' element={<BeforeSignUpPage />}></Route>
         <Route path='/signup/profile' element={<Private_Signup><SignupPage /></Private_Signup>}></Route>
         <Route path='/analyser' element={<Analyser />}></Route>
