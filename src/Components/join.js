@@ -37,7 +37,7 @@ const Join = ({ matches }) => {
 
   return (
     <>
-      <Dropdown menu={{ items }} placement="bottomLeft" arrow className="flex justify-center items-center m-3">
+      <Dropdown menu={{ items }} placement="bottomLeft" arrow className={`flex ${(!matches) ? "justify-start ml-0 text-white font-semibold" : "justify center"} items-center m-3`}>
         <li
           class="md:p-4 py-2 block text-white hover:text-purple-400 font-mono cursor-pointer"
         >

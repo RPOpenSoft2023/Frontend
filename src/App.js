@@ -9,9 +9,6 @@ import Navbar from "./Components/Navbar/navbar";
 import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
 import Join from "./Components/join";
-import ForgotPasswordPage from "./Pages/ForgotPassword";
-import Private from "./Components/private";
-import Private_Signup from "./Components/Private_Signup";
 function App() {
 
   return (
@@ -19,11 +16,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<LoginPage />}></Route>
-        <Route path='/dashboard' element={<Private><Dashboard /></Private>}></Route>
+        <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/signup' element={<BeforeSignUpPage />}></Route>
         <Route path='/signup/profile' element={<Private_Signup><SignupPage /></Private_Signup>}></Route>
         <Route path='/analyser' element={<Analyser />}></Route>
-        <Route path='/banking' element={<Private><BankingDetails /></Private>}></Route>
+        <Route path='/banking' element={<BankingDetails />}></Route>
         <Route path='/join' element={<Join />}></Route>
         <Route path='/forgotpassword' element={<ForgotPasswordPage />}></Route>
       </ Routes>
