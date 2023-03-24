@@ -18,7 +18,7 @@ export const BankingDetailsProvider = (props) => {
             Bank: element.bank_name,
             AccountNo: element.account_number,
             IFSC: element.ifsc,
-            Reports: 3,
+            Account_type:element.account_type
           };
           data.push(dataobj);
         });
@@ -29,7 +29,7 @@ export const BankingDetailsProvider = (props) => {
       });
   }, [BankingDetails]);
   const addAccount=()=>{
-    
+
   }
   return (
     <BankingdetailsContext.Provider value={[BankingDetails, setBankingdetailsContext]}>

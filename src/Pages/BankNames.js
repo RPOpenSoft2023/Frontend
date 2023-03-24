@@ -30,9 +30,9 @@ export default function BankNames(props) {
       width: "20%",
     },
     {
-      title: "Reports Created",
-      dataIndex: "Reports",
-      key: "Reports",
+      title: "Account Type",
+      dataIndex: "Account_type",
+      key: "Type",
       width: "15%",
     },
     {
