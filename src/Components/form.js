@@ -4,20 +4,6 @@ import TextArea from "antd/es/input/TextArea";
 import axios from 'axios';
 
 const FormCom = () => {
-    // const layout = {
-    //     labelCol: {
-    //         span: 8,
-    //     },
-    //     wrapperCol: {
-    //         span: 16,
-    //     },
-    // };
-    // const tailLayout = {
-    //     wrapperCol: {
-    //         offset: 8,
-    //         span: 16,
-    //     },
-    // };
     const [form] = Form.useForm();
     const onFinish = (values) => {
         // console.log('Success:', values);

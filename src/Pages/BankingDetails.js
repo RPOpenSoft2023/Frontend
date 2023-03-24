@@ -5,11 +5,13 @@ import BankDetails from '../Components/BankingDetails/BankDetails';
 import BankTransaction from '../Components/BankingDetails/BankTransaction';
 import { useNavigate } from 'react-router';
 import useAuth from '../Components/Auth'
+import { useLocation } from 'react-router-dom';
 const BANKING_API=process.env.REACT_APP_BANKING_API // this is the URL for the banking API
 const USER_API=process.env.REACT_APP_USER_API // this is the URL for the user API
 
 const BankingDetails = () => {
     useAuth();
+    const location = useLocation();
     const [user, setUser] = useState({loading:true});
     const [account, setAccount] = useState({loading:true});
     const [transaction, setTransaction] = useState({loading:true});
@@ -41,7 +43,7 @@ const BankingDetails = () => {
 
         // const account_number = localStorage.getItem('account_number');
         // const account_number = 65749567438;
-        const account_number = 123456789011;
+        const account_number = location.state;
         axios.get(`${BANKING_API}/banking/api/accounts?account_number=${account_number}`, accountConfig)
             .then(res => {
                 setAccount({
