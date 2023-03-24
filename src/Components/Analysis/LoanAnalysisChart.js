@@ -1,54 +1,10 @@
-// import React, { useState, useEffect } from 'react';
-// import ReactDOM from 'react-dom';
-// import { Area } from '@ant-design/plots';
 import data from '../../Data/LoanAnalysisData'
-// const LoanAnalysisChart = () => {
-
-//   const config = {
-//     data,
-//     xField: 'Month',
-//     yField: 'value',
-//     seriesField: 'category',
-//     color: ['#1e40af', '#2563eb', '#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#bfdbfe'],
-//     // xAxis: {
-//     //   type: 'month',
-//     //   mask: 'YYYY',
-//     // },
-//     // yAxis: {
-//     //   label: {
-//     //     // 数值格式化为千分位
-//     //     formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
-//     //   },
-//     // },
-//     legend: {
-//       position: 'top',
-//     },
-//   };
-
-//   return <Area {...config} />;
-// };
-
-// export default LoanAnalysisChart
-
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Line } from '@ant-design/plots';
 
 const LoanAnalysisChart = () => {
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     asyncFetch();
-//   }, []);
-
-//   const asyncFetch = () => {
-//     fetch('https://gw.alipayobjects.com/os/bmw-prod/e00d52f4-2fa6-47ee-a0d7-105dd95bde20.json')
-//       .then((response) => response.json())
-//       .then((json) => setData(json))
-//       .catch((error) => {
-//         console.log('fetch data failed', error);
-//       });
-//   };
+  // LoanGraphData(data);
   const config = {
     data,
     xField: 'Month',
@@ -76,3 +32,52 @@ const LoanAnalysisChart = () => {
 };
 
 export default LoanAnalysisChart
+      // let data = [{
+      //     "analytics": {
+      //       "month": 0,
+      //         "year": 2020,
+      //         "loanDetails": {
+      //           "credit": {
+      //             "amount": 0.0
+      //           },
+      //           "debit": {
+      //             "amount": 0.0
+      //           }
+      //         },
+      //         "transactionTypes": {
+      //           "upi": 1,
+      //           "cheque": 1,
+      //           "neft": 3,
+      //           "rdgs": 0,
+      //           "others": 6
+      //         },
+      //         "averageDayWiseExpense": 7963.433333333333,
+      //         "averageDayWiseIncome": 7046.2,
+      //         "creditDebitFrequency": {
+      //           "creditFreq": 4,
+      //           "debitFreq": 7
+      //         },
+      //         "totalMonthIncome": 211386.0,
+      //         "totalMonthExpense": 238903.0,
+      //         "spendingExpenseRatio": 0.8848193618330452,
+      //         "categorizedData": {
+      //           "shoppingAndFood": {
+      //             "transactionTypes": {
+      //               "upi": 0,
+      //               "cheque": 0,
+      //               "neft": 0,
+      //               "rdgs": 0,
+      //               "others": 0
+      //             },
+      //             "totalSectorMonthIncome": 0.0,
+      //             "totalSectorMonthExpense": 0.0,
+      //             "count": 0
+      //           }}}}]
+      
+      // let result=[];
+      // function LoanGraphData(data){
+      //     for(let i=0; i<data.analytics[0].month.length;i++){
+      //         result+= ({"Month":data.analytics[0].month[i], "Value":data[i].analytics[0].month[i].debit.amount, "Category":"Debit"});
+      //         result+= ({"Month":data.analytics[0].month[i], "Value":data[i].analytics[0].month[i].credit.amount, "Category":"Credit"});
+      //     }
+      // }
