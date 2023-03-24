@@ -4,14 +4,15 @@ import axios from 'axios';
 import BankDetails from '../Components/BankingDetails/BankDetails';
 import BankTransaction from '../Components/BankingDetails/BankTransaction';
 import { useNavigate } from 'react-router';
+import useAuth from '../Components/Auth'
 const BANKING_API=process.env.REACT_APP_BANKING_API // this is the URL for the banking API
 const USER_API=process.env.REACT_APP_USER_API // this is the URL for the user API
 
 const BankingDetails = () => {
+    useAuth();
     const [user, setUser] = useState({loading:true});
     const [account, setAccount] = useState({loading:true});
     const [transaction, setTransaction] = useState({loading:true});
-    const navigate = useNavigate();
     useEffect(() => {
         const token = localStorage.getItem('jwt_token');
         const config = {
@@ -22,7 +23,6 @@ const BankingDetails = () => {
         }
         axios.get(`${USER_API}/verify_token/`, config)
             .then(res => {
-                // console.log(res.data);
                 setUser({
                     ...res.data,
                     loading: false
@@ -30,7 +30,6 @@ const BankingDetails = () => {
             })
             .catch(err => {
                 console.log(err);
-                // navigate('/dashboard');
             })
         
         const accountConfig = {
@@ -52,7 +51,6 @@ const BankingDetails = () => {
             })
             .catch(err => {
                 console.log(err);
-                // navigate('/dashboard');
             })
         
         const transactionConfig = {
@@ -83,16 +81,10 @@ const BankingDetails = () => {
 
     return (
         <div className='w-3/5 mx-auto my-2'>
-            {/* <div className='m-auto grid grid-cols-2 lg:grid-cols-3 '>
-                <div className='col-span-2 lg:col-span-1 md:text-center lg:text-left md:mx-2 lg:mx-2 lg:ml-4 my-2'> */}
-                    <BankDetails user={user} />
-                {/* </div>
-                <div className='col-span-2 md:mx-2 lg:mx-2 lg:mr-4 my-2'> */}
-                    <BankTransaction account={account} transaction={transaction} />
-                {/* </div>
-            </div> */}
+            <BankDetails user={user} />
+            <BankTransaction account={account} transaction={transaction} />
         </div>
-    );
-}
+  );
+};
 
 export default BankingDetails;
