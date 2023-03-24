@@ -8,12 +8,14 @@ import * as Yup from "yup";
 import { showToastMessage } from "./Toast";
 import { ToastContainer } from "react-toastify";
 import {useNavigate} from "react-router-dom"
+import useAuth from "./Auth";
 const fields = loginFields;
 let fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 
 export default function Login() {
-    const navigate=useNavigate();
+  useAuth("login")
+  const navigate=useNavigate();
   const [loginState, setLoginState] = useState(fieldsState);
 
   const handleChange = (e) => {

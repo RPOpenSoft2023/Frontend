@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-const useAuth = () => {
+const useAuth = (path = null) => {
   const navigate = useNavigate();
   useEffect(() => {
     axios({
@@ -10,6 +10,9 @@ const useAuth = () => {
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
+        if(path != null){
+          navigate("/dashboard")
+        }
       })
       .catch((error) => {
         console.log("error.message", error.message);
