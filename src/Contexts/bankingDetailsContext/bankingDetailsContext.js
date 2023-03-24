@@ -29,6 +29,7 @@ export const BankingDetailsProvider = (props) => {
       });
   }, [BankingDetails]);
   const addAccount=()=>{
+    
   }
   return (
     <BankingdetailsContext.Provider value={[BankingDetails, setBankingdetailsContext]}>
