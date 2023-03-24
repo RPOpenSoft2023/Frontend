@@ -25,15 +25,14 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     schema
-    .isValid({
+      .isValid({
         phoneNumber: loginState.phone_number,
-    })
-    .then(function (valid) {
-        if(!valid){
-            showToastMessage("Enter a valid phone number","negative");
-        }
-        else{
-            authenticateUser();
+      })
+      .then(function (valid) {
+        if (!valid) {
+          showToastMessage("Enter a valid phone number", "negative");
+        } else {
+          authenticateUser();
         }
       });
   };
@@ -60,7 +59,9 @@ export default function Login() {
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
   let schema = Yup.object().shape({
-    phoneNumber: Yup.string().matches(phoneRegExp, "Phone number is not valid").max(10),
+    phoneNumber: Yup.string()
+      .matches(phoneRegExp, "Phone number is not valid")
+      .max(10),
   });
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -78,8 +79,8 @@ export default function Login() {
             isRequired={field.isRequired}
             placeholder={field.placeholder}
           />
-          ))}
-          <ToastContainer />
+        ))}
+        <ToastContainer />
       </div>
 
       <FormExtra />

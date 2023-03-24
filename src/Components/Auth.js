@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-const useAuth = (path = null) => {
+const useAuth = (path=null) => {
   const navigate = useNavigate();
   useEffect(() => {
     axios({
