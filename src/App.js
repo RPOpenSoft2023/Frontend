@@ -18,10 +18,11 @@ function App() {
         <Route path='/' element={<LoginPage />}></Route>
         <Route path='/dashboard' element={<Dashboard />}></Route>
         <Route path='/signup' element={<BeforeSignUpPage />}></Route>
-        <Route path='/signup/profile' element={<SignupPage />}></Route>
+        <Route path='/signup/profile' element={<Private_Signup><SignupPage /></Private_Signup>}></Route>
         <Route path='/analyser' element={<Analyser />}></Route>
         <Route path='/banking' element={<BankingDetails />}></Route>
         <Route path='/join' element={<Join />}></Route>
+        <Route path='/forgotpassword' element={<ForgotPasswordPage />}></Route>
       </ Routes>
     </div>
   );
