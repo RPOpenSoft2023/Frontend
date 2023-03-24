@@ -41,7 +41,7 @@ const BankingDetails = () => {
 
         // const account_number = localStorage.getItem('account_number');
         // const account_number = 65749567438;
-        const account_number = 12345678910;
+        const account_number = 123456789011;
         axios.get(`${BANKING_API}/banking/api/accounts?account_number=${account_number}`, accountConfig)
             .then(res => {
                 setAccount({

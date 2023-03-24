@@ -29,7 +29,7 @@ const Join = ({ matches }) => {
       key: "2",
       label: (
         <div target="_blank" rel="noopener noreferrer" to="" onClick={showModal2}>
-          Add Bank Details
+          Add Bank Account
         </div>
       ),
     },

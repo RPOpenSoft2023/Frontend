@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import axios from 'axios';
 
 const FormCom = () => {
     // const layout = {
@@ -19,7 +20,37 @@ const FormCom = () => {
     // };
     const [form] = Form.useForm();
     const onFinish = (values) => {
-        console.log(values);
+        // console.log('Success:', values);
+        // console.log(`${values.DOP.date()}/${values.DOP.month()+1}/${values.DOP.year()}`);
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
+        }
+        const data = {
+            "ifsc": values.ifsc,
+            "account_number": values.account,
+            "bank_name": values.bankName,
+            "branch_name": values.branchName,
+            "bank_address": values.bankAddress,
+            "account_opening_date": `${values.DOP.year()}-${values.DOP.month()+1}-${values.DOP.date()}`,
+            "account_type": values.accountType,
+            "phone_number": "1234567898",
+        }
+        console.log(data)
+        axios({
+            method: 'post',
+            url: `${process.env.REACT_APP_BANKING_API}/banking/api/create_account/`,
+            headers: headers,
+            data: data,
+        })
+        .then((response) => {
+            console.log(response);
+            form.resetFields();
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        
     };
     const onReset = () => {
         form.resetFields();
@@ -35,7 +66,7 @@ const FormCom = () => {
             }}
         >
             <Form.Item
-                name="username"
+                name="ifsc"
                 label="IFSC Code"
                 rules={[
                     {
