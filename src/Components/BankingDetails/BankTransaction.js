@@ -1,15 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Table, Tabs, Button, Card, Descriptions, Modal, Upload } from "antd";
+import {
+  Table,
+  Tabs,
+  Button,
+  Card,
+  Descriptions,
+  Modal,
+  InputNumber,
+} from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useContext } from "react";
 import { BankingdetailsContext } from "../../Contexts/bankingDetailsContext/bankingDetailsContext";
-import { ToastContainer } from "react-toastify";
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
-
+const ANALYSER_API = process.env.REACT_APP_ANALYSER_API; // this is the URL for the analyser API
 const columns = [
   {
     title: "Date",
@@ -71,6 +78,8 @@ const columns = [
 
 const BankTransaction = ({ account, transaction }) => {
   const navigate = useNavigate();
+  const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
+  const [OpenAnalyseModal, setOpenAnalyseModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -80,23 +89,9 @@ const BankTransaction = ({ account, transaction }) => {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
     };
-    // const account_number =
-    // const formData = new FormData();
-    // formData.append('transactions', selectedFile);
-    // formData.append('account_number', account.account_number);
-    // console.log(formData.get('transactions'));
-    // console.log(formData.get('account_number'))
-    // showToastMessage('File uploaded successfully', 'positive');
-    // axios.post(`${BANKING_API}/banking/api/add_transactions`, {
-    //   headers: headers,
-    //   data: {
-    //     'account_number': account.account_number,
-    //     'transactions': selectedFile
-    //   }
-    // })
     axios({
       method: "post",
-      url: `${BANKING_API}/banking/api/add_transactions/`,
+      url: `${ANALYSER_API}/analyse/api/add-statement/`,
       headers: headers,
       data: {
         account_number: account.account_number,
@@ -164,7 +159,13 @@ const BankTransaction = ({ account, transaction }) => {
       .then((res) => {
         console.log(res.data);
         showToastMessage("Account deleted Successfully", "positive");
-        setBankingDetails([]);
+        var index = bankingDetails.findIndex(
+          (item) => item.AccountNo === account.account_number
+        );
+        setBankingDetails([
+          ...bankingDetails.slice(0, index),
+          ...bankingDetails.slice(index + 1),
+        ]);
         navigate("/dashboard");
       })
       .catch((err) => {
@@ -178,11 +179,6 @@ const BankTransaction = ({ account, transaction }) => {
         <div>
           <Tabs defaultActiveKey="0" className="mx-auto text-center">
             <Tabs.TabPane tab="Bank Details" key="0">
-              <Card
-                bordered={true}
-                style={{ width: "100%", height: "50%", fontSize: "16px" }}
-                className="mx-auto my-4"
-              >
                 <Descriptions
                   bordered
                   column={{
@@ -198,48 +194,49 @@ const BankTransaction = ({ account, transaction }) => {
                     className="overflow-hidden"
                     label={<b>Account Number</b>}
                   >
-                    {account.account_number}
+                    {account.AccountNo}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Account Type</b>}
                   >
-                    {account.account_type}
+                    {account.Account_type}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>IFSC Code</b>}
                   >
-                    {account.ifsc}
+                    {account.IFSC}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Bank Name</b>}
                   >
-                    {account.bank_name}
+                    {account.Bank}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Branch Name</b>}
                   >
-                    {account.branch_name}
+                    {account.BranchName}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Branch Address</b>}
                   >
-                    {account.branch_address}
+                    {account.BranchAddress}
                   </Descriptions.Item>
                 </Descriptions>
                 <Button
                   type="primary"
                   danger
                   className="m-5  bg-red-600 hover:bg-red-900"
-                  onClick={deleteAccount}
+                  onClick={() => {
+                    setOpenDeleteModal(true);
+                  }}
                 >
                   Delete Account
                 </Button>
-              </Card>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Transaction History" className="mx-auto" key="1">
               <Table
@@ -252,6 +249,9 @@ const BankTransaction = ({ account, transaction }) => {
               <Button
                 type="primary"
                 className="m-5 bg-blue-600 hover:bg-blue-900"
+                onClick={() => {
+                  setOpenAnalyseModal(true);
+                }}
               >
                 Analyse
               </Button>
@@ -329,8 +329,68 @@ const BankTransaction = ({ account, transaction }) => {
               </Modal>
             </Tabs.TabPane>
           </Tabs>
-          <ToastContainer />
         </div>
+        <Modal
+          open={OpenDeleteModal}
+          onCancel={() => {
+            setOpenDeleteModal(false);
+          }}
+          closable={false}
+          footer={[]}
+        >
+          <p className="text-center">Are You sure Want to Delete the Account</p>
+          <div className="flex justify-center">
+            <Button
+              onClick={() => {
+                deleteAccount();
+              }}
+              className="m-2  bg-blue-600  hover:bg-blue-900 text-white ml-0"
+            >
+              OK
+            </Button>
+            <Button
+              onClick={() => {
+                setOpenDeleteModal(false);
+              }}
+              className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
+            >
+              Cancel
+            </Button>
+          </div>
+        </Modal>
+        <Modal
+          open={OpenAnalyseModal}
+          onCancel={() => {
+            setOpenAnalyseModal(false);
+          }}
+          closable={false}
+          footer={[]}
+          
+        >
+          <div className="m-0">
+            <div className="flex m-2 justify-center">
+              <p className=" m-2">
+                Start Month : <InputNumber />
+              </p>
+              <p className=" m-2">
+                End Month : <InputNumber />
+              </p>
+            </div>
+            <div className="flex m-2 justify-center">
+              <p className=" m-2">
+                Start Year : <InputNumber />
+              </p>
+              <p className=" m-2">
+                End Year : <InputNumber />
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <Button className="m-2  bg-blue-600  hover:bg-blue-900 text-white">
+                Analyse
+              </Button>
+            </div>
+          </div>
+        </Modal>
       </>
     );
   }
