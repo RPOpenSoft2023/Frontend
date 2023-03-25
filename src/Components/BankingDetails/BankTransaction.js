@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Table, Tabs, Button, Card, Descriptions, Modal, Upload } from "antd";
+import { Table, Tabs, Button, Card, Descriptions, Modal, InputNumber } from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -241,6 +241,9 @@ const BankTransaction = ({ account, transaction }) => {
               <Button
                 type="primary"
                 className="m-5 bg-blue-600 hover:bg-blue-900"
+                onClick={()=>{
+                  setOpenAnalyseModal(true);
+                }}
               >
                 Analyse
               </Button>
@@ -346,6 +349,23 @@ const BankTransaction = ({ account, transaction }) => {
               Cancel
             </Button>
           </div>
+        </Modal>
+        <Modal open={OpenAnalyseModal}
+          onCancel={() => {
+            setOpenAnalyseModal(false);
+          }}
+          footer={[]}>
+            <div className="flex m-2">
+              <p className=" m-2">Start Month : <InputNumber/></p>
+              <p className=" m-2">Start Year : <InputNumber/></p>
+            </div>
+            <div className="flex m-2">
+              <p className=" m-2">End Month : <InputNumber/></p>
+              <p className=" m-2">End Year : <InputNumber/></p>
+            </div>
+            <div className="flex justify-end">
+            <Button  className="m-2  bg-blue-600  hover:bg-blue-900 text-white">Analyse</Button>
+            </div>
         </Modal>
       </>
     );
