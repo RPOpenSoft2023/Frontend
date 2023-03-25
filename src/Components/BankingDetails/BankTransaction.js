@@ -150,7 +150,7 @@ const BankTransaction = ({ account, transaction }) => {
       },
     };
 
-    const body = { account_number: `${account.account_number}` };
+    const body = { account_number: `${account.AccountNo}` };
     axios
       .delete(`${BANKING_API}/banking/api/delete_account`, {
         headers: config.headers,
@@ -160,7 +160,7 @@ const BankTransaction = ({ account, transaction }) => {
         console.log(res.data);
         showToastMessage("Account deleted Successfully", "positive");
         var index = bankingDetails.findIndex(
-          (item) => item.AccountNo === account.account_number
+          (item) => item.AccountNo === account.AccountNo
         );
         setBankingDetails([
           ...bankingDetails.slice(0, index),
@@ -338,7 +338,7 @@ const BankTransaction = ({ account, transaction }) => {
           closable={false}
           footer={[]}
         >
-          <p className="text-center">Are You sure Want to Delete the Account</p>
+          <p className="text-center">Are You sure Want to Delete the Account?</p>
           <div className="flex justify-center">
             <Button
               onClick={() => {
@@ -347,14 +347,6 @@ const BankTransaction = ({ account, transaction }) => {
               className="m-2  bg-blue-600  hover:bg-blue-900 text-white ml-0"
             >
               OK
-            </Button>
-            <Button
-              onClick={() => {
-                setOpenDeleteModal(false);
-              }}
-              className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
-            >
-              Cancel
             </Button>
           </div>
         </Modal>
