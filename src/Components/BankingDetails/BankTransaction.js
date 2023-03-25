@@ -42,6 +42,18 @@ const columns = [
     ellipsis: true,
   },
   {
+    title: "Category",
+    dataIndex: "Category",
+    key: "Category",
+    align: "center",
+    render: (text) => (
+      <div className="text-center whitespace-nowrap overflow-hidden	">
+        {text}
+      </div>
+    ),
+    ellipsis: true,
+  },
+  {
     title: "Debit",
     dataIndex: "debit",
     key: "debit",
