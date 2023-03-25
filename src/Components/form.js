@@ -4,6 +4,8 @@ import TextArea from "antd/es/input/TextArea";
 import axios from 'axios';
 import { useContext } from "react";
 import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
+import { showToastMessage } from "./Toast";
+import { ToastContainer } from "react-toastify";
 const FormCom = () => {
     const [form] = Form.useForm();
     const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
@@ -35,6 +37,7 @@ const FormCom = () => {
             console.log(response);
             setBankingDetails([]);
             form.resetFields();
+            showToastMessage("Account Created Successfully","positive");
         })
         .catch((error) => {
             console.log(error);
@@ -45,6 +48,7 @@ const FormCom = () => {
         form.resetFields();
     };
     return (
+        <>
         <Form
             // {...layout}
             form={form}
@@ -83,7 +87,6 @@ const FormCom = () => {
                     }}
                 />
             </Form.Item>
-
             <Form.Item
                 name="bankName"
                 label="Bank Name"
@@ -141,6 +144,8 @@ const FormCom = () => {
                 </Button>
             </Form.Item>
         </Form>
+        <ToastContainer/>
+        </>
     );
 };
 export default FormCom;
