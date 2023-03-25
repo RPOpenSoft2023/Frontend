@@ -1,9 +1,12 @@
 import React from "react";
 import {Modal, Dropdown } from "antd";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Plus from "./Plus";
 import FormCom from './form';
+import { useContext } from "react";
+import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 const Join = ({ matches }) => {
+  const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const showModal1 = () => {
@@ -16,6 +19,10 @@ const Join = ({ matches }) => {
     setOpen1(false);
     setOpen2(false);
   };
+  useEffect(() => {
+    handleCancel();
+  }, [bankingDetails])
+  
   const items = [
     {
       key: "1",

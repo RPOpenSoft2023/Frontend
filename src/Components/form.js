@@ -17,15 +17,22 @@ const FormCom = ( { handleCancel } ) => {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
         }
+        let month = values.DOP.month()+1;
+        if(values.DOP.month()+1 < 10){
+            month = `0${values.DOP.month()+1}`
+        }
+        let date = values.DOP.date();
+        if(values.DOP.date() < 10){
+            date = `0${values.DOP.date()}`
+        }
         const data = {
             "ifsc": values.ifsc,
             "account_number": values.account,
             "bank_name": values.bankName,
             "branch_name": values.branchName,
             "branch_address": values.bankAddress,
-            "account_opening_date": `${values.DOP.year()}-${values.DOP.month()+1}-${values.DOP.date()}`,
+            "account_opening_date": `${values.DOP.year()}-${month}-${date}`,
             "account_type": values.accountType,
-            "phone_number": "1234567890",
         }
         console.log(data)
         form.resetFields();
@@ -49,6 +56,7 @@ const FormCom = ( { handleCancel } ) => {
         form.resetFields();
     };
     return (
+        <>
         <Form
             form={form}
             name="control-hooks"
@@ -87,7 +95,6 @@ const FormCom = ( { handleCancel } ) => {
                     }}
                 />
             </Form.Item>
-
             <Form.Item
                 name="bankName"
                 label="Bank Name"
@@ -145,6 +152,7 @@ const FormCom = ( { handleCancel } ) => {
                 </Button>
             </Form.Item>
         </Form>
+        </>
     );
 };
 

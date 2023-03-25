@@ -52,7 +52,7 @@ function Navbar() {
           text-xl text-white
           font-bold
           z-10
-          bg-gradient-to-br from-purple-600 to-blue-500
+          bg-blue-700
        
         "
       >
