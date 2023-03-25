@@ -25,7 +25,7 @@ const Dashboard = () => {
             Account_type: element.account_type,
             OpeningDate:element.account_opening_date,
             BranchName:element.branch_name,
-            BankAddress:element.bank_address
+            BankAddress:element.branch_address
           };
           data.push(dataobj);
           setBankingDetails(data);
