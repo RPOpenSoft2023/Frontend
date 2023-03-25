@@ -219,7 +219,7 @@ const BankTransaction = ({ account, transaction }) => {
                     className="overflow-hidden"
                     label={<b>Branch Address</b>}
                   >
-                    {account.BranchAddress}
+                    {account.BankAddress}
                   </Descriptions.Item>
                 </Descriptions>
                 <Button
