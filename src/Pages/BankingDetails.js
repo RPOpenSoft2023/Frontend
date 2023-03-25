@@ -79,7 +79,7 @@ const BankingDetails = () => {
     }, [transaction]);
     return (
         <div className='w-3/5 mx-auto my-2'>
-            <BankDetails user={user} />
+            <BankDetails account={account} />
             <BankTransaction account={account} transaction={transaction} />
         </div>
   );

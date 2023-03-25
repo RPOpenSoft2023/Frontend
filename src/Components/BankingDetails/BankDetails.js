@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Avatar, Typography } from 'antd'
-const BankDetails = ({ user }) => {
-  if(!user.loading){
+const BankDetails = ({ account }) => {
+  if(!account.loading){
   return (
     <div className='flex flex-wrap'>
       <Avatar
@@ -16,7 +16,7 @@ const BankDetails = ({ user }) => {
       >
         <div className='h-44 flex items-center'>
           <div className='w-full text-center text-7xl'>
-            {(user.first_name)?user.first_name[0]:'A'}
+            {(account.Bank)?account.Bank[0]:'A'}
           </div>
         </div>
       </Avatar>
@@ -24,37 +24,43 @@ const BankDetails = ({ user }) => {
         <div className="flex">
           <Typography.Title level={4} style={{ margin: '0.5rem' }}>
             {/* Name svg*/}
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26"><path fill="currentColor" d="M16.563 15.9c-.159-.052-1.164-.505-.536-2.414h-.009c1.637-1.686 2.888-4.399 2.888-7.07c0-4.107-2.731-6.26-5.905-6.26c-3.176 0-5.892 2.152-5.892 6.26c0 2.682 1.244 5.406 2.891 7.088c.642 1.684-.506 2.309-.746 2.397c-3.324 1.202-7.224 3.393-7.224 5.556v.811c0 2.947 5.714 3.617 11.002 3.617c5.296 0 10.938-.67 10.938-3.617v-.811c0-2.228-3.919-4.402-7.407-5.557z" /></svg>
-          </Typography.Title>
+            <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-bank text-center h-8 w-8" viewBox="0 0 24 24"> <path d="M8 .95 14.61 4h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.379l.5 2A.5.5 0 0 1 15.5 17H.5a.5.5 0 0 1-.485-.621l.5-2A.5.5 0 0 1 1 14V7H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 4h.89L8 .95zM3.776 4h8.447L8 2.05 3.776 4zM2 7v7h1V7H2zm2 0v7h2.5V7H4zm3.5 0v7h1V7h-1zm2 0v7H12V7H9.5zM13 7v7h1V7h-1zm2-1V5H1v1h14zm-.39 9H1.39l-.25 1h13.72l-.25-1z"/> </svg>          </Typography.Title>
 
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.first_name} {user.last_name}
+            {account.Bank}
           </Typography.Title>
         </div>
         <div className="flex">
           <Typography.Title level={4} style={{ margin: '0.5rem' }}>
             {/* Email svg*/}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m20 8l-8 5l-8-5V6l8 5l8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-credit-card text-center h-9 w-9" viewBox="0 0 24 24">
+              <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+              <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+            </svg>
           </Typography.Title>
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.email}
+            {account.AccountNo}
           </Typography.Title>
         </div>
         <div className="flex">
           <Typography.Title level={4} style={{ margin: '0.5rem' }}>
             {/* Phone svg*/}
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 20h3q.2 0 .35-.15q.15-.15.15-.35q0-.2-.15-.35q-.15-.15-.35-.15h-3q-.2 0-.35.15q-.15.15-.15.35q0 .2.15.35q.15.15.35.15ZM7 23q-.825 0-1.412-.587Q5 21.825 5 21V3q0-.825.588-1.413Q6.175 1 7 1h10q.825 0 1.413.587Q19 2.175 19 3v18q0 .825-.587 1.413Q17.825 23 17 23Zm0-7h10V6H7Z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-upc-scan text-center h-8 w-8" viewBox="0 0 24 24">
+              <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+            </svg>
           </Typography.Title>
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.phone_number}
+            {account.IFSC}
           </Typography.Title>
         </div>
         <div className="flex">
           <Typography.Title level={4} style={{ margin: '0.5rem' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-geo-alt-fill text-center w-8 h-8" viewBox="0 0 24 24">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
           </Typography.Title>
           <Typography.Title level={4} className='' style={{ margin: '0.3rem' }}>
-            {user.city}, {user.state}
+            {account.BranchAddress}
           </Typography.Title>
         </div>
       </div>
@@ -64,7 +70,7 @@ const BankDetails = ({ user }) => {
 }
 
 BankDetails.propTypes = {
-  user: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
 }
 
 export default BankDetails
