@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import axios from "axios";
 const Dashboard = () => {
   const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
-  const [accounts_array, setAccounts_array] = useState([]);
   useEffect(() => {
     axios({
       method: "get",
@@ -16,7 +15,6 @@ const Dashboard = () => {
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
-        setBankingDetails(res.data.results);
         const data = [];
         res.data.results.map((element, index) => {
           const dataobj = {
@@ -25,15 +23,18 @@ const Dashboard = () => {
             AccountNo: element.account_number,
             IFSC: element.ifsc,
             Account_type: element.account_type,
+            OpeningData:element.account_opening_date,
+            BranchName:element.branch_name,
+            BankAddress:element.bank_address
           };
           data.push(dataobj);
+          setBankingDetails(data);
         });
-        setAccounts_array(data);
       })
       .catch((error) => {
         console.log("error.message", error.message);
       });
-  }, [bankingDetails]);
+  }, []);
   useAuth();
   return (
     <>
@@ -47,7 +48,7 @@ const Dashboard = () => {
         className="block bg-orange-300 w-3/5 m-auto"
         style={{ height: "1.5px" }}
       ></hr>
-      <BankNames bankNames={accounts_array} />
+      <BankNames />
     </>
   );
 };
