@@ -82,7 +82,7 @@ const BankTransaction = ({ account, transaction }) => {
     };
     axios({
       method: 'post',
-      url: `${ANALYSER_API}/analyse/api/add-transactions/`,
+      url: `${ANALYSER_API}/analyse/api/add-statement/`,
       headers: headers,
       data: {
         account_number: account.account_number,
