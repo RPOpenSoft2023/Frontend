@@ -43,7 +43,7 @@ const FormCom = ( { handleCancel } ) => {
             data: data,
         })
         .then((response) => {
-            console.log(response);
+            console.log(response)
             showToastMessage('Account Created Successfully', 'positive')
         })
         .catch((error) => {
