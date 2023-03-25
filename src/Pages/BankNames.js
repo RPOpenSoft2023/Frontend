@@ -64,7 +64,7 @@ export default function BankNames(props) {
 
   return (
     <div className="m-1 ">
-      <Table columns={columns} dataSource={bankingDetails} pagination={false} className="m-3"/>
+      <Table columns={columns} dataSource={bankingDetails} pagination={false} className="p-3"/>
     </div>
   );
 }
