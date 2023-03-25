@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { useContext } from "react";
 import { BankingdetailsContext } from "../../Contexts/bankingDetailsContext/bankingDetailsContext";
-import { ToastContainer } from "react-toastify";
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
 
 const columns = [
@@ -71,6 +70,7 @@ const columns = [
 
 const BankTransaction = ({ account, transaction }) => {
   const navigate = useNavigate();
+  const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -235,7 +235,9 @@ const BankTransaction = ({ account, transaction }) => {
                   type="primary"
                   danger
                   className="m-5  bg-red-600 hover:bg-red-900"
-                  onClick={deleteAccount}
+                  onClick={() => {
+                    setOpenDeleteModal(true);
+                  }}
                 >
                   Delete Account
                 </Button>
@@ -329,8 +331,35 @@ const BankTransaction = ({ account, transaction }) => {
               </Modal>
             </Tabs.TabPane>
           </Tabs>
-          <ToastContainer />
         </div>
+        <Modal
+          open={OpenDeleteModal}
+          onCancel={() => {
+            setOpenDeleteModal(false);
+          }}
+          footer={[]}
+        >
+          <div></div>
+          <p>Are You sure Want to Delete the Account</p>
+          <div>
+            <Button
+              onClick={() => {
+                deleteAccount();
+              }}
+              className="m-2  bg-blue-600  hover:bg-blue-900 text-white ml-0"
+            >
+              OK
+            </Button>
+            <Button
+              onClick={() => {
+                setOpenDeleteModal(false);
+              }}
+              className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
+            >
+              Cancel
+            </Button>
+          </div>
+        </Modal>
       </>
     );
   }
