@@ -151,7 +151,11 @@ const BankTransaction = ({ account, transaction }) => {
       .then((res) => {
         console.log(res.data);
         showToastMessage("Account deleted Successfully", "positive");
-        setBankingDetails([]);
+        var index = bankingDetails.findIndex(item => item.AccountNo === account.account_number);
+        setBankingDetails([
+          ...bankingDetails.slice(0,index),
+          ...bankingDetails.slice(index+1)
+        ])
         navigate("/dashboard");
       })
       .catch((err) => {

@@ -1,7 +1,8 @@
 import { Modal, Table, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import UpdateForm from "../Components/UpdateForm";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 import {
   DeleteOutlined,
   FormOutlined,
@@ -10,6 +11,7 @@ import {
 } from "@ant-design/icons";
 export default function BankNames(props) {
   const navigate = useNavigate();
+  const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const columns = [
     {
       title: "Bank Name",
@@ -53,7 +55,7 @@ export default function BankNames(props) {
               boxShadow: "none",
             }}
             icon={<RightOutlined />}
-            onClick={() => navigate("/banking",{state:record.AccountNo})}
+            onClick={() => navigate("/banking",{state:record})}
           ></Button>
         </>
       ),
@@ -62,7 +64,7 @@ export default function BankNames(props) {
 
   return (
     <div className="m-1 ">
-      <Table columns={columns} dataSource={props.bankNames} pagination={false} className="m-3"/>
+      <Table columns={columns} dataSource={bankingDetails} pagination={false} className="m-3"/>
     </div>
   );
 }

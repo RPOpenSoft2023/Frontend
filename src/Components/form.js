@@ -43,7 +43,17 @@ const FormCom = ( { handleCancel } ) => {
             data: data,
         })
         .then((response) => {
-            console.log(response)
+            console.log(response);
+            // const dataobj = {
+            //     key: index,
+            //     Bank: values.bankName,
+            //     AccountNo: element.account_number,
+            //     IFSC: element.ifsc,
+            //     Account_type: element.account_type,
+            //     OpeningData:element.account_opening_date,
+            //     BranchName:element.branch_name,
+            //     BankAddress:element.bank_address
+            //   };
             showToastMessage('Account Created Successfully', 'positive')
         })
         .catch((error) => {
