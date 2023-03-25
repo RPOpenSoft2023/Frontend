@@ -1,7 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Table, Tabs, Button, Card, Descriptions, Modal, InputNumber } from "antd";
+import {
+  Table,
+  Tabs,
+  Button,
+  Card,
+  Descriptions,
+  Modal,
+  InputNumber,
+} from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
 import axios from "axios";
@@ -71,7 +79,7 @@ const columns = [
 const BankTransaction = ({ account, transaction }) => {
   const navigate = useNavigate();
   const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
-  const [OpenAnalyseModal,setOpenAnalyseModal]=useState(false);
+  const [OpenAnalyseModal, setOpenAnalyseModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -82,7 +90,7 @@ const BankTransaction = ({ account, transaction }) => {
       Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
     };
     axios({
-      method: 'post',
+      method: "post",
       url: `${ANALYSER_API}/analyse/api/add-statement/`,
       headers: headers,
       data: {
@@ -142,7 +150,7 @@ const BankTransaction = ({ account, transaction }) => {
       },
     };
 
-    const body = { account_number: `${account.account_number}` };
+    const body = { account_number: `${account.AccountNo}` };
     axios
       .delete(`${BANKING_API}/banking/api/delete_account`, {
         headers: config.headers,
@@ -151,11 +159,13 @@ const BankTransaction = ({ account, transaction }) => {
       .then((res) => {
         console.log(res.data);
         showToastMessage("Account deleted Successfully", "positive");
-        var index = bankingDetails.findIndex(item => item.AccountNo === account.account_number);
+        var index = bankingDetails.findIndex(
+          (item) => item.AccountNo === account.AccountNo
+        );
         setBankingDetails([
-          ...bankingDetails.slice(0,index),
-          ...bankingDetails.slice(index+1)
-        ])
+          ...bankingDetails.slice(0, index),
+          ...bankingDetails.slice(index + 1),
+        ]);
         navigate("/dashboard");
       })
       .catch((err) => {
@@ -169,11 +179,6 @@ const BankTransaction = ({ account, transaction }) => {
         <div>
           <Tabs defaultActiveKey="0" className="mx-auto text-center">
             <Tabs.TabPane tab="Bank Details" key="0">
-              <Card
-                bordered={true}
-                style={{ width: "100%", height: "50%", fontSize: "16px" }}
-                className="mx-auto my-4"
-              >
                 <Descriptions
                   bordered
                   column={{
@@ -232,7 +237,6 @@ const BankTransaction = ({ account, transaction }) => {
                 >
                   Delete Account
                 </Button>
-              </Card>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Transaction History" className="mx-auto" key="1">
               <Table
@@ -245,7 +249,7 @@ const BankTransaction = ({ account, transaction }) => {
               <Button
                 type="primary"
                 className="m-5 bg-blue-600 hover:bg-blue-900"
-                onClick={()=>{
+                onClick={() => {
                   setOpenAnalyseModal(true);
                 }}
               >
@@ -331,11 +335,11 @@ const BankTransaction = ({ account, transaction }) => {
           onCancel={() => {
             setOpenDeleteModal(false);
           }}
+          closable={false}
           footer={[]}
         >
-          <div></div>
-          <p>Are You sure Want to Delete the Account</p>
-          <div>
+          <p className="text-center">Are You sure Want to Delete the Account?</p>
+          <div className="flex justify-center">
             <Button
               onClick={() => {
                 deleteAccount();
@@ -344,32 +348,40 @@ const BankTransaction = ({ account, transaction }) => {
             >
               OK
             </Button>
-            <Button
-              onClick={() => {
-                setOpenDeleteModal(false);
-              }}
-              className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
-            >
-              Cancel
-            </Button>
           </div>
         </Modal>
-        <Modal open={OpenAnalyseModal}
+        <Modal
+          open={OpenAnalyseModal}
           onCancel={() => {
             setOpenAnalyseModal(false);
           }}
-          footer={[]}>
-            <div className="flex m-2">
-              <p className=" m-2">Start Month : <InputNumber/></p>
-              <p className=" m-2">Start Year : <InputNumber/></p>
+          closable={false}
+          footer={[]}
+          
+        >
+          <div className="m-0">
+            <div className="flex m-2 justify-center">
+              <p className=" m-2">
+                Start Month : <InputNumber />
+              </p>
+              <p className=" m-2">
+                End Month : <InputNumber />
+              </p>
             </div>
-            <div className="flex m-2">
-              <p className=" m-2">End Month : <InputNumber/></p>
-              <p className=" m-2">End Year : <InputNumber/></p>
+            <div className="flex m-2 justify-center">
+              <p className=" m-2">
+                Start Year : <InputNumber />
+              </p>
+              <p className=" m-2">
+                End Year : <InputNumber />
+              </p>
             </div>
-            <div className="flex justify-end">
-            <Button  className="m-2  bg-blue-600  hover:bg-blue-900 text-white">Analyse</Button>
+            <div className="flex justify-center">
+              <Button className="m-2  bg-blue-600  hover:bg-blue-900 text-white">
+                Analyse
+              </Button>
             </div>
+          </div>
         </Modal>
       </>
     );

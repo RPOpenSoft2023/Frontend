@@ -1,6 +1,6 @@
 import AnalyserCard from "../Components/AnalyserCard"
 import StackedPlot from "../Components/StackedPlot";
-import CardData from "../Data/CardData"
+// import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
 import freqData from '../Data/freqData'
@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
-import PieChart from "@ant-design/plots/es/components/pie";
+// import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
@@ -20,31 +20,57 @@ const change = (key) => {
     console.log(key)
 }
 
-var cardBlocksData=[];
-function cardset(){
-        cardBlocksData.push({"key":1,"num":"100","title":"Average Day wise Income"});
-        cardBlocksData.push({"key":2,"num":"100","title":"Average Day wise Expense"});
-        cardBlocksData.push({"key":3,"num":"100","title":"Spending/Income"});
-        cardBlocksData.push({"key":4,"num":"100","title":"Credit Frequency"});
-        cardBlocksData.push({"key":5,"num":"100","title":"Debit Frequency"});
-        cardBlocksData.push({"key":6,"num":"100","title":"Credit/Debit"});
+function averageIncome(data) {
+    var avg = 0;
+    for (let i = 0; i < data.analytics.length; i++) {
+        avg += data.analytics[i].averageDayWiseIncome;
+    }
+    return avg / (data.analytics.length);
 }
-
+function averageSpending(data) {
+    var avg = 0;
+    for (let i = 0; i < data.analytics.length; i++) {
+        avg += data.analytics[i].averageDayWiseExpense;
+    }
+    return avg / (data.analytics.length);
+}
+function IncomeSpend(data) {
+    var num= averageSpending(data) / averageIncome(data);
+    num = num.toString(); //If it's not already a String
+    num = num.slice(0, (num.indexOf("."))+3); //With 3 exposing the hundredths place
+    return Number(num);
+}
+function CreditFrequency(data) {
+    var avg = 0;
+    for (let i = 0; i < data.analytics.length; i++) {
+        avg += data.analytics[i].creditDebitFrequency.creditFreq;
+    }
+    return avg / (data.analytics.length);
+}
+function DebitFrequency(data) {
+    var avg = 0;
+    for (let i = 0; i < data.analytics.length; i++) {
+        avg += data.analytics[i].creditDebitFrequency.debitFreq;
+    }
+    return avg / (data.analytics.length);
+}
+function CreditDebit(data) {
+    return CreditFrequency(data)/DebitFrequency(data);
+}
 const Analyser = () => {
     const [start_month, set_start_month] = useState("4")
     const [start_year, set_start_year] = useState("2020")
     const [end_month, set_end_month] = useState("8")
     const [end_year, set_end_year] = useState("2020")
-    const [data, set_data]=useState({})
-    // var boxData =[];
-    cardBlocksData=[];
-    cardset();
-    
+    // const [data, set_data] = useState([])
+    const [user, setUser] = useState({ loading: true });
+    const [cardBlocksData, setCardData] = useState([]);
+
     useEffect(() => {
         const access_token = localStorage.getItem("jwt_token");
         // const account_number= localStorage.getItem("account_number");
         const account_number = "65749567438";
-        
+        console.log(account_number)
         axios(
             {
                 method: "get",
@@ -57,95 +83,111 @@ const Analyser = () => {
                     "end_year": end_year
                 }
                 ,
-                headers:{
-                    // Authorization:"Bearer " + localStorage.getItem("jwt_token"),
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("jwt_token"),
                     'content-type': 'application/json',
                 }
             }
-            ).then((res) => {
-                console.log(res);
-                set_data(res);
-                // cardset(data);
-            }).catch((error) => {
-                console.log(error);
+        ).then((res) => {
+            setCardData([
+                ...cardBlocksData,
+                { "key": 1, "num": averageIncome(res.data), "title": "Average Day wise Income" },
+                { "key": 2, "num": averageSpending(res.data), "title": "Average Day wise Expense" },
+                { "key": 3, "num": IncomeSpend(res.data), "title": "Spending/Income" },
+                { "key": 4, "num": CreditFrequency(res.data), "title": "Credit Frequency" },
+                { "key": 5, "num": DebitFrequency(res.data), "title": "Debit Frequency" }, 
+                { "key": 6, "num": CreditDebit(res.data), "title": "Credit/Debit" }]);
+            setUser({
+
+                ...user,
+                loading: false,
+            })
+            console.log(user)
+        }).catch((error) => {
+            console.log(error);
         })
 
     }, []);
 
     useAuth();
-    const items = [
-        {
-            key: '1',
-            label: `Overview`,
-            children: <div >
-                <Container className='my-3' style={{ display: 'flex', justifyContent: '', flexWrap: 'wrap', }}>
-                    {cardBlocksData.map((data) =>
-                        <AnalyserCard
-                            key={data.key}
-                            id={data.key}
-                            data={data.num}
-                            title={data.title}
-                            style={{ width: '100%', maxWidth: '400px', margin: '0.5rem' }}
-                        />
-                    )}
-                </Container>
+    if (!user.loading) {
+        console.log(cardBlocksData)
+        const items = [
+            {
+                key: '1',
+                label: `Overview`,
+                children: <div >
+                    <Container className='my-3' style={{ display: 'flex', justifyContent: '', flexWrap: 'wrap', }}>
+                        {cardBlocksData.map((data) =>
+                            <AnalyserCard
+                                key={data.key}
+                                id={data.key}
+                                data={data.num}
+                                title={data.title}
+                                style={{ width: '100%', maxWidth: '400px', margin: '0.5rem' }}
+                            />
+                        )}
+                    </Container>
 
-                <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Card title="Income & Expenditure" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <AnalyseChart />
+                    <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card title="Income & Expenditure" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                            <AnalyseChart />
 
-                    </Card>
-                    <Card title="Transaction Types" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <StackedPlot data={freqData} />
-                    </Card>
-                </div>
-                <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <CategoryChart />
-                    </Card>
-                    <Card title="Loan details" className="shadow-lg h-inherit" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                        <LoanAnalysisChart />
-                    </Card>
-                </div>
-            </div>,
-        },
-        {
-            key: '2',
-            label: `Recent Transactions`,
-            children: <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Card bordered={true} style={{ width: '70%', height: 'auto', textAlign: "center" }}>
-                    <Table columns={ColumnData} dataSource={TableData}
-                        pagination={{ pageSize: 9 }}
-                    />
-                </Card>
-            </div>,
-        },
-        {
-            key: '3',
-            label: `Monthly Summary`,
-            children: <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
-                    <SummaryTab />
-                </Card>
-            </div>,
-        },
-
-    ];
-    return (
-        <div className="p-0">
-            <div className="my-3">
-                <div className="grid grid-cols-10 gap-4 font-sans">
-                    <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">{">"} BANK ANALYSIS</div>
-                    <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
-                        <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white"><i class='bx bx-calendar mr-2'></i><span>22/09/2022</span></div>
-                        <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white"><i class='bx bx-calendar mr-2'></i><span>23/03/2023</span></div>
+                        </Card>
+                        <Card title="Transaction Types" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                            <StackedPlot data={freqData} />
+                        </Card>
                     </div>
-                    <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4"><Link><i class='bx bx-download mx-2'></i><span>Analysis</span></Link></div>
+                    <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                            <CategoryChart />
+                        </Card>
+                        <Card title="Loan details" className="shadow-lg h-inherit" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                            <LoanAnalysisChart />
+                        </Card>
+                    </div>
+                </div>,
+            },
+            {
+                key: '2',
+                label: `Recent Transactions`,
+                children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card bordered={true} style={{ width: '70%', height: 'auto', textAlign: "center" }}>
+                        <Table columns={ColumnData} dataSource={TableData}
+                            pagination={{ pageSize: 9 }}
+                        />
+                    </Card>
+                </div>,
+            },
+            {
+                key: '3',
+                label: `Monthly Summary`,
+                children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
+                        <SummaryTab />
+                    </Card>
+                </div>,
+            },
+
+        ];
+
+
+        return (
+            <div className="p-0">
+                <div className="my-3">
+                    <div className="grid grid-cols-10 gap-4 font-sans">
+                        <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">{">"} BANK ANALYSIS</div>
+                        <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
+                            <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white"><i class='bx bx-calendar mr-2'></i><span>22/09/2022</span></div>
+                            <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white"><i class='bx bx-calendar mr-2'></i><span>23/03/2023</span></div>
+                        </div>
+                        <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4"><Link><i class='bx bx-download mx-2'></i><span>Analysis</span></Link></div>
+                    </div>
                 </div>
+                <Tabs animated defaultActiveKey="1" items={items} />
             </div>
-            <Tabs animated defaultActiveKey="1" centered items={items} />
-        </div>
-    );
+        );
+    }
 }
 const Container = styled.div`
   display: flex;
