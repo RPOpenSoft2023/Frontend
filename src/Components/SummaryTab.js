@@ -13,9 +13,6 @@ for (let i = 0; i < SummaryData.length; i++) {
    averageDayWiseIncome:SummaryData[i].averageDayWiseExpense.toFixed(3),
    totalMonthIncome:SummaryData[i].totalMonthExpense,
    spendingExpenseRatio:SummaryData[i].spendingExpenseRatio.toFixed(3),
-
-
-
  });
 }
 const SummaryTab = () => {

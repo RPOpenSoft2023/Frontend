@@ -4,7 +4,7 @@ import axios from "axios";
 import FormAction from "./FormAction";
 import Input from "./Input";
 import ResendOTP from "./ResendOtp";
-
+import { showToastMessage } from "./Toast";
 export default function ForgotPassword(prop) {
   const [phoneNo, setPhoneNo] = useState("");
   const [otp, setOtp] = useState("");
@@ -30,6 +30,8 @@ export default function ForgotPassword(prop) {
       .then((res) => {
         console.log("res", res);
         setIsOtpSent(true);
+      }).catch((error)=>{
+        showToastMessage(error.message,"negative");
       });
   };
 
@@ -51,6 +53,7 @@ export default function ForgotPassword(prop) {
       })
       .catch((error) => {
         console.log("error", error);
+        showToastMessage(error.message,"negative");
       });
   };
   //Handle Login API Integration here

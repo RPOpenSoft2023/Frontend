@@ -6,6 +6,7 @@ import BankTransaction from '../Components/BankingDetails/BankTransaction';
 import { useNavigate } from 'react-router';
 import useAuth from '../Components/Auth'
 import { useLocation } from 'react-router-dom';
+import { showToastMessage } from '../Components/Toast';
 const BANKING_API=process.env.REACT_APP_BANKING_API // this is the URL for the banking API
 const USER_API=process.env.REACT_APP_USER_API // this is the URL for the user API
 
@@ -32,6 +33,7 @@ const BankingDetails = () => {
             })
             .catch(err => {
                 console.log(err);
+                showToastMessage(err.message,"negative");
             })
         
         const accountConfig = {
@@ -70,6 +72,7 @@ const BankingDetails = () => {
             .catch(err => {
                 console.log(err);
                 // navigate('/dashboard');
+                showToastMessage(err.message,"negative");
             })
         console.log(transaction)
     }, []);

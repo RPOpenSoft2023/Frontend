@@ -117,7 +117,7 @@ const BankTransaction = ({ account, transaction }) => {
       })
       .catch((err) => {
         console.log(err);
-        showToastMessage("File upload failed", "error");
+        showToastMessage(err.message,"negative");
       });
     setOpen(false);
     setSelectedFile(null);
@@ -182,6 +182,7 @@ const BankTransaction = ({ account, transaction }) => {
       })
       .catch((err) => {
         console.log(err);
+        showToastMessage(err.message,"negative")
       });
   };
   if (!account.loading && !transaction.loading) {

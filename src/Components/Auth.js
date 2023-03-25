@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { showToastMessage } from "./Toast";
 const useAuth = (path=null) => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -19,6 +20,7 @@ const useAuth = (path=null) => {
         console.log("error.message", error.message);
         localStorage.removeItem("jwt_token");
         localStorage.removeItem("logstat")
+        showToastMessage(error.message,"negative");
         navigate("/");
       });
   }, []);

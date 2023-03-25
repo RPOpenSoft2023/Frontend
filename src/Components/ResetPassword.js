@@ -36,6 +36,8 @@ export default function ForgotPassword(prop) {
       .then((res) => {
         console.log("res", res);
         setIsOtpSent(true);
+      }).catch((error)=>{
+        showToastMessage(error.messge,"negative");
       });
   };
 
@@ -56,6 +58,7 @@ export default function ForgotPassword(prop) {
       })
       .catch((error) => {
         console.log("error", error);
+        showToastMessage(error.message,"negative")
       });
   };
 

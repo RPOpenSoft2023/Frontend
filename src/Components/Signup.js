@@ -49,6 +49,7 @@ export default function Signup() {
       })
       .catch((error) => {
         console.log("error.message", error.message);
+        showToastMessage(error.message,"negative");
       });
   };
   return (

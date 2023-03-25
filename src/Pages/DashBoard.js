@@ -5,6 +5,7 @@ import useAuth from "../Components/Auth";
 import { useContext, useState } from "react";
 import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 import { useEffect } from "react";
+import {showToastMessage} from "../Components/Toast"
 import axios from "axios";
 const Dashboard = () => {
   const [BankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
@@ -33,7 +34,7 @@ const Dashboard = () => {
         });
       })
       .catch((error) => {
-        console.log("error.message", error.message);
+        showToastMessage(error.message,"negative");
       });
     axios({
       method: "get",
@@ -44,7 +45,7 @@ const Dashboard = () => {
         setTransactions(res.data.results);
       })
       .catch((error) => {
-        console.log("error.message", error.message);
+        showToastMessage(error.message,"negative");
       });
   }, []);
   useAuth();

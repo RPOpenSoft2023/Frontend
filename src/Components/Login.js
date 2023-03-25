@@ -52,6 +52,7 @@ export default function Login() {
       })
       .catch((error) => {
         console.log("error.message", error.message);
+        showToastMessage(error.message,"negative");
       });
   };
   //validatoin schema
