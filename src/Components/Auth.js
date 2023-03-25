@@ -10,12 +10,15 @@ const useAuth = (path=null) => {
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
+        localStorage.setItem("logstat", "true");
         if(path != null){
           navigate("/dashboard")
         }
       })
       .catch((error) => {
         console.log("error.message", error.message);
+        localStorage.removeItem("jwt_token");
+        localStorage.removeItem("logstat")
         navigate("/");
       });
   }, []);

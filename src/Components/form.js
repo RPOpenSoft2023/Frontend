@@ -1,32 +1,41 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from 'axios';
-import { useContext } from "react";
-import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
-import { showToastMessage } from "./Toast";
-import { ToastContainer } from "react-toastify";
-const FormCom = () => {
+import { useContext } from 'react';
+import { BankingdetailsContext } from '../Contexts/bankingDetailsContext/bankingDetailsContext';
+import { showToastMessage } from './Toast'; 
+
+const FormCom = ( { handleCancel } ) => {
+    
+    const [BankingDetails, setBankingdetailsContext] = useContext(BankingdetailsContext);
     const [form] = Form.useForm();
-    const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
     const onFinish = (values) => {
-        // console.log('Success:', values);
-        // console.log(`${values.DOP.date()}/${values.DOP.month()+1}/${values.DOP.year()}`);
+        handleCancel()
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
+        }
+        let month = values.DOP.month()+1;
+        if(values.DOP.month()+1 < 10){
+            month = `0${values.DOP.month()+1}`
+        }
+        let date = values.DOP.date();
+        if(values.DOP.date() < 10){
+            date = `0${values.DOP.date()}`
         }
         const data = {
             "ifsc": values.ifsc,
             "account_number": values.account,
             "bank_name": values.bankName,
             "branch_name": values.branchName,
-            "bank_address": values.bankAddress,
-            "account_opening_date": `${values.DOP.year()}-${values.DOP.month()+1}-${values.DOP.date()}`,
+            "branch_address": values.bankAddress,
+            "account_opening_date": `${values.DOP.year()}-${month}-${date}`,
             "account_type": values.accountType,
-            "phone_number": "1234567898",
         }
         console.log(data)
+        form.resetFields();
         axios({
             method: 'post',
             url: `${process.env.REACT_APP_BANKING_API}/banking/api/create_account/`,
@@ -35,12 +44,11 @@ const FormCom = () => {
         })
         .then((response) => {
             console.log(response);
-            setBankingDetails([]);
-            form.resetFields();
-            showToastMessage("Account Created Successfully","positive");
+            showToastMessage('Account Created Successfully', 'positive')
         })
         .catch((error) => {
             console.log(error);
+            showToastMessage('Account Creation Failed', 'negative')
         })
         
     };
@@ -50,7 +58,6 @@ const FormCom = () => {
     return (
         <>
         <Form
-            // {...layout}
             form={form}
             name="control-hooks"
             onFinish={onFinish}
@@ -61,6 +68,7 @@ const FormCom = () => {
             <Form.Item
                 name="ifsc"
                 label="IFSC Code"
+                colon={false}
                 rules={[
                     {
                         required: true,
@@ -69,7 +77,7 @@ const FormCom = () => {
             >
                 <Input showCount maxLength={20} />
             </Form.Item>
-
+            
             <Form.Item
                 name="account"
                 label="Account no."
@@ -144,8 +152,12 @@ const FormCom = () => {
                 </Button>
             </Form.Item>
         </Form>
-        <ToastContainer/>
         </>
     );
 };
+
+FormCom.propTypes = {
+    handleCancel: PropTypes.func.isRequired,
+};
+
 export default FormCom;

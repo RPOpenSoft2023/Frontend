@@ -12,7 +12,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios({
       method: "get",
-      url: `${process.env.REACT_APP_BANKING_API}/banking/api/accounts?page_size=1000`,
+      url: `${process.env.REACT_APP_BANKING_API}/banking/api/accounts`,
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {

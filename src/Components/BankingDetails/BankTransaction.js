@@ -8,7 +8,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { BankingdetailsContext } from "../../Contexts/bankingDetailsContext/bankingDetailsContext";
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
-
+const ANALYSER_API = process.env.REACT_APP_ANALYSER_API; // this is the URL for the analyser API
 const columns = [
   {
     title: "Date",
@@ -81,23 +81,9 @@ const BankTransaction = ({ account, transaction }) => {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
     };
-    // const account_number =
-    // const formData = new FormData();
-    // formData.append('transactions', selectedFile);
-    // formData.append('account_number', account.account_number);
-    // console.log(formData.get('transactions'));
-    // console.log(formData.get('account_number'))
-    // showToastMessage('File uploaded successfully', 'positive');
-    // axios.post(`${BANKING_API}/banking/api/add_transactions`, {
-    //   headers: headers,
-    //   data: {
-    //     'account_number': account.account_number,
-    //     'transactions': selectedFile
-    //   }
-    // })
     axios({
-      method: "post",
-      url: `${BANKING_API}/banking/api/add_transactions/`,
+      method: 'post',
+      url: `${ANALYSER_API}/analyse/api/add-statement/`,
       headers: headers,
       data: {
         account_number: account.account_number,
