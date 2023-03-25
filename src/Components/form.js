@@ -1,13 +1,18 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { Button, Form, Input, DatePicker, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import axios from 'axios';
+import { useContext } from 'react';
+import { BankingdetailsContext } from '../Contexts/bankingDetailsContext/bankingDetailsContext';
+import { showToastMessage } from './Toast'; 
 
-const FormCom = ({ func }) => {
+const FormCom = ( { handleCancel } ) => {
+    
+    const [BankingDetails, setBankingdetailsContext] = useContext(BankingdetailsContext);
     const [form] = Form.useForm();
     const onFinish = (values) => {
-        // console.log('Success:', values);
-        // console.log(`${values.DOP.date()}/${values.DOP.month()+1}/${values.DOP.year()}`);
+        handleCancel()
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
@@ -17,12 +22,13 @@ const FormCom = ({ func }) => {
             "account_number": values.account,
             "bank_name": values.bankName,
             "branch_name": values.branchName,
-            "bank_address": values.bankAddress,
+            "branch_address": values.bankAddress,
             "account_opening_date": `${values.DOP.year()}-${values.DOP.month()+1}-${values.DOP.date()}`,
             "account_type": values.accountType,
-            "phone_number": "1234567898",
+            "phone_number": "1234567890",
         }
         console.log(data)
+        form.resetFields();
         axios({
             method: 'post',
             url: `${process.env.REACT_APP_BANKING_API}/banking/api/create_account/`,
@@ -31,11 +37,11 @@ const FormCom = ({ func }) => {
         })
         .then((response) => {
             console.log(response);
-            form.resetFields();
-            func();
+            showToastMessage('Account Created Successfully', 'positive')
         })
         .catch((error) => {
             console.log(error);
+            showToastMessage('Account Creation Failed', 'negative')
         })
         
     };
@@ -44,7 +50,6 @@ const FormCom = ({ func }) => {
     };
     return (
         <Form
-            // {...layout}
             form={form}
             name="control-hooks"
             onFinish={onFinish}
@@ -55,6 +60,7 @@ const FormCom = ({ func }) => {
             <Form.Item
                 name="ifsc"
                 label="IFSC Code"
+                colon={false}
                 rules={[
                     {
                         required: true,
@@ -63,7 +69,7 @@ const FormCom = ({ func }) => {
             >
                 <Input showCount maxLength={20} />
             </Form.Item>
-
+            
             <Form.Item
                 name="account"
                 label="Account no."
@@ -141,4 +147,9 @@ const FormCom = ({ func }) => {
         </Form>
     );
 };
+
+FormCom.propTypes = {
+    handleCancel: PropTypes.func.isRequired,
+};
+
 export default FormCom;

@@ -6,7 +6,7 @@ import { showToastMessage } from '../Toast';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 const BANKING_API=process.env.REACT_APP_BANKING_API // this is the URL for the banking API
-
+const ANALYSER_API=process.env.REACT_APP_ANALYSER_API // this is the URL for the analyser API
 const columns = [
     {
         title: 'Date',
@@ -67,7 +67,7 @@ const BankTransaction = ({ account, transaction }) => {
     }
     axios({
       method: 'post',
-      url: `${BANKING_API}/banking/api/add_transactions/`,
+      url: `${ANALYSER_API}/analyse/api/add-transactions/`,
       headers: headers,
       data: {
         account_number: account.account_number,

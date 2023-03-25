@@ -61,9 +61,8 @@ const Join = ({ matches }) => {
         title="Add Bank Details"
         onCancel={handleCancel}
         footer={[]}
-        func={handleCancel}
       >
-        <FormCom/>
+        <FormCom handleCancel={handleCancel}/>
       </Modal>
     </>
   );
