@@ -169,7 +169,11 @@ const BankTransaction = ({ account, transaction }) => {
         <div>
           <Tabs defaultActiveKey="0" className="mx-auto text-center">
             <Tabs.TabPane tab="Bank Details" key="0">
-              
+              <Card
+                bordered={true}
+                style={{ width: "100%", height: "50%", fontSize: "16px" }}
+                className="mx-auto my-4"
+              >
                 <Descriptions
                   bordered
                   column={{
