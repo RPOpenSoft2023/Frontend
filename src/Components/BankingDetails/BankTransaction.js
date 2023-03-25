@@ -178,11 +178,7 @@ const BankTransaction = ({ account, transaction }) => {
         <div>
           <Tabs defaultActiveKey="0" className="mx-auto text-center">
             <Tabs.TabPane tab="Bank Details" key="0">
-              <Card
-                bordered={true}
-                style={{ width: "100%", height: "50%", fontSize: "16px" }}
-                className="mx-auto my-4"
-              >
+              
                 <Descriptions
                   bordered
                   column={{
@@ -231,15 +227,15 @@ const BankTransaction = ({ account, transaction }) => {
                     {account.branch_address}
                   </Descriptions.Item>
                 </Descriptions>
-                <Button
-                  type="primary"
-                  danger
-                  className="m-5  bg-red-600 hover:bg-red-900"
-                  onClick={deleteAccount}
-                >
-                  Delete Account
-                </Button>
-              </Card>
+              
+              <Button
+                type="primary"
+                danger
+                className="m-5  bg-red-600 hover:bg-red-900"
+                onClick={deleteAccount}
+              >
+                Delete Account
+              </Button>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Transaction History" className="mx-auto" key="1">
               <Table
