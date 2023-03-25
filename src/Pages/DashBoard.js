@@ -23,7 +23,7 @@ const Dashboard = () => {
             AccountNo: element.account_number,
             IFSC: element.ifsc,
             Account_type: element.account_type,
-            OpeningData:element.account_opening_date,
+            OpeningDate:element.account_opening_date,
             BranchName:element.branch_name,
             BankAddress:element.bank_address
           };
