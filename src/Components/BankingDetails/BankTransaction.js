@@ -333,9 +333,8 @@ const BankTransaction = ({ account, transaction }) => {
           }}
           footer={[]}
         >
-          <div></div>
-          <p>Are You sure Want to Delete the Account</p>
-          <div>
+          <p className="text-center">Are You sure Want to Delete the Account</p>
+          <div className="flex justify-center">
             <Button
               onClick={() => {
                 deleteAccount();
@@ -359,15 +358,15 @@ const BankTransaction = ({ account, transaction }) => {
             setOpenAnalyseModal(false);
           }}
           footer={[]}>
-            <div className="flex m-2">
+            <div className="flex m-2 justify-center">
               <p className=" m-2">Start Month : <InputNumber/></p>
               <p className=" m-2">Start Year : <InputNumber/></p>
             </div>
-            <div className="flex m-2">
+            <div className="flex m-2 justify-center">
               <p className=" m-2">End Month : <InputNumber/></p>
               <p className=" m-2">End Year : <InputNumber/></p>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-center">
             <Button  className="m-2  bg-blue-600  hover:bg-blue-900 text-white">Analyse</Button>
             </div>
         </Modal>
