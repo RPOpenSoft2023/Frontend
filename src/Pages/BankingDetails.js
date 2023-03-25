@@ -43,18 +43,12 @@ const BankingDetails = () => {
 
         // const account_number = localStorage.getItem('account_number');
         // const account_number = 65749567438;
-        const account_number = location.state.AccountNo;
-        axios.get(`${BANKING_API}/banking/api/accounts?account_number=${account_number}`, accountConfig)
-            .then(res => {
-                setAccount({
-                    ...res.data,
-                    loading: false
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            })
         
+        setAccount({
+            ...location.state,
+            loading: false
+        });
+        console.log(account)
         const transactionConfig = {
             headers: {
                 'Content-Type': 'application/json',
@@ -62,10 +56,10 @@ const BankingDetails = () => {
             }
         }
 
-        
+        console.log(location.state)
         // const start_date = '2020-01-01';
         // const end_date = '2020-11-24';
-        axios.get(`${BANKING_API}/banking/api/transactions?account_number=${account_number}`, transactionConfig)
+        axios.get(`${BANKING_API}/banking/api/transactions?account_number=${location.state.AccountNo}`, transactionConfig)
             .then(res => {
                 console.log(res.data.results);
                 setTransaction({
@@ -80,7 +74,9 @@ const BankingDetails = () => {
         console.log(transaction)
     }, []);
         
+    useEffect(() => {
 
+    }, [transaction]);
     return (
         <div className='w-3/5 mx-auto my-2'>
             <BankDetails user={user} />

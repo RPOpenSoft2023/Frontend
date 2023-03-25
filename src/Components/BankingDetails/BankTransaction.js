@@ -189,37 +189,37 @@ const BankTransaction = ({ account, transaction }) => {
                     className="overflow-hidden"
                     label={<b>Account Number</b>}
                   >
-                    {account.account_number}
+                    {account.AccountNo}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Account Type</b>}
                   >
-                    {account.account_type}
+                    {account.Account_type}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>IFSC Code</b>}
                   >
-                    {account.ifsc}
+                    {account.IFSC}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Bank Name</b>}
                   >
-                    {account.bank_name}
+                    {account.Bank}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Branch Name</b>}
                   >
-                    {account.branch_name}
+                    {account.BranchName}
                   </Descriptions.Item>
                   <Descriptions.Item
                     className="overflow-hidden"
                     label={<b>Branch Address</b>}
                   >
-                    {account.branch_address}
+                    {account.BranchAddress}
                   </Descriptions.Item>
                 </Descriptions>
                 <Button
