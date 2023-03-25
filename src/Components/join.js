@@ -69,7 +69,7 @@ const Join = ({ matches }) => {
         onCancel={handleCancel}
         footer={[]}
       >
-        <FormCom/>
+        <FormCom handleCancel={handleCancel}/>
       </Modal>
     </>
   );

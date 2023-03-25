@@ -29,8 +29,9 @@ export default function ForgotPassword(prop) {
   const handleSendOtpClick = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.REACT_APP_USER_API}/generate_otp/reset_password/`, {
+      .post(`${process.env.REACT_APP_USER_API}/generate_otp/`, {
         phone_number: phoneNo,
+        purpose:"reset_password"
       })
       .then((res) => {
         console.log("res", res);

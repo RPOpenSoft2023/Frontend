@@ -25,6 +25,7 @@ export default function ForgotPassword(prop) {
     axios
       .post(`${process.env.REACT_APP_USER_API}/generate_otp/verify_phone/`, {
         phone_number: phoneNo,
+        purpose:"verify_phone_number"
       })
       .then((res) => {
         console.log("res", res);
