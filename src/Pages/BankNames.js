@@ -53,7 +53,7 @@ export default function BankNames(props) {
               boxShadow: "none",
             }}
             icon={<RightOutlined />}
-            onClick={() => navigate("/banking",{state:record.AccountNo})}
+            onClick={() => navigate("/banking",{state:record})}
           ></Button>
         </>
       ),

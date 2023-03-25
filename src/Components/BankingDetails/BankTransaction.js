@@ -71,6 +71,7 @@ const columns = [
 const BankTransaction = ({ account, transaction }) => {
   const navigate = useNavigate();
   const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
+  const [OpenAnalyseModal,setOpenAnalyseModal]=useState(false);
   const [open, setOpen] = useState(false);
   const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [selectedFile, setSelectedFile] = useState(null);
