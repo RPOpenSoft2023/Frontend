@@ -35,26 +35,9 @@ const Plus = () => {
     event.target.value = null;
   };
   const handleUpload = () => {
-    const headers = {
-      "Content-Type": "multipart/form-data",
-    };
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_ANALYSER_API}/analyse/api/statement-analyse/`,
-      headers: headers,
-      data: {
-        transactions: selectedFile,
-      },
-    })
-      .then((res) => {
-        navigate("/analyser",{state:{
-            file:selectedFile
-        }})
-      })
-      .catch((err) => {
-        console.log(err);
-        showToastMessage(err.message, "negative");
-      });
+    navigate("/analyser",{state:{
+        file:selectedFile
+    }})
     setSelectedFile(null);
     // message.success('File uploaded successfully');
   };

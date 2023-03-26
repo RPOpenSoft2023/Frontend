@@ -66,6 +66,7 @@ const Analyser = (props) => {
   const [cardBlocksData, setCardData] = useState([]);
 
   useEffect(() => {
+    console.log('Hi')
     if (!location.state.file) {
       console.log("location.sate", location.state);
       const account_number = location.state.AccountNo;
@@ -129,13 +130,18 @@ const Analyser = (props) => {
           console.log(error);
         });
     } else {
-      axios
-        .post(
-          `${process.env.REACT_APP_ANALYSER_API}/analyse/api/statement-analyse/`,
-          {
-            file: location.state.file,
-          }
-        )
+      console.log("location.sate", location.state.file);
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_ANALYSER_API}/analyse/api/statement-analyse/`,
+        data: {
+          file: location.state.file,
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+
+      })
         .then((res) => {
           setCardData([
             ...cardBlocksData,
