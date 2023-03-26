@@ -15,7 +15,7 @@ import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../Components/Auth";
-
+import SuspiciousActivities from "../Components/SuspiciousActivities";
 function averageIncome(data) {
     var avg = 0;
     for (let i = 0; i < data.analytics.length; i++) {
@@ -200,11 +200,19 @@ const Analyser = () => {
                 label: `Monthly Summary`,
                 children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
-                        <SummaryTab />
+                        <SummaryTab data={data}/>
                     </Card>
                 </div>,
             },
-
+            {
+                key: '4',
+                label: `Suspicious Activities`,
+                children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
+                        <SuspiciousActivities data={data}/>
+                    </Card>
+                </div>,
+            },
         ];
 
 
