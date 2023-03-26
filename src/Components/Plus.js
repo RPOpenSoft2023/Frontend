@@ -4,7 +4,7 @@ import { Button, Form, Upload } from "antd";
 import { showToastMessage } from "./Toast";
 import axios from "axios";
 import { useNavigate } from "react-router";
-const Plus = () => {
+const Plus = (props) => {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const handleDragOver = (event) => {
@@ -39,6 +39,7 @@ const Plus = () => {
         file:selectedFile
     }})
     setSelectedFile(null);
+    props.closeUploadStatementModal();
     // message.success('File uploaded successfully');
   };
   return (
