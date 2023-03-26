@@ -1,3 +1,5 @@
+import { Children } from "react";
+
 const data=[
     {
         title: 'Month',
@@ -5,20 +7,6 @@ const data=[
         dataIndex: 'month',
         key: 'month',
         fixed: 'left',
-        align:'center'
-      },
-      {
-        title: 'Loan Credit',
-        width: 50,
-        dataIndex: 'LoanCredit',
-        key: 'LoanCredit',
-        align:'center'
-      },
-      {
-        title: 'Loan Debit',
-        width: 50,
-        dataIndex: 'LoanDebit',
-        key: 'LoanDebit',
         align:'center'
       },
       {
@@ -43,11 +31,17 @@ const data=[
         align:'center'
       },
       {
-        title: 'spendingExpenseRatio',
+        title: 'Categories',
         width: 50,
         dataIndex: 'spendingExpenseRatio',
         key: 'spendingExpenseRatio',
-        align:'center'
+        align:'center',
+        children:[
+          {
+            title:"Food",
+            dataIndex:"food"
+          }
+        ]
       },
     //   {
     //     title: 'Travel',
