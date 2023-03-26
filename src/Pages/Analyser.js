@@ -143,6 +143,7 @@ const Analyser = (props) => {
 
       })
         .then((res) => {
+          console.log(res.data);
           setCardData([
             ...cardBlocksData,
             {
@@ -184,6 +185,7 @@ const Analyser = (props) => {
           
         })
         .catch((error) => {
+          console.log("error", error)
           console.log("error.message", error.message);
         });
     }
