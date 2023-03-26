@@ -1,36 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from '@ant-design/plots';
 
-const AnalyseChart = () => {
-  const [data, setData] = useState([]);
+const AnalyseChart = (props) => {
+  let {data} = props
+  data = data.analytics
+  let chartData = []
+  for(let i=0; i<data.length; ++i){
+    const monthEntry1 = {}
+    monthEntry1.value = data[i].totalMonthExpense
+    monthEntry1.name = "Expense"
+    monthEntry1.date = String(Number(data[i].month) + 1) + "," + String(data[i].year)
+    chartData.push(monthEntry1)
+    const monthEntry2 = {}
+    monthEntry2.value = data[i].totalMonthIncome
+    monthEntry2.name = "Credit"
+    monthEntry2.date = String(Number(data[i].month) + 1) + "," + String(data[i].year)
+    chartData.push(monthEntry2)
+  }
 
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/e00d52f4-2fa6-47ee-a0d7-105dd95bde20.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
   const config = {
-    data,
-    xField: 'year',
-    yField: 'gdp',
+    data : chartData,
+    xField: 'date',
+    yField: 'value',
     seriesField: 'name',
-    yAxis: {
-      label: {
-        formatter: (v) => `${(v / 10e8).toFixed(1)} B`,
-      },
-    },
     legend: {
       position: 'top',
     },
     smooth: true,
-    // @TODO 后续会换一种动画方式
     animation: {
       appear: {
         animation: 'path-in',

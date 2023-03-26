@@ -1,33 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from '@ant-design/plots';
 import data from '../Data/TransactionTypeData'
-const StackedPlot = () => {
+const StackedPlot = (props) => {
+  let {data} = props;
+  data  = data.analytics
+  let stackData = new Array()
+  for(let i=0; i<data.length; ++i){
+    for(let key in data[i].transactionTypes){
+      let newEntry = {}
+      if(data[i].transactionTypes[key] != 0){
+        newEntry.date = String(Number(data[i].month) + 1) + " " + String(data[i].year)
+        newEntry.value = data[i].transactionTypes[key]
+        newEntry.type = key
+        stackData.push(newEntry)
+      }
+    }
+  }
+  console.log(stackData);
   const config = {
-    data: data.reverse(),
+    data: stackData.reverse(),
     isStack: true,
     xField: 'value',
-    yField: 'year',
+    yField: 'date',
     seriesField: 'type',
     label: {
-      // 可手动配置 label 数据标签位置
       position: 'middle',
-      // 'left', 'middle', 'right'
-      // 可配置附加的布局方法
       layout: [
-        // 柱形图数据标签位置自动调整
         {
           type: 'interval-adjust-position',
-        }, // 数据标签防遮挡
+        },
         {
           type: 'interval-hide-overlap',
-        }, // 数据标签文颜色自动调整
+        },
         {
           type: 'adjust-color',
         },
       ],
     },
   };
-  return <Bar {...config} />;
+  return <Bar {...config}/>;
 };
 
 export default StackedPlot

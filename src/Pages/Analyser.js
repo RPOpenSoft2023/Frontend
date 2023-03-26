@@ -3,7 +3,6 @@ import StackedPlot from "../Components/StackedPlot";
 // import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
-import freqData from '../Data/freqData'
 import { Row, Col, Card, Table } from 'antd'
 import { Tabs } from 'antd';
 import styled from 'styled-components';
@@ -16,9 +15,6 @@ import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../Components/Auth";
-const change = (key) => {
-    console.log(key)
-}
 
 function averageIncome(data) {
     var avg = 0;
@@ -58,11 +54,11 @@ function CreditDebit(data) {
     return CreditFrequency(data)/DebitFrequency(data);
 }
 const Analyser = () => {
-    const [start_month, set_start_month] = useState("4")
+    const [start_month, set_start_month] = useState("0")
     const [start_year, set_start_year] = useState("2020")
     const [end_month, set_end_month] = useState("8")
     const [end_year, set_end_year] = useState("2020")
-    // const [data, set_data] = useState([])
+    const [data, setData] = useState({})
     const [user, setUser] = useState({ loading: true });
     const [cardBlocksData, setCardData] = useState([]);
 
@@ -102,7 +98,8 @@ const Analyser = () => {
                 ...user,
                 loading: false,
             })
-            console.log(user)
+            setData(res.data);
+           
         }).catch((error) => {
             console.log(error);
         })
@@ -111,7 +108,6 @@ const Analyser = () => {
 
     useAuth();
     if (!user.loading) {
-        console.log(cardBlocksData)
         const items = [
             {
                 key: '1',
@@ -130,22 +126,21 @@ const Analyser = () => {
                     </Container>
 
                     <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Card title="Income & Expenditure" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                            <AnalyseChart />
-
+                        <Card title="Credit & Expenditure" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
+                            <AnalyseChart data={data}/>
                         </Card>
                         <Card title="Transaction Types" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                            <StackedPlot data={freqData} />
+                            <StackedPlot data={data} />
                         </Card>
                     </div>
-                    <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                    {/* <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
                         <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                             <CategoryChart />
                         </Card>
                         <Card title="Loan details" className="shadow-lg h-inherit" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
                             <LoanAnalysisChart />
                         </Card>
-                    </div>
+                    </div> */}
                 </div>,
             },
             {
