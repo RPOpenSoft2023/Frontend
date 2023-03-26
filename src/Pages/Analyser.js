@@ -9,13 +9,13 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
+import { useLocation } from "react-router";
 // import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../Components/Auth";
-
 function averageIncome(data) {
     var avg = 0;
     for (let i = 0; i < data.analytics.length; i++) {
@@ -54,10 +54,11 @@ function CreditDebit(data) {
     return CreditFrequency(data)/DebitFrequency(data);
 }
 const Analyser = () => {
-    const [start_month, set_start_month] = useState("0")
-    const [start_year, set_start_year] = useState("2020")
-    const [end_month, set_end_month] = useState("8")
-    const [end_year, set_end_year] = useState("2020")
+    const location=useLocation();
+    const [start_month, set_start_month] = useState(location.state.StartMonth-1)
+    const [start_year, set_start_year] = useState(location.state.StartYear)
+    const [end_month, set_end_month] = useState(location.state.EndMonth-1)
+    const [end_year, set_end_year] = useState(location.state.EndYear)
     const [data, setData] = useState({})
     const [user, setUser] = useState({ loading: true });
     const [cardBlocksData, setCardData] = useState([]);
@@ -173,8 +174,8 @@ const Analyser = () => {
                     <div className="grid grid-cols-10 gap-4 font-sans">
                         <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">{">"} BANK ANALYSIS</div>
                         <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
-                            <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white"><i class='bx bx-calendar mr-2'></i><span>22/09/2022</span></div>
-                            <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white"><i class='bx bx-calendar mr-2'></i><span>23/03/2023</span></div>
+                            <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white"><i class='bx bx-calendar mr-2'></i><span>{start_month}/{start_year}</span></div>
+                            <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white"><i class='bx bx-calendar mr-2'></i><span>{end_month}/{end_year}</span></div>
                         </div>
                         <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4"><Link><i class='bx bx-download mx-2'></i><span>Analysis</span></Link></div>
                     </div>

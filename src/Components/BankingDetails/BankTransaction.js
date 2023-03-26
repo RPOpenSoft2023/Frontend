@@ -42,18 +42,6 @@ const columns = [
     ellipsis: true,
   },
   {
-    title: "Category",
-    dataIndex: "Category",
-    key: "Category",
-    align: "center",
-    render: (text) => (
-      <div className="text-center whitespace-nowrap overflow-hidden	">
-        {text}
-      </div>
-    ),
-    ellipsis: true,
-  },
-  {
     title: "Debit",
     dataIndex: "debit",
     key: "debit",
@@ -95,6 +83,10 @@ const BankTransaction = ({ account, transaction }) => {
   const [open, setOpen] = useState(false);
   const [bankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [StartMonth, setStartMonth] = useState(0);
+  const [EndMonth, setEndMonth] = useState(0);
+  const [StartYear, setStartYear] = useState(0);
+  const [EndYear, setEndYear] = useState(0);
   const handleUpload = () => {
     console.log(selectedFile);
     const headers = {
@@ -117,7 +109,7 @@ const BankTransaction = ({ account, transaction }) => {
       })
       .catch((err) => {
         console.log(err);
-        showToastMessage(err.message,"negative");
+        showToastMessage(err.message, "negative");
       });
     setOpen(false);
     setSelectedFile(null);
@@ -151,6 +143,21 @@ const BankTransaction = ({ account, transaction }) => {
     }
     setSelectedFile(file);
   };
+  const AnalyseTransactions = () => {
+    if (StartMonth > 0 && EndMonth < 13 && StartYear > 0 && EndYear > 0) {
+      navigate("/analyser", {
+        state: {
+          StartMonth: StartMonth,
+          EndMonth: EndMonth,
+          StartYear: StartYear,
+          EndYear: EndYear,
+        },
+      });
+    }
+    else{
+      showToastMessage("Input Valid Month and Year", "negative")
+    }
+  };
 
   const deleteAccount = () => {
     console.log(account.account_number);
@@ -182,7 +189,7 @@ const BankTransaction = ({ account, transaction }) => {
       })
       .catch((err) => {
         console.log(err);
-        showToastMessage(err.message,"negative")
+        showToastMessage(err.message, "negative");
       });
   };
   if (!account.loading && !transaction.loading) {
@@ -192,64 +199,64 @@ const BankTransaction = ({ account, transaction }) => {
         <div>
           <Tabs defaultActiveKey="0" className="mx-auto text-center">
             <Tabs.TabPane tab="Bank Details" key="0">
-                <Descriptions
-                  bordered
-                  column={{
-                    xxl: 2,
-                    xl: 2,
-                    lg: 1,
-                    md: 1,
-                    sm: 1,
-                    xs: 1,
-                  }}
+              <Descriptions
+                bordered
+                column={{
+                  xxl: 2,
+                  xl: 2,
+                  lg: 1,
+                  md: 1,
+                  sm: 1,
+                  xs: 1,
+                }}
+              >
+                <Descriptions.Item
+                  className="overflow-hidden"
+                  label={<b>Account Number</b>}
                 >
-                  <Descriptions.Item
-                    className="overflow-hidden"
-                    label={<b>Account Number</b>}
-                  >
-                    {account.AccountNo}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="overflow-hidden"
-                    label={<b>Account Type</b>}
-                  >
-                    {account.Account_type}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="overflow-hidden"
-                    label={<b>IFSC Code</b>}
-                  >
-                    {account.IFSC}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="overflow-hidden"
-                    label={<b>Bank Name</b>}
-                  >
-                    {account.Bank}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="overflow-hidden"
-                    label={<b>Branch Name</b>}
-                  >
-                    {account.BranchName}
-                  </Descriptions.Item>
-                  <Descriptions.Item
-                    className="overflow-hidden"
-                    label={<b>Branch Address</b>}
-                  >
-                    {account.BranchAddress}
-                  </Descriptions.Item>
-                </Descriptions>
-                <Button
-                  type="primary"
-                  danger
-                  className="m-5  bg-red-600 hover:bg-red-900"
-                  onClick={() => {
-                    setOpenDeleteModal(true);
-                  }}
+                  {account.AccountNo}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  className="overflow-hidden"
+                  label={<b>Account Type</b>}
                 >
-                  Delete Account
-                </Button>
+                  {account.Account_type}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  className="overflow-hidden"
+                  label={<b>IFSC Code</b>}
+                >
+                  {account.IFSC}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  className="overflow-hidden"
+                  label={<b>Bank Name</b>}
+                >
+                  {account.Bank}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  className="overflow-hidden"
+                  label={<b>Branch Name</b>}
+                >
+                  {account.BranchName}
+                </Descriptions.Item>
+                <Descriptions.Item
+                  className="overflow-hidden"
+                  label={<b>Branch Address</b>}
+                >
+                  {account.BranchAddress}
+                </Descriptions.Item>
+              </Descriptions>
+              <Button
+                type="primary"
+                danger
+                className="m-5  bg-red-600 hover:bg-red-900"
+                onClick={() => {
+                  setOpenDeleteModal(true);
+                }}
+              >
+                Delete Account
+              </Button>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Transaction History" className="mx-auto" key="1">
               <Table
@@ -351,7 +358,9 @@ const BankTransaction = ({ account, transaction }) => {
           closable={false}
           footer={[]}
         >
-          <p className="text-center">Are You sure Want to Delete the Account?</p>
+          <p className="text-center">
+            Are You sure Want to Delete the Account?
+          </p>
           <div className="flex justify-center">
             <Button
               onClick={() => {
@@ -370,27 +379,61 @@ const BankTransaction = ({ account, transaction }) => {
           }}
           closable={false}
           footer={[]}
-          
         >
           <div className="m-0">
             <div className="flex m-2 justify-center">
               <p className=" m-2">
-                Start Month : <InputNumber />
+                Start Month :{" "}
+                <InputNumber
+                  value={StartMonth}
+                  onChange={(e) => {
+                    setStartMonth(e);
+                  }}
+                  min={1}
+                  max={12}
+                />
               </p>
               <p className=" m-2">
-                End Month : <InputNumber />
+                End Month :{" "}
+                <InputNumber
+                  value={EndMonth}
+                  onChange={(e) => {
+                    setEndMonth(e);
+                  }}
+                  min={1}
+                  max={12}
+                />
               </p>
             </div>
             <div className="flex m-2 justify-center">
               <p className=" m-2">
-                Start Year : <InputNumber />
+                Start Year :{" "}
+                <InputNumber
+                  value={StartYear}
+                  onChange={(e) => {
+                    setStartYear(e);
+                  }}
+                  min={0}
+                />
               </p>
               <p className=" m-2">
-                End Year : <InputNumber />
+                End Year :{" "}
+                <InputNumber
+                  value={EndYear}
+                  onChange={(e) => {
+                    setEndYear(e);
+                  }}
+                  min={0}
+                />
               </p>
             </div>
             <div className="flex justify-center">
-              <Button className="m-2  bg-blue-600  hover:bg-blue-900 text-white">
+              <Button
+                className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
+                onClick={() => {
+                  AnalyseTransactions();
+                }}
+              >
                 Analyse
               </Button>
             </div>

@@ -43,7 +43,7 @@ const Reports = (props) => (
       className="text-center m-4 col-span-2 md:col-span-1 h-[250px] overflow-x-scroll [&::-webkit-scrollbar]:hidden overflow-y-scroll"
     >
       <div className="flex justify-center flex-col">
-        <div className="flex justify-between gap-5 m-2">
+        <div className="flex justify-between gap-5 m-2 font-semibold">
           <div>Account_No</div>
           <div className="overflow-hidden flex justify-center w-full">
             Date
