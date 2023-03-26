@@ -71,9 +71,6 @@ const Reports = (props) => (
             </div>
           );
         })}
-        {/* <div>23456789097</div>
-        <div>kljfdlfjfjdioidnfififnfi</div>
-        <div>+100</div> */}
       </div>
     </Card>
   </div>
