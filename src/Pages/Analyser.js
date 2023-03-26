@@ -113,7 +113,7 @@ const Analyser = () => {
                 key: '1',
                 label: `Overview`,
                 children: <div >
-                    <Container className='my-3' style={{ display: 'flex', justifyContent: '', flexWrap: 'wrap', }}>
+                    <div className='my-3 flex justify-center flex-wrap'>
                         {cardBlocksData.map((data) =>
                             <AnalyserCard
                                 key={data.key}
@@ -123,7 +123,7 @@ const Analyser = () => {
                                 style={{ width: '100%', maxWidth: '400px', margin: '0.5rem' }}
                             />
                         )}
-                    </Container>
+                    </div>
 
                     <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
                         <Card title="Credit & Expenditure" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
