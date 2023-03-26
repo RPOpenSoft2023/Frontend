@@ -20,7 +20,7 @@ import { BankingdetailsContext } from "../../Contexts/bankingDetailsContext/bank
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
 const ANALYSER_API = process.env.REACT_APP_ANALYSER_API; // this is the URL for the analyser API
 
-const BankTransaction = ({ account, transaction }) => {
+const BankTransaction = ({ account, transaction, category }) => {
   const navigate = useNavigate();
   const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
   const [OpenAnalyseModal, setOpenAnalyseModal] = useState(false);
@@ -33,6 +33,7 @@ const BankTransaction = ({ account, transaction }) => {
   const [EndYear, setEndYear] = useState(0);
   const [editModal, setEditModal] = useState(null);
   const [transactionData, setTransactionData] = useState(transaction.result);
+  const [categoryData, setCategoryData] = useState(category.result);
   // console.log("transaction", transactionData);
   const columns = [
     {
@@ -100,7 +101,7 @@ const BankTransaction = ({ account, transaction }) => {
         <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
       ),
       align: "center",
-      // ellipsis: true,
+      ellipsis: true,
     },
     {
       title: "Note",
@@ -111,7 +112,7 @@ const BankTransaction = ({ account, transaction }) => {
         <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
       ),
       align: "center",
-      // ellipsis: true,
+      ellipsis: true,
     },
     {
       title: "Action",
@@ -261,14 +262,15 @@ const BankTransaction = ({ account, transaction }) => {
     }).then((res) => {
       console.log(res.data);
       showToastMessage("Transaction edited Successfully", "positive");
-      var index = transaction.result.findIndex(
+      var index = transactionData.findIndex(
         (item) => item.id === editModal.id
       );
-      setTransactionData({
-          ...transaction.slice(0, index),
-          ...transaction.slice(index + 1),
-          editModal
-      });
+      // console.log('transactionData', transactionData.slice(index+1))
+      setTransactionData([
+          ...transactionData.slice(0, index),
+          editModal,
+          ...transactionData.slice(index + 1),
+      ]);
       setEditModal(null);
     }).catch((err) => {
       console.log(err);
@@ -280,6 +282,10 @@ const BankTransaction = ({ account, transaction }) => {
   useEffect(() => {
     setTransactionData(transaction.result);
   }, [transaction.result]);
+  useEffect(() => {
+    setCategoryData(category.result);
+    console.log('categoryData', categoryData)
+  }, [category.result]);
   if (!account.loading && !transaction.loading) {
     transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
     return (
@@ -548,12 +554,11 @@ const BankTransaction = ({ account, transaction }) => {
                     });
                   }}
                 >
-                  <Select.Option value="Food">Food</Select.Option>
-                  <Select.Option value="Travel">Travel</Select.Option>
-                  <Select.Option value="Shopping">Shopping</Select.Option>
-                  <Select.Option value="Entertainment">Entertainment</Select.Option>
-                  <Select.Option value="Bills">Bills</Select.Option>
-                  <Select.Option value="Others">Others</Select.Option>
+                  {categoryData && categoryData.map((category) => (
+                    <Select.Option value={category}>
+                      {category}
+                    </Select.Option>
+                  ))}
                 </Select>
               </p>
             </div>
@@ -591,6 +596,7 @@ const BankTransaction = ({ account, transaction }) => {
 BankTransaction.propTypes = {
   account: PropTypes.object.isRequired,
   transaction: PropTypes.array.isRequired,
+  category: PropTypes.array.isRequired,
 };
 
 export default BankTransaction;

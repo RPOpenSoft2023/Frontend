@@ -12,6 +12,7 @@ const USER_API=process.env.REACT_APP_USER_API // this is the URL for the user AP
 
 const BankingDetails = () => {
     useAuth();
+    const [category, setCategory] = useState({loading:true});
     const location = useLocation();
     const [user, setUser] = useState({loading:true});
     const [account, setAccount] = useState({loading:true});
@@ -42,6 +43,20 @@ const BankingDetails = () => {
                 'Authorization': `Bearer ${token}`
             }
         }
+
+        axios({
+            method: "get",
+            url: `${BANKING_API}/banking/api/get_categories`,
+            headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
+        }).then((res) => {
+            console.log(res.data);
+            setCategory({
+                result: res.data,
+                loading: false
+            })
+        }).catch((error) => {
+            console.log("error.message", error.message);
+        });
 
         // const account_number = localStorage.getItem('account_number');
         // const account_number = 65749567438;
@@ -83,7 +98,7 @@ const BankingDetails = () => {
     return (
         <div className='w-3/5 mx-auto my-2'>
             <BankDetails account={account} />
-            <BankTransaction account={account} transaction={transaction} />
+            <BankTransaction account={account} transaction={transaction}  category={category}/>
         </div>
   );
 };
