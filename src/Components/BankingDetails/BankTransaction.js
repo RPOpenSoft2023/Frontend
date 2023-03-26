@@ -151,6 +151,7 @@ const BankTransaction = ({ account, transaction }) => {
           EndMonth: EndMonth,
           StartYear: StartYear,
           EndYear: EndYear,
+          AccountNo:account.AccountNo
         },
       });
     }
