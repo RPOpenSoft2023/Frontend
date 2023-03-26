@@ -53,6 +53,23 @@ function DebitFrequency(data) {
 function CreditDebit(data) {
     return CreditFrequency(data)/DebitFrequency(data);
 }
+
+function TransactionDataAdd(data){
+    let ResultArray= [];
+    for(let i=0; i<data.results.length; i++){
+        let newEntry= {}
+        newEntry.key= i+1;
+        newEntry.date= data.results[i].date;
+        newEntry.desc= data.results[i].category;
+        newEntry.debit= data.results[i].debit;
+        newEntry.credit= data.results[i].credit;
+        newEntry.balance= data.results[i].balance;
+
+        ResultArray.push(newEntry)
+    }
+    return ResultArray
+}
+
 const Analyser = () => {
     const [start_month, set_start_month] = useState("0")
     const [start_year, set_start_year] = useState("2020")
@@ -61,11 +78,14 @@ const Analyser = () => {
     const [data, setData] = useState({})
     const [user, setUser] = useState({ loading: true });
     const [cardBlocksData, setCardData] = useState([]);
-
+    const [recentTransactions, setTransactions]= useState([]);
+    const [account_number, setAccount]= useState("65749567438");
+    const [transactions_start_date, set_start_date]= useState("2020-04-01");
+    const [transactions_end_date, set_end_date]= useState("2020-10-01");
     useEffect(() => {
         const access_token = localStorage.getItem("jwt_token");
         // const account_number= localStorage.getItem("account_number");
-        const account_number = "65749567438";
+        // const account_number = "65749567438";
         console.log(account_number)
         axios(
             {
@@ -100,6 +120,26 @@ const Analyser = () => {
             })
             setData(res.data);
            
+        }).catch((error) => {
+            console.log(error);
+        })
+
+        //recent transactions data
+        axios(
+            {
+                method: "get",
+                url: `${process.env.REACT_APP_BANKING_API}/banking/api/transactions/?account_number=${account_number}&start_date=${transactions_start_date}&end_date=${transactions_end_date}`,
+                params: {
+                },
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("jwt_token"),
+                    'content-type': 'application/json',
+                }
+            }
+        ).then((res) => {
+           console.log("transaction data check");
+           console.log(res.data);
+           setTransactions(TransactionDataAdd(res.data));
         }).catch((error) => {
             console.log(error);
         })
@@ -148,7 +188,8 @@ const Analyser = () => {
                 label: `Recent Transactions`,
                 children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card bordered={true} style={{ width: '70%', height: 'auto', textAlign: "center" }}>
-                        <Table columns={ColumnData} dataSource={TableData}
+                        {/* <Table columns={ColumnData} dataSource={TableData} */}
+                        <Table columns={ColumnData} dataSource={recentTransactions}
                             pagination={{ pageSize: 9 }}
                         />
                     </Card>
