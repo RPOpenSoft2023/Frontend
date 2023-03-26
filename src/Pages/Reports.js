@@ -56,17 +56,17 @@ const Reports = (props) => (
           return (
             <div className="flex justify-between gap-5 m-2">
               <div>{element.account}</div>
-              <div className="overflow-hidden flex justify-between w-full">
+              <div className="overflow-hidden flex justify-center w-full">
                 {element.date}
               </div>
               <div
                 className={`${
-                  element.credit === 0 ? "text-green-500" : "text-red-500"
+                  element.credit === 0 ? "text-red-500" : "text-green-500"
                 }`}
               >
                 {element.credit === 0
-                  ? `+${element.debit}`
-                  : `-${element.credit}`}
+                  ? `-${element.debit}`
+                  : `+${element.credit}`}
               </div>
             </div>
           );
