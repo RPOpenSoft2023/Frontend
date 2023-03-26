@@ -46,7 +46,7 @@ const Reports = (props) => (
         <div className="flex justify-between gap-5 m-2">
           <div>Account_No</div>
           <div className="overflow-hidden flex justify-center w-full">
-            Description
+            Date
           </div>
           <div>
               Amount
@@ -56,8 +56,8 @@ const Reports = (props) => (
           return (
             <div className="flex justify-between gap-5 m-2">
               <div>{element.account}</div>
-              <div className="overflow-hidden flex justify-start w-full">
-                {element.description}
+              <div className="overflow-hidden flex justify-between w-full">
+                {element.date}
               </div>
               <div
                 className={`${
