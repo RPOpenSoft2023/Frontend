@@ -1,5 +1,4 @@
 import { Switch, Table } from 'antd';
-import { useState } from 'react';
 import Data from '../Data/SummaryColumn'
 
 const SummaryTab = (props) => {
