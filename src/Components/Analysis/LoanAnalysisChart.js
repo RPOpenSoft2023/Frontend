@@ -1,25 +1,32 @@
-import data from '../../Data/LoanAnalysisData'
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import { Line } from '@ant-design/plots';
 
-const LoanAnalysisChart = () => {
-  // LoanGraphData(data);
+const LoanAnalysisChart = (props) => {
+  let {data} = props
+  data = data.analytics
+  let LoanChartData = []
+  for(let i=0; i<data.length; ++i){
+    const monthEntry1 = {}
+    monthEntry1.value = data[i].loanDetails['credit'].amount
+    monthEntry1.Category = "Credit"
+    monthEntry1.date = String(Number(data[i].month) + 1) + "," + String(data[i].year)
+    LoanChartData.push(monthEntry1)
+    const monthEntry2 = {}
+    monthEntry2.value = data[i].loanDetails['debit'].amount
+    monthEntry2.Category = "Debit"
+    monthEntry2.date = String(Number(data[i].month) + 1) + "," + String(data[i].year)
+    LoanChartData.push(monthEntry2)
+  }
+  console.log('LoanChartData', LoanChartData)
   const config = {
-    data,
-    xField: 'Month',
+    data:LoanChartData,
+    xField: 'date',
     yField: 'value',
-    seriesField: 'category',
-    // yAxis: {
-    //   label: {
-    //     formatter: (v) => `${(v / 10e8).toFixed(1)} B`,
-    //   },
-    // },
+    seriesField: 'Category',
     legend: {
       position: 'top',
     },
     smooth: true,
-    // @TODO 后续会换一种动画方式
     animation: {
       appear: {
         animation: 'path-in',
@@ -32,52 +39,3 @@ const LoanAnalysisChart = () => {
 };
 
 export default LoanAnalysisChart
-      // let data = [{
-      //     "analytics": {
-      //       "month": 0,
-      //         "year": 2020,
-      //         "loanDetails": {
-      //           "credit": {
-      //             "amount": 0.0
-      //           },
-      //           "debit": {
-      //             "amount": 0.0
-      //           }
-      //         },
-      //         "transactionTypes": {
-      //           "upi": 1,
-      //           "cheque": 1,
-      //           "neft": 3,
-      //           "rdgs": 0,
-      //           "others": 6
-      //         },
-      //         "averageDayWiseExpense": 7963.433333333333,
-      //         "averageDayWiseIncome": 7046.2,
-      //         "creditDebitFrequency": {
-      //           "creditFreq": 4,
-      //           "debitFreq": 7
-      //         },
-      //         "totalMonthIncome": 211386.0,
-      //         "totalMonthExpense": 238903.0,
-      //         "spendingExpenseRatio": 0.8848193618330452,
-      //         "categorizedData": {
-      //           "shoppingAndFood": {
-      //             "transactionTypes": {
-      //               "upi": 0,
-      //               "cheque": 0,
-      //               "neft": 0,
-      //               "rdgs": 0,
-      //               "others": 0
-      //             },
-      //             "totalSectorMonthIncome": 0.0,
-      //             "totalSectorMonthExpense": 0.0,
-      //             "count": 0
-      //           }}}}]
-      
-      // let result=[];
-      // function LoanGraphData(data){
-      //     for(let i=0; i<data.analytics[0].month.length;i++){
-      //         result+= ({"Month":data.analytics[0].month[i], "Value":data[i].analytics[0].month[i].debit.amount, "Category":"Debit"});
-      //         result+= ({"Month":data.analytics[0].month[i], "Value":data[i].analytics[0].month[i].credit.amount, "Category":"Credit"});
-      //     }
-      // }

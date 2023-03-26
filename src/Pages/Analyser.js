@@ -87,12 +87,12 @@ const Analyser = () => {
         ).then((res) => {
             setCardData([
                 ...cardBlocksData,
-                { "key": 1, "num": averageIncome(res.data), "title": "Average Day wise Income" },
-                { "key": 2, "num": averageSpending(res.data), "title": "Average Day wise Expense" },
-                { "key": 3, "num": IncomeSpend(res.data), "title": "Spending/Income" },
-                { "key": 4, "num": CreditFrequency(res.data), "title": "Credit Frequency" },
-                { "key": 5, "num": DebitFrequency(res.data), "title": "Debit Frequency" }, 
-                { "key": 6, "num": CreditDebit(res.data), "title": "Credit/Debit" }]);
+                { "key": 1, "num": averageIncome(res.data).toFixed(2), "title": "Average Day wise Income" },
+                { "key": 2, "num": averageSpending(res.data).toFixed(2), "title": "Average Day wise Expense" },
+                { "key": 3, "num": IncomeSpend(res.data).toFixed(2), "title": "Spending/Income" },
+                { "key": 4, "num": CreditFrequency(res.data).toFixed(2), "title": "Credit Frequency" },
+                { "key": 5, "num": DebitFrequency(res.data).toFixed(2), "title": "Debit Frequency" }, 
+                { "key": 6, "num": CreditDebit(res.data).toFixed(2), "title": "Credit/Debit" }]);
             setUser({
 
                 ...user,
@@ -133,14 +133,14 @@ const Analyser = () => {
                             <StackedPlot data={data} />
                         </Card>
                     </div>
-                    {/* <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div className='bg-inherit space-x-4 p-8' style={{ display: 'flex', justifyContent: 'center' }}>
                         <Card title="Category Chart" className="shadow-lg" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                            <CategoryChart />
+                            <CategoryChart data={data}/>
                         </Card>
                         <Card title="Loan details" className="shadow-lg h-inherit" bordered={true} style={{ width: '50%', height: '50%', fontSize: "16px", textAlign: "center" }}>
-                            <LoanAnalysisChart />
+                            <LoanAnalysisChart data={data}/>
                         </Card>
-                    </div> */}
+                    </div>
                 </div>,
             },
             {

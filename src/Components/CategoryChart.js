@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import { Pie } from '@ant-design/plots';
-import data from "../Data/CategoryData"
-const CategoryChart = () => {
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+import { Pie } from "@ant-design/plots";
+const CategoryChart = (props) => {
+  let data = props.data.analytics;
+  let categoryChartData = new Array();
+  for (let key in data[0].categorizedData) {
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+      sum += (data[i].categorizedData[`${key}`].totalSectorMonthExpense);
+    }
+    const newChartObj = {
+      type: key,
+      value: sum,
+    };
+    categoryChartData.push(newChartObj);
+  }
   const config = {
     appendPadding: 10,
-    data,
-    angleField: 'value',
-    colorField: 'type',
+    data:categoryChartData,
+    angleField: "value",
+    colorField: "type",
     radius: 0.8,
     label: {
-      type: 'outer',
-      content: '{name} {percentage}',
+      type: "outer",
+      content: "{name} {percentage}",
     },
     interactions: [
       {
-        type: 'pie-legend-active',
+        type: "pie-legend-active",
       },
       {
-        type: 'element-active',
+        type: "element-active",
       },
     ],
   };
@@ -26,4 +38,4 @@ const CategoryChart = () => {
 };
 
 // ReactDOM.render(<DemoPie />, document.getElementById('container'));
-export default CategoryChart
+export default CategoryChart;

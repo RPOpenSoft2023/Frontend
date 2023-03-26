@@ -16,7 +16,6 @@ const StackedPlot = (props) => {
       }
     }
   }
-  console.log(stackData);
   const config = {
     data: stackData.reverse(),
     isStack: true,
