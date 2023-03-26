@@ -61,7 +61,7 @@ const Join = ({ matches }) => {
         onCancel={handleCancel}
         footer={[]}
       >
-        <Plus />
+        <Plus closeUploadStatementModal={handleCancel}/>
       </Modal>
       <Modal
         open={open2}
