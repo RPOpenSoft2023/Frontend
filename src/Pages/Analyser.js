@@ -190,7 +190,7 @@ const Analyser = (props) => {
         label: `Overview`,
         children: (
           <div>
-            <div className="my-3 flex justify-center flex-wrap">
+            <div className="my-3 flex justify-center flex-wrap gap-3">
               {cardBlocksData.map((data) => (
                 <AnalyserCard
                   key={data.key}
