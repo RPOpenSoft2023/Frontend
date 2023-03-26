@@ -184,19 +184,4 @@ const Analyser = () => {
         );
     }
 }
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    align-items: left;
-
-
-    & > * { 
-      margin: 0.5rem 0;
-    }
-  }
-`;
 export default Analyser;
