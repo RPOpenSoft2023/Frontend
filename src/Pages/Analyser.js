@@ -159,7 +159,16 @@ const Analyser = () => {
                 label: `Monthly Summary`,
                 children: <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
-                        <SummaryTab />
+                        <SummaryTab data={data}/>
+                    </Card>
+                </div>,
+            },
+            {
+                key: '4',
+                label: `Suspicious transactions`,
+                children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
+                        <SummaryTab data={data}/>
                     </Card>
                 </div>,
             },
