@@ -175,6 +175,7 @@ const Analyser = (props) => {
             loading: false,
           });
           setData(res.data);
+          
         })
         .catch((error) => {
           console.log("error.message", error.message);
