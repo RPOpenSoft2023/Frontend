@@ -437,6 +437,7 @@ const BankTransaction = ({ account, transaction, category }) => {
                       type="primary"
                       className="m-5  bg-blue-600 hover:bg-blue-900"
                       onClick={handleUpload}
+                      disabled={!selectedFile}
                     >
                       Upload
                     </Button>
