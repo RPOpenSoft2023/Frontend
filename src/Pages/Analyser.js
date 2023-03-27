@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 // import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
@@ -58,16 +58,32 @@ const Analyser = (props) => {
   const [start_month, set_start_month] = useState(
     location.state.StartMonth - 1
   );
+  const navigate = useNavigate();
   const [start_year, set_start_year] = useState(location.state.StartYear);
   const [end_month, set_end_month] = useState(location.state.EndMonth - 1);
   const [end_year, set_end_year] = useState(location.state.EndYear);
   const [data, setData] = useState({});
   const [user, setUser] = useState({ loading: true });
   const [cardBlocksData, setCardData] = useState([]);
-
+  const [ transactionData, setTransactionData ] = useState([]);
   useEffect(() => {
-    console.log('Hi')
-    if (!location.state.file) {
+      console.log('Hi')
+      if (!location.state.file) {
+        setTransactionData(location.state.transactions)
+        axios({
+        method: "get",
+        url: `${process.env.REACT_APP_USER_API}/verify_token`,
+        headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
+      })
+        .then((res) => {
+          localStorage.setItem("logstat", "true");
+        })
+        .catch((error) => {
+          console.log("error.message", error.message);
+          localStorage.removeItem("jwt_token");
+          localStorage.removeItem("logstat")
+          navigate("/");
+        });
       console.log("location.sate", location.state);
       const account_number = location.state.AccountNo;
       console.log("account_number", account_number);
@@ -88,7 +104,6 @@ const Analyser = (props) => {
       })
         .then((res) => {
           setCardData([
-            ...cardBlocksData,
             {
               key: 1,
               num: averageIncome(res.data).toFixed(2),
@@ -145,7 +160,6 @@ const Analyser = (props) => {
         .then((res) => {
           console.log(res.data);
           setCardData([
-            ...cardBlocksData,
             {
               key: 1,
               num: averageIncome(res.data).toFixed(2),
@@ -182,16 +196,16 @@ const Analyser = (props) => {
             loading: false,
           });
           setData(res.data);
-          
+          location.state.file = null;
         })
         .catch((error) => {
           console.log("error", error)
           console.log("error.message", error.message);
         });
     }
-  }, []);
+  }, [location.state]);
 
-  useAuth();
+  // useAuth();
   if (!user.loading) {
     const items = [
       {
@@ -318,6 +332,7 @@ const Analyser = (props) => {
             <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">
               {">"} BANK ANALYSIS
             </div>
+            {start_month ? 
             <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
               <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white">
                 <i class="bx bx-calendar mr-2"></i>
@@ -331,13 +346,13 @@ const Analyser = (props) => {
                   {end_month + 1}/{end_year}
                 </span>
               </div>
-            </div>
-            <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4">
+            </div> : <></>}
+            {/* <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4">
               <Link>
                 <i class="bx bx-download mx-2"></i>
                 <span>Analysis</span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         <Tabs animated defaultActiveKey="1" items={items} />
