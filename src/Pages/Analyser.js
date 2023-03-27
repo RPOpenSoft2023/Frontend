@@ -16,6 +16,7 @@ import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../Components/Auth";
+import SuspiciousActivities from "../Components/SuspiciousActivities";
 function averageIncome(data) {
   var avg = 0;
   for (let i = 0; i < data.analytics.length; i++) {
@@ -67,23 +68,8 @@ const Analyser = (props) => {
   const [cardBlocksData, setCardData] = useState([]);
   const [ transactionData, setTransactionData ] = useState([]);
   useEffect(() => {
-      console.log('Hi')
-      if (!location.state.file) {
-        setTransactionData(location.state.transactions)
-        axios({
-        method: "get",
-        url: `${process.env.REACT_APP_USER_API}/verify_token`,
-        headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
-      })
-        .then((res) => {
-          localStorage.setItem("logstat", "true");
-        })
-        .catch((error) => {
-          console.log("error.message", error.message);
-          localStorage.removeItem("jwt_token");
-          localStorage.removeItem("logstat")
-          navigate("/");
-        });
+    // console.log('Hi')
+    if (!location.state.file) {
       console.log("location.sate", location.state);
       const account_number = location.state.AccountNo;
       console.log("account_number", account_number);
@@ -291,6 +277,32 @@ const Analyser = (props) => {
         ),
       },
       {
+        key: "3",
+        label: `Monthly Summary`,
+        children: (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Card
+              bordered={true}
+              style={{ width: "75%", height: "auto", textAlign: "center" }}
+              // className=".overflow-scroll"
+            >
+              <SummaryTab data={data} />
+            </Card>
+          </div>
+        ),
+      },
+      {
+        key: '4',
+        label: `Suspicious Activities`,
+        children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
+                <SuspiciousActivities data={data} />
+            </Card>
+        </div>,
+    },
+    ];
+    if(transactionData && transactionData.length > 0){
+      items.push({
         key: "2",
         label: `Recent Transactions`,
         children: (
@@ -307,24 +319,8 @@ const Analyser = (props) => {
             </Card>
           </div>
         ),
-      },
-      {
-        key: "3",
-        label: `Monthly Summary`,
-        children: (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Card
-              bordered={true}
-              style={{ width: "75%", height: "auto", textAlign: "center" }}
-              className=".overflow-scroll"
-            >
-              <SummaryTab />
-            </Card>
-          </div>
-        ),
-      },
-    ];
-
+      })
+    }
     return (
       <div className="p-0">
         <div className="my-3">

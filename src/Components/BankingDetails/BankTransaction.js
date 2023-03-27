@@ -164,13 +164,12 @@ const BankTransaction = ({ account, transaction, category }) => {
   const handleFileSelect = (event) => {
     console.log("hello");
     const file = event.target.files[0];
+    setSelectedFile(file);
     if (file.type !== "text/csv") {
       showToastMessage("Please select a CSV file!", "negative");
       return;
     }
     console.log(file);
-    setSelectedFile(file);
-    console.log("1234567890")
     console.log('selectedFile', selectedFile)
     event.target.value = null;
   };

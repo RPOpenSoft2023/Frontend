@@ -1,33 +1,38 @@
 import { Switch, Table } from 'antd';
-import { useState } from 'react';
 import Data from '../Data/SummaryColumn'
-import SummaryData from '../Data/SummaryData'
+
+const SummaryTab = (props) => {
+
+const SummaryData = props.data.analytics;
+const MonthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
 const data = [];
 for (let i = 0; i < SummaryData.length; i++) {
  data.push({
    key: i,
-   month: SummaryData[i].month+' '+SummaryData[i].year,
-   LoanCredit:(SummaryData[i].loanDetails.credit.amount*100)/100,
-   LoanDebit:(SummaryData[i].loanDetails.debit.amount*100)/100,
+   month: MonthNames[SummaryData[i].month]+' '+SummaryData[i].year,
    averageDayWiseExpense:(SummaryData[i].averageDayWiseExpense).toFixed(3),
    averageDayWiseIncome:SummaryData[i].averageDayWiseExpense.toFixed(3),
-   totalMonthIncome:SummaryData[i].totalMonthExpense,
    spendingExpenseRatio:SummaryData[i].spendingExpenseRatio.toFixed(3),
+   travelling:SummaryData[i].categorizedData.travelling.totalSectorMonthExpense.toFixed(3),
+   shoppingAndFood:SummaryData[i].categorizedData.shoppingAndFood.totalSectorMonthExpense.toFixed(3),
+   investmentAndSaving:SummaryData[i].categorizedData.investmentAndSaving.totalSectorMonthExpense.toFixed(3),
+   medicalAndHealthcare:SummaryData[i].categorizedData.medicalAndHealthcare.totalSectorMonthExpense.toFixed(3),
+   utilities:SummaryData[i].categorizedData.utilities.totalSectorMonthExpense.toFixed(3),
+   others:SummaryData[i].categorizedData.others.totalSectorMonthExpense.toFixed(3),
  });
 }
-const SummaryTab = () => {
-//   const [fixedTop, setFixedTop] = useState(false);
+
  return (
+
    <Table
      columns={Data}
      dataSource={data}
      align='center'
+     pagination={{ pageSize: 10 }}
     //  scroll={{
     //    x: 1500,
     //  }}
-
-
-  
    />
  );
 };
