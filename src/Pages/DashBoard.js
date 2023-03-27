@@ -6,10 +6,16 @@ import { useContext, useState } from "react";
 import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 import { useEffect } from "react";
 import {showToastMessage} from "../Components/Toast"
+import { useLocation } from "react-router";
 import axios from "axios";
 const Dashboard = () => {
-  const [BankingDetails, setBankingDetails] = useContext(BankingdetailsContext);
+  const location = useLocation();
+  const [BankingDetails, setBankingDetails, userData, setUserData] = useContext( BankingdetailsContext );
   const [Transactions, setTransactions] = useState([]);
+  useEffect(() => {
+    if(location.state)
+      setUserData(location.state);
+  }, [location.state]);
   useEffect(() => {
     axios({
       method: "get",
@@ -51,7 +57,7 @@ const Dashboard = () => {
   useAuth();
   return (
     <>
-      <DashboardTabs />
+      <DashboardTabs user={userData} />
       <hr
         className="block bg-orange-300 w-3/5 m-auto"
         style={{ height: "1.5px" }}

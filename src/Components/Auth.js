@@ -13,7 +13,12 @@ const useAuth = (path=null) => {
       .then((res) => {
         localStorage.setItem("logstat", "true");
         if(path != null){
-          navigate("/dashboard")
+          console.log("path", res.data);
+          navigate("/dashboard", {
+            state:{
+              ...res.data
+            }
+          });
         }
       })
       .catch((error) => {

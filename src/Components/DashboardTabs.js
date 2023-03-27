@@ -1,7 +1,14 @@
 import React from "react";
 import { Card } from "antd";
 import { Link } from "react-router-dom";
-function DashboardTabs() {
+import { useEffect, useState } from "react";
+function DashboardTabs({ user }) {
+  console.log('user', user)
+  const [userData, setUserData] = useState(user);
+  useEffect(() => {
+    setUserData(user);
+    console.log("user", user);
+  }, [user]);
   return (
     <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-7 gap-4 flex my-4">
       <div className="col-span-1 md:col-span-2 lg:col-span-3 flex justify-start">
@@ -12,9 +19,9 @@ function DashboardTabs() {
           className="bg-inherit border-0"
         >
           <div className="text-center tracking-wide">
-            <p className="font-bold text-2xl">Hello, User</p>
-            <p className="text-xl">COMPANY NAME</p>
-            <p className="font-semibold">19th March</p>
+            <p className="font-bold text-2xl">{(userData && userData.first_name && userData.first_name + " " + userData.last_name) || 'User Name'}</p>
+            <p className="text-xl">{(userData && userData.email) || 'User Email'}</p>
+            <p className="font-semibold">{(userData && userData.phone_number) || 'User Phone'}</p>
           </div>
         </Card>
       </div>
@@ -28,7 +35,7 @@ function DashboardTabs() {
           <div className="grid grid-cols-3 gap-2 flex items-center">
             <div className="col-span-2 text-center mr-2 pr-4 border-r-2 w-fit">
               <p>Reports Created</p>
-              <p className="font-semibold text-xl mt-2">2</p>
+              <p className="font-semibold text-xl mt-2">{(userData && userData.reports_count) || 0}</p>
             </div>
             <div className="col-span-1 flex justify-center ml-0 sm:ml-4">
               <Link>
