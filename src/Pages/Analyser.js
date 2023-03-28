@@ -316,14 +316,14 @@ const Analyser = (props) => {
             <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">
               {">"} BANK ANALYSIS
             </div>
-            <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white">
+            <div className="col-span-5 md:col-span-5 grid grid-cols-5  items-center ml-4">
+              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit flex items-center justify-items-end bg-white">
                 <i class="bx bx-calendar mr-2"></i>
                 <span>
                   {start_month + 1}/{start_year}
                 </span>
               </div>
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white">
+              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit  flex items-center justify-items-start bg-white">
                 <i class="bx bx-calendar mr-2"></i>
                 <span>
                   {end_month + 1}/{end_year}
