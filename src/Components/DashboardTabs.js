@@ -3,11 +3,9 @@ import { Card } from "antd";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 function DashboardTabs({ user }) {
-  console.log('user', user)
   const [userData, setUserData] = useState(user);
   useEffect(() => {
     setUserData(user);
-    console.log("user", user);
   }, [user]);
   return (
     <div className="grid grid-cols-2 md:grid-cols-6 lg:grid-cols-7 gap-4 flex my-4">

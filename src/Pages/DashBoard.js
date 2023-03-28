@@ -5,16 +5,22 @@ import useAuth from "../Components/Auth";
 import { useContext, useState } from "react";
 import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 import { useEffect } from "react";
-import {showToastMessage} from "../Components/Toast"
+import { showToastMessage } from "../Components/Toast";
 import { useLocation } from "react-router";
 import axios from "axios";
 const Dashboard = () => {
   const location = useLocation();
-  const [BankingDetails, setBankingDetails, userData, setUserData] = useContext( BankingdetailsContext );
+  const [
+    BankingDetails,
+    setBankingDetails,
+    userData,
+    setUserData,
+    Categories,
+    setCategories,
+  ] = useContext(BankingdetailsContext);
   const [Transactions, setTransactions] = useState([]);
   useEffect(() => {
-    if(location.state)
-      setUserData(location.state);
+    if (location.state) setUserData(location.state);
   }, [location.state]);
   useEffect(() => {
     axios({
@@ -40,20 +46,33 @@ const Dashboard = () => {
         });
       })
       .catch((error) => {
-        showToastMessage(error.message,"negative");
+        showToastMessage(error.message, "negative");
       });
     axios({
       method: "get",
-      url: `${process.env.REACT_APP_BANKING_API}/banking/api/transactions`,
+      url: `${process.env.REACT_APP_BANKING_API}/banking/api/transactions/?page_size=2000`,
       headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
     })
       .then((res) => {
         setTransactions(res.data.results);
       })
       .catch((error) => {
-        showToastMessage(error.message,"negative");
+        showToastMessage(error.message, "negative");
       });
   }, []);
+  
+  axios({
+    method: "get",
+    url: `${process.env.REACT_APP_BANKING_API}/banking/api/get_categories`,
+    headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
+  })
+    .then((res) => {
+      setCategories(res.data);
+    })
+    .catch((error) => {
+      console.log("error.message", error.message);
+    });
+
   useAuth();
   return (
     <>
@@ -62,7 +81,7 @@ const Dashboard = () => {
         className="block bg-orange-300 w-3/5 m-auto"
         style={{ height: "1.5px" }}
       ></hr>
-      <Reports transaction={Transactions}/>
+      <Reports transaction={Transactions} />
       <hr
         className="block bg-orange-300 w-3/5 m-auto"
         style={{ height: "1.5px" }}
