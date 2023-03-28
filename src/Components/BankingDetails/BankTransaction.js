@@ -10,7 +10,7 @@ import {
   Modal,
   InputNumber,
   Input,
-  Select
+  Select,
 } from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
@@ -43,7 +43,9 @@ const BankTransaction = ({ account, transaction, category }) => {
       align: "center",
       // sorter: (a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">
+          {text}
+        </div>
       ),
       // ellipsis: true,
     },
@@ -65,7 +67,9 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "debit",
       // sorter: (a, b) => a.debit - b.debit,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">
+          {text}
+        </div>
       ),
       align: "center",
       // ellipsis: true,
@@ -76,7 +80,9 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "credit",
       // sorter: (a, b) => a.credit - b.credit,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">
+          {text}
+        </div>
       ),
       align: "center",
       // ellipsis: true,
@@ -87,7 +93,9 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "balance",
       // sorter: (a, b) => a.balance - b.balance,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">
+          {text}
+        </div>
       ),
       align: "center",
       // ellipsis: true,
@@ -98,7 +106,9 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "category",
       // sorter: (a, b) => a.balance - b.balance,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">
+          {text}
+        </div>
       ),
       align: "center",
       ellipsis: true,
@@ -109,7 +119,9 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "note",
       // sorter: (a, b) => a.balance - b.balance,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">
+          {text}
+        </div>
       ),
       align: "center",
       ellipsis: true,
@@ -119,19 +131,32 @@ const BankTransaction = ({ account, transaction, category }) => {
       dataIndex: "action",
       key: "action",
       align: "center",
-      render: (text,record) => {
-        return(
-          <Button value={text} onClick={e => {
-            setEditModal(record)
-            console.log(record)
-          }}
-          icon={<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" className="bi bi-pencil-square w-6 mx-auto" viewBox="0 0 16 16">
-              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-            </svg>}/>
-        )
+      render: (text, record) => {
+        return (
+          <Button
+            value={text}
+            onClick={(e) => {
+              setEditModal(record);
+              console.log(record);
+            }}
+            icon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                className="bi bi-pencil-square w-6 mx-auto"
+                viewBox="0 0 16 16"
+              >
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                />
+              </svg>
+            }
+          />
+        );
       },
-    }
+    },
   ];
   const handleUpload = () => {
     console.log(selectedFile);
@@ -170,7 +195,7 @@ const BankTransaction = ({ account, transaction, category }) => {
       return;
     }
     console.log(file);
-    console.log('selectedFile', selectedFile)
+    console.log("selectedFile", selectedFile);
     event.target.value = null;
   };
   const handleDragOver = (event) => {
@@ -197,13 +222,12 @@ const BankTransaction = ({ account, transaction, category }) => {
           EndMonth: EndMonth,
           StartYear: StartYear,
           EndYear: EndYear,
-          AccountNo:account.AccountNo,
-          transactions:transactionData
+          AccountNo: account.AccountNo,
+          transactions: transactionData,
         },
       });
-    }
-    else{
-      showToastMessage("Input Valid Month and Year", "negative")
+    } else {
+      showToastMessage("Input Valid Month and Year", "negative");
     }
   };
 
@@ -254,39 +278,41 @@ const BankTransaction = ({ account, transaction, category }) => {
       category: editModal.category,
       note: editModal.note,
     };
-    console.log('body', body)
-    
+    console.log("body", body);
+
     axios({
       method: "put",
       url: `${ANALYSER_API}/analyse/api/edit-transaction/`,
       data: body,
       headers: config.headers,
-    }).then((res) => {
-      console.log(res.data);
-      showToastMessage("Transaction edited Successfully", "positive");
-      var index = transactionData.findIndex(
-        (item) => item.id === editModal.id
-      );
-      // console.log('transactionData', transactionData.slice(index+1))
-      setTransactionData([
+    })
+      .then((res) => {
+        console.log(res.data);
+        showToastMessage("Transaction edited Successfully", "positive");
+        var index = transactionData.findIndex(
+          (item) => item.id === editModal.id
+        );
+        // console.log('transactionData', transactionData.slice(index+1))
+        setTransactionData([
           ...transactionData.slice(0, index),
           editModal,
           ...transactionData.slice(index + 1),
-      ]);
-      setEditModal(null);
-    }).catch((err) => {
-      console.log(err);
-      setEditModal(null);
-      showToastMessage(err.message, "negative");
-    });
-  }
+        ]);
+        setEditModal(null);
+      })
+      .catch((err) => {
+        console.log(err);
+        setEditModal(null);
+        showToastMessage(err.message, "negative");
+      });
+  };
 
   useEffect(() => {
     setTransactionData(transaction.result);
   }, [transaction.result]);
   useEffect(() => {
     setCategoryData(category.result);
-    console.log('categoryData', categoryData)
+    console.log("categoryData", categoryData);
   }, [category.result]);
   if (!account.loading && !transaction.loading) {
     transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -546,8 +572,8 @@ const BankTransaction = ({ account, transaction, category }) => {
         >
           <div className="m-0">
             <div className="flex m-2 justify-center">
-              <p className=" m-2">
-                Category :{" "}
+              <div className="m-2 flex justify-between items-center w-[300px]">
+                <p className="mr-3">Category:</p>
                 <Select
                   value={editModal ? editModal.category : ""}
                   onChange={(e) => {
@@ -556,18 +582,18 @@ const BankTransaction = ({ account, transaction, category }) => {
                       category: e,
                     });
                   }}
+                  className="w-full"
                 >
-                  {categoryData && categoryData.map((category) => (
-                    <Select.Option value={category}>
-                      {category}
-                    </Select.Option>
-                  ))}
+                  {categoryData &&
+                    categoryData.map((category) => (
+                      <Select.Option value={category}>{category}</Select.Option>
+                    ))}
                 </Select>
-              </p>
+              </div>
             </div>
             <div className="flex m-2 justify-center">
-              <p className=" m-2">
-                Note :{" "}
+              <div className=" m-2 flex justify-between items-center w-[300px]">
+                <p className="mr-3">Note:</p>
                 <Input
                   value={editModal ? editModal.note : ""}
                   onChange={(e) => {
@@ -577,7 +603,7 @@ const BankTransaction = ({ account, transaction, category }) => {
                     });
                   }}
                 />
-              </p>
+              </div>
             </div>
             <div className="flex justify-center">
               <Button
