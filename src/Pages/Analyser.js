@@ -1,21 +1,16 @@
 import AnalyserCard from "../Components/AnalyserCard";
 import StackedPlot from "../Components/StackedPlot";
-// import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
 import { Card, Table, Spin } from "antd";
 import { Tabs } from "antd";
-// import styled from "styled-components";
-// import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
 import { useLocation, useNavigate } from "react-router";
-// import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import useAuth from "../Components/Auth";
 import SuspiciousActivities from "../Components/SuspiciousActivities";
 import { showToastMessage } from "../Components/Toast";
 function averageIncome(data) {

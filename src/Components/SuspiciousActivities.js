@@ -4,7 +4,6 @@ import {
 } from "@ant-design/icons";
 import { Badge, Dropdown, Space, Table, Button, Popover } from "antd";
 import { Tooltip } from "antd";
-
 const SuspiciousActivities = (props) => {
 
   const Data = props.data.Cautions;
