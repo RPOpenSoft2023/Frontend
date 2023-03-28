@@ -60,7 +60,7 @@ const Dashboard = () => {
         showToastMessage(error.message, "negative");
       });
   }, []);
-  
+
   axios({
     method: "get",
     url: `${process.env.REACT_APP_BANKING_API}/banking/api/get_categories`,
