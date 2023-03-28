@@ -8,9 +8,7 @@ import { showToastMessage } from "./Toast";
 import { ToastContainer } from "react-toastify";
 const fields = signupFields;
 let fieldsState = {};
-
 fields.forEach((field) => (fieldsState[field.id] = ""));
-
 export default function Signup() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,7 +21,10 @@ export default function Signup() {
     if (signupState.confirm_password === signupState.password) {
       createAccount();
     } else {
-      showToastMessage("Confirm Password is not matching the Password","negative");
+      showToastMessage(
+        "Confirm Password is not matching the Password",
+        "negative"
+      );
     }
   };
 
@@ -45,38 +46,40 @@ export default function Signup() {
         console.log(res);
         localStorage.clear();
         navigate("/");
-        showToastMessage("Successfully Registered","positive");
+        showToastMessage("Successfully Registered", "positive");
       })
       .catch((error) => {
         console.log("error.message", error.message);
-        showToastMessage(error.message,"negative");
+        showToastMessage(error.message, "negative");
       });
   };
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-      <div className="">
-        {fields.map((field) => (
-          <Input
-            key={field.id}
-            handleChange={handleChange}
-            value={
-              field.id === "Phone Number"
-                ? location.state
-                : signupState[field.id]
-            }
-            labelText={field.labelText}
-            labelFor={field.labelFor}
-            id={field.id}
-            name={field.name}
-            type={field.type}
-            isRequired={field.isRequired}
-            placeholder={field.placeholder}
-            isDisabled={field.isDisabled}
-          />
-        ))}
-        <FormAction handleSubmit={handleSubmit} text="Signup" />
-        <ToastContainer />
-      </div>
-    </form>
+    <>
+      <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <div className="">
+          {fields.map((field) => (
+            <Input
+              key={field.id}
+              handleChange={handleChange}
+              value={
+                field.id === "phone_number"
+                  ? location.state
+                  : signupState[field.id]
+              }
+              labelText={field.labelText}
+              labelFor={field.labelFor}
+              id={field.id}
+              name={field.name}
+              type={field.type}
+              isRequired={field.isRequired}
+              placeholder={field.placeholder}
+              isDisabled={field.isDisabled}
+            />
+          ))}
+          <FormAction handleSubmit={handleSubmit} text="Signup" />
+          <ToastContainer />
+        </div>
+      </form>
+    </>
   );
 }

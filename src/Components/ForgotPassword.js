@@ -43,6 +43,7 @@ export default function ForgotPassword(prop) {
       data: {
         phone_number: phoneNo,
         otp: otp,
+        purpose:"verify_phone_number"
       },
     })
       .then((res) => {
