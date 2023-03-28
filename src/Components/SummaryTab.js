@@ -11,15 +11,15 @@ for (let i = 0; i < SummaryData.length; i++) {
  data.push({
    key: i,
    month: MonthNames[SummaryData[i].month]+' '+SummaryData[i].year,
-   averageDayWiseExpense:(SummaryData[i].averageDayWiseExpense).toFixed(3),
-   averageDayWiseIncome:SummaryData[i].averageDayWiseExpense.toFixed(3),
-   spendingExpenseRatio:SummaryData[i].spendingExpenseRatio.toFixed(3),
-   travelling:SummaryData[i].categorizedData.travelling.totalSectorMonthExpense.toFixed(3),
-   shoppingAndFood:SummaryData[i].categorizedData.shoppingAndFood.totalSectorMonthExpense.toFixed(3),
-   investmentAndSaving:SummaryData[i].categorizedData.investmentAndSaving.totalSectorMonthExpense.toFixed(3),
-   medicalAndHealthcare:SummaryData[i].categorizedData.medicalAndHealthcare.totalSectorMonthExpense.toFixed(3),
-   utilities:SummaryData[i].categorizedData.utilities.totalSectorMonthExpense.toFixed(3),
-   others:SummaryData[i].categorizedData.others.totalSectorMonthExpense.toFixed(3),
+   averageDayWiseExpense:(SummaryData[i].averageDayWiseExpense).toFixed(2),
+   averageDayWiseIncome:SummaryData[i].averageDayWiseIncome.toFixed(2),
+   spendingExpenseRatio:SummaryData[i].spendingExpenseRatio.toFixed(2),
+   travelling:SummaryData[i].categorizedData.travelling.totalSectorMonthExpense.toFixed(2),
+   shoppingAndFood:SummaryData[i].categorizedData.shoppingAndFood.totalSectorMonthExpense.toFixed(2),
+   investmentAndSaving:SummaryData[i].categorizedData.investmentAndSaving.totalSectorMonthExpense.toFixed(2),
+   medicalAndHealthcare:SummaryData[i].categorizedData.medicalAndHealthcare.totalSectorMonthExpense.toFixed(2),
+   utilities:SummaryData[i].categorizedData.utilities.totalSectorMonthExpense.toFixed(2),
+   others:SummaryData[i].categorizedData.others.totalSectorMonthExpense.toFixed(2),
  });
 }
 

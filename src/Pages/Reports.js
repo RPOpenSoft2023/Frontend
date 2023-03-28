@@ -23,27 +23,27 @@ const Reports = (props) => (
           <div className="overflow-hidden flex justify-center w-full">Date</div>
           <div>Amount</div>
         </div>
-        {props.transaction.slice(0, 10).map((element, index) => {
-          return (
-            <div className="flex justify-between gap-5 m-2">
-              <div>{element.account}</div>
-              <div className="overflow-hidden flex justify-center w-full">
-                {element.date}
+          {props.transaction.slice(0,10).map((element) => {
+            return (
+              <div className="flex justify-between gap-5 m-2">
+                <div>{element.account}</div>
+                <div className="overflow-hidden flex justify-center w-full">
+                  {element.date}
+                </div>
+                <div
+                  className={`${
+                    element.credit < 0.01 ? "text-red-500" : "text-green-500"
+                  }`}
+                >
+                  {element.credit < 0.01
+                    ? `-${(Math.round(element.debit * 100) / 100).toFixed(2)}`
+                    : `+${(Math.round(element.credit * 100) / 100).toFixed(2)}`}
+                </div>
               </div>
-              <div
-                className={`${
-                  element.credit === 0 ? "text-red-500" : "text-green-500"
-                }`}
-              >
-                {element.credit === 0
-                  ? `-${element.debit}`
-                  : `+${element.credit}`}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </Card>
-  </div>
-);
+            );
+          })}
+        </div>
+      </Card>
+    </div>
+  );
 export default Reports;

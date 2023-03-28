@@ -11,7 +11,7 @@ import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/banking
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
 const USER_API = process.env.REACT_APP_USER_API; // this is the URL for the user API
 const BankingDetails = () => {
-  useAuth();
+  useAuth('/bankingdetails');
   const [
     BankingDetails,
     setBankingDetails,

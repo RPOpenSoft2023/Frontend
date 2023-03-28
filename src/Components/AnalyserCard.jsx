@@ -1,16 +1,25 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Typography } from "antd";
+const { Title } = Typography;
 function AnalyserCard(props) {
   return (
     <div>
       <Card
         style={{ width: 190,height:120 }}
         className="ml-3 mr-3 bg-zinc-300 text-center text-sm font-semibold shadow-md"
-      >
-        <h1 style={{color:"#2563EB"}}><b>{props.data}</b></h1>
-        <h3>
+        >
+        <b>
+          <Title level={2} style={{color:"#2563EB",padding:0}}>
+            <code style={{padding:0,margin:0, background:"none",border:'none'}}>
+              <span className="mr-1" style={{fontSize:"1.2rem"
+            }}>{(props.id === 1 || props.id === 2) && "₹"}</span>{props.data}
+            </code>
+          </Title>
+        </b>
+        <h3 className="mb-2">
           {props.title}
         </h3>
+        
       </Card>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Modal, Table, Button } from "antd";
+import { Modal, Table, Button, Spin } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import UpdateForm from "../Components/UpdateForm";
 import { useContext, useState } from "react";
@@ -61,10 +61,13 @@ export default function BankNames(props) {
       ),
     },
   ];
-
-  return (
-    <div className="m-1 ">
-      <Table columns={columns} dataSource={bankingDetails} pagination={false} className="p-3"/>
-    </div>
-  );
+  if (bankingDetails.length === 0) {
+    return <div className="text-center"><Spin size="large" className="text-center" /></div>;
+  } else {
+    return (
+      <div className="m-1 ">
+        <Table columns={columns} dataSource={bankingDetails} pagination={false} className="p-3"/>
+      </div>
+    );
+  }
 }
