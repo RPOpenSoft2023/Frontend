@@ -10,7 +10,7 @@ import BankingDetails from "./Pages/BankingDetails";
 import Analyser from "./Pages/Analyser";
 import Private_Signup from "./Components/Private_Signup"
 import Join from "./Components/join";
-import ForgotPassword from "./Components/ForgotPassword";
+import ForgotPassword from "./Pages/ForgotPassword";
 function App() {
 
   return (

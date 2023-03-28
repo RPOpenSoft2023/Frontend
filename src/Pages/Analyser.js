@@ -9,13 +9,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 // import PieChart from "@ant-design/plots/es/components/pie";
 import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../Components/Auth";
+import SuspiciousActivities from "../Components/SuspiciousActivities";
 function averageIncome(data) {
   var avg = 0;
   for (let i = 0; i < data.analytics.length; i++) {
@@ -58,15 +59,16 @@ const Analyser = (props) => {
   const [start_month, set_start_month] = useState(
     location.state.StartMonth - 1
   );
+  const navigate = useNavigate();
   const [start_year, set_start_year] = useState(location.state.StartYear);
   const [end_month, set_end_month] = useState(location.state.EndMonth - 1);
   const [end_year, set_end_year] = useState(location.state.EndYear);
   const [data, setData] = useState({});
   const [user, setUser] = useState({ loading: true });
   const [cardBlocksData, setCardData] = useState([]);
-
+  const [ transactionData, setTransactionData ] = useState([]);
   useEffect(() => {
-    console.log('Hi')
+    // console.log('Hi')
     if (!location.state.file) {
       console.log("location.sate", location.state);
       const account_number = location.state.AccountNo;
@@ -88,7 +90,6 @@ const Analyser = (props) => {
       })
         .then((res) => {
           setCardData([
-            ...cardBlocksData,
             {
               key: 1,
               num: averageIncome(res.data).toFixed(2),
@@ -143,8 +144,8 @@ const Analyser = (props) => {
 
       })
         .then((res) => {
+          console.log(res.data);
           setCardData([
-            ...cardBlocksData,
             {
               key: 1,
               num: averageIncome(res.data).toFixed(2),
@@ -181,15 +182,16 @@ const Analyser = (props) => {
             loading: false,
           });
           setData(res.data);
-          
+          location.state.file = null;
         })
         .catch((error) => {
+          console.log("error", error)
           console.log("error.message", error.message);
         });
     }
-  }, []);
+  }, [location.state]);
 
-  useAuth();
+  // useAuth();
   if (!user.loading) {
     const items = [
       {
@@ -275,6 +277,32 @@ const Analyser = (props) => {
         ),
       },
       {
+        key: "3",
+        label: `Monthly Summary`,
+        children: (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Card
+              bordered={true}
+              style={{ width: "75%", height: "auto", textAlign: "center" }}
+              // className=".overflow-scroll"
+            >
+              <SummaryTab data={data} />
+            </Card>
+          </div>
+        ),
+      },
+      {
+        key: '4',
+        label: `Suspicious Activities`,
+        children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
+                <SuspiciousActivities data={data} />
+            </Card>
+        </div>,
+    },
+    ];
+    if(transactionData && transactionData.length > 0){
+      items.push({
         key: "2",
         label: `Recent Transactions`,
         children: (
@@ -291,24 +319,8 @@ const Analyser = (props) => {
             </Card>
           </div>
         ),
-      },
-      {
-        key: "3",
-        label: `Monthly Summary`,
-        children: (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <Card
-              bordered={true}
-              style={{ width: "75%", height: "auto", textAlign: "center" }}
-              className=".overflow-scroll"
-            >
-              <SummaryTab />
-            </Card>
-          </div>
-        ),
-      },
-    ];
-
+      })
+    }
     return (
       <div className="p-0">
         <div className="my-3">
@@ -316,8 +328,9 @@ const Analyser = (props) => {
             <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">
               {">"} BANK ANALYSIS
             </div>
-            <div className="col-span-5 md:col-span-5 grid grid-cols-5  items-center ml-4">
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit flex items-center justify-items-end bg-white">
+            {start_month ? 
+            <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
+              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white">
                 <i class="bx bx-calendar mr-2"></i>
                 <span>
                   {start_month + 1}/{start_year}
@@ -329,13 +342,13 @@ const Analyser = (props) => {
                   {end_month + 1}/{end_year}
                 </span>
               </div>
-            </div>
-            <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4">
+            </div> : <></>}
+            {/* <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4">
               <Link>
                 <i class="bx bx-download mx-2"></i>
                 <span>Analysis</span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
         <Tabs animated defaultActiveKey="1" items={items} />

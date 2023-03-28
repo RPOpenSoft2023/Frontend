@@ -91,6 +91,7 @@ const Plus = (props) => {
           type="primary"
           className="m-5  bg-blue-600 hover:bg-blue-900"
           onClick={handleUpload}
+          disabled={!selectedFile}
         >
           Analyse
         </Button>

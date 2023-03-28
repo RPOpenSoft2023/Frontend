@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import {
@@ -9,6 +9,8 @@ import {
   Descriptions,
   Modal,
   InputNumber,
+  Input,
+  Select
 } from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
@@ -17,66 +19,8 @@ import { useContext } from "react";
 import { BankingdetailsContext } from "../../Contexts/bankingDetailsContext/bankingDetailsContext";
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
 const ANALYSER_API = process.env.REACT_APP_ANALYSER_API; // this is the URL for the analyser API
-const columns = [
-  {
-    title: "Date",
-    dataIndex: "date",
-    key: "date",
-    align: "center",
-    // sorter: (a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0,
-    render: (text) => (
-      <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
-    ),
-    // ellipsis: true,
-  },
-  {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
-    align: "center",
-    render: (text) => (
-      <div className="text-center whitespace-nowrap overflow-hidden	">
-        {text}
-      </div>
-    ),
-    ellipsis: true,
-  },
-  {
-    title: "Debit",
-    dataIndex: "debit",
-    key: "debit",
-    // sorter: (a, b) => a.debit - b.debit,
-    render: (text) => (
-      <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
-    ),
-    align: "center",
-    // ellipsis: true,
-  },
-  {
-    title: "Credit",
-    dataIndex: "credit",
-    key: "credit",
-    // sorter: (a, b) => a.credit - b.credit,
-    render: (text) => (
-      <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
-    ),
-    align: "center",
-    // ellipsis: true,
-  },
-  {
-    title: "Balance",
-    dataIndex: "balance",
-    key: "balance",
-    // sorter: (a, b) => a.balance - b.balance,
-    render: (text) => (
-      <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
-    ),
-    align: "center",
-    // ellipsis: true,
-  },
-];
 
-const BankTransaction = ({ account, transaction }) => {
+const BankTransaction = ({ account, transaction, category }) => {
   const navigate = useNavigate();
   const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
   const [OpenAnalyseModal, setOpenAnalyseModal] = useState(false);
@@ -87,6 +31,108 @@ const BankTransaction = ({ account, transaction }) => {
   const [EndMonth, setEndMonth] = useState(0);
   const [StartYear, setStartYear] = useState(0);
   const [EndYear, setEndYear] = useState(0);
+  const [editModal, setEditModal] = useState(null);
+  const [transactionData, setTransactionData] = useState(transaction.result);
+  const [categoryData, setCategoryData] = useState(category.result);
+  // console.log("transaction", transactionData);
+  const columns = [
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      align: "center",
+      // sorter: (a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0,
+      render: (text) => (
+        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+      ),
+      // ellipsis: true,
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+      align: "center",
+      render: (text) => (
+        <div className="text-center whitespace-nowrap overflow-hidden	">
+          {text}
+        </div>
+      ),
+      ellipsis: true,
+    },
+    {
+      title: "Debit",
+      dataIndex: "debit",
+      key: "debit",
+      // sorter: (a, b) => a.debit - b.debit,
+      render: (text) => (
+        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+      ),
+      align: "center",
+      // ellipsis: true,
+    },
+    {
+      title: "Credit",
+      dataIndex: "credit",
+      key: "credit",
+      // sorter: (a, b) => a.credit - b.credit,
+      render: (text) => (
+        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+      ),
+      align: "center",
+      // ellipsis: true,
+    },
+    {
+      title: "Balance",
+      dataIndex: "balance",
+      key: "balance",
+      // sorter: (a, b) => a.balance - b.balance,
+      render: (text) => (
+        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+      ),
+      align: "center",
+      // ellipsis: true,
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      key: "category",
+      // sorter: (a, b) => a.balance - b.balance,
+      render: (text) => (
+        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+      ),
+      align: "center",
+      ellipsis: true,
+    },
+    {
+      title: "Note",
+      dataIndex: "note",
+      key: "note",
+      // sorter: (a, b) => a.balance - b.balance,
+      render: (text) => (
+        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+      ),
+      align: "center",
+      ellipsis: true,
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      align: "center",
+      render: (text,record) => {
+        return(
+          <Button value={text} onClick={e => {
+            setEditModal(record)
+            console.log(record)
+          }}
+          icon={<svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" className="bi bi-pencil-square w-6 mx-auto" viewBox="0 0 16 16">
+              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+            </svg>}/>
+        )
+      },
+    }
+  ];
   const handleUpload = () => {
     console.log(selectedFile);
     const headers = {
@@ -98,8 +144,8 @@ const BankTransaction = ({ account, transaction }) => {
       url: `${ANALYSER_API}/analyse/api/add-statement/`,
       headers: headers,
       data: {
-        account_number: account.account_number,
-        transactions: selectedFile,
+        account_number: account.AccountNo,
+        file: selectedFile,
       },
     })
       .then((res) => {
@@ -118,13 +164,13 @@ const BankTransaction = ({ account, transaction }) => {
   const handleFileSelect = (event) => {
     console.log("hello");
     const file = event.target.files[0];
-    console.log(file);
+    setSelectedFile(file);
     if (file.type !== "text/csv") {
       showToastMessage("Please select a CSV file!", "negative");
       return;
     }
-
-    setSelectedFile(event.target.files[0]);
+    console.log(file);
+    console.log('selectedFile', selectedFile)
     event.target.value = null;
   };
   const handleDragOver = (event) => {
@@ -151,7 +197,8 @@ const BankTransaction = ({ account, transaction }) => {
           EndMonth: EndMonth,
           StartYear: StartYear,
           EndYear: EndYear,
-          AccountNo:account.AccountNo
+          AccountNo:account.AccountNo,
+          transactions:transactionData
         },
       });
     }
@@ -193,6 +240,54 @@ const BankTransaction = ({ account, transaction }) => {
         showToastMessage(err.message, "negative");
       });
   };
+  const EditTransaction = () => {
+    console.log(editModal);
+    const token = localStorage.getItem("jwt_token");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const body = {
+      transaction_id: String(editModal.id),
+      category: editModal.category,
+      note: editModal.note,
+    };
+    console.log('body', body)
+    
+    axios({
+      method: "put",
+      url: `${ANALYSER_API}/analyse/api/edit-transaction/`,
+      data: body,
+      headers: config.headers,
+    }).then((res) => {
+      console.log(res.data);
+      showToastMessage("Transaction edited Successfully", "positive");
+      var index = transactionData.findIndex(
+        (item) => item.id === editModal.id
+      );
+      // console.log('transactionData', transactionData.slice(index+1))
+      setTransactionData([
+          ...transactionData.slice(0, index),
+          editModal,
+          ...transactionData.slice(index + 1),
+      ]);
+      setEditModal(null);
+    }).catch((err) => {
+      console.log(err);
+      setEditModal(null);
+      showToastMessage(err.message, "negative");
+    });
+  }
+
+  useEffect(() => {
+    setTransactionData(transaction.result);
+  }, [transaction.result]);
+  useEffect(() => {
+    setCategoryData(category.result);
+    console.log('categoryData', categoryData)
+  }, [category.result]);
   if (!account.loading && !transaction.loading) {
     transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
     return (
@@ -264,7 +359,7 @@ const BankTransaction = ({ account, transaction }) => {
                 size={"middle"}
                 columns={columns}
                 bordered={false}
-                dataSource={transaction.result}
+                dataSource={transactionData}
                 pagination={false}
               />
               <Button
@@ -342,6 +437,7 @@ const BankTransaction = ({ account, transaction }) => {
                       type="primary"
                       className="m-5  bg-blue-600 hover:bg-blue-900"
                       onClick={handleUpload}
+                      disabled={!selectedFile}
                     >
                       Upload
                     </Button>
@@ -440,6 +536,61 @@ const BankTransaction = ({ account, transaction }) => {
             </div>
           </div>
         </Modal>
+        <Modal
+          open={editModal ? true : false}
+          onCancel={() => {
+            setEditModal(null);
+          }}
+          closable={false}
+          footer={[]}
+        >
+          <div className="m-0">
+            <div className="flex m-2 justify-center">
+              <p className=" m-2">
+                Category :{" "}
+                <Select
+                  value={editModal ? editModal.category : ""}
+                  onChange={(e) => {
+                    setEditModal({
+                      ...editModal,
+                      category: e,
+                    });
+                  }}
+                >
+                  {categoryData && categoryData.map((category) => (
+                    <Select.Option value={category}>
+                      {category}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </p>
+            </div>
+            <div className="flex m-2 justify-center">
+              <p className=" m-2">
+                Note :{" "}
+                <Input
+                  value={editModal ? editModal.note : ""}
+                  onChange={(e) => {
+                    setEditModal({
+                      ...editModal,
+                      note: e.target.value,
+                    });
+                  }}
+                />
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <Button
+                className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
+                onClick={() => {
+                  EditTransaction();
+                }}
+              >
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </Modal>
       </>
     );
   }
@@ -448,6 +599,7 @@ const BankTransaction = ({ account, transaction }) => {
 BankTransaction.propTypes = {
   account: PropTypes.object.isRequired,
   transaction: PropTypes.array.isRequired,
+  category: PropTypes.array.isRequired,
 };
 
 export default BankTransaction;
