@@ -7,7 +7,9 @@ const CategoryChart = (props) => {
   for (let key in data[0].categorizedData) {
     let sum = 0;
     for (let i = 0; i < data.length; i++) {
-      sum += (data[i].categorizedData[`${key}`].totalSectorMonthExpense);
+      if (data[i].categorizedData[`${key}`].totalSectorMonthExpense > 0) {
+        sum += data[i].categorizedData[`${key}`].totalSectorMonthExpense;
+      }
     }
     const newChartObj = {
       type: key,
@@ -17,7 +19,7 @@ const CategoryChart = (props) => {
   }
   const config = {
     appendPadding: 10,
-    data:categoryChartData,
+    data: categoryChartData,
     angleField: "value",
     colorField: "type",
     radius: 0.8,
