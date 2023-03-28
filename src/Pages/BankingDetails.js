@@ -14,36 +14,10 @@ const BankingDetails = () => {
     useAuth();
     const [category, setCategory] = useState({loading:true});
     const location = useLocation();
-    const [user, setUser] = useState({loading:true});
     const [account, setAccount] = useState({loading:true});
     const [transaction, setTransaction] = useState({loading:true});
     useEffect(() => {
         const token = localStorage.getItem('jwt_token');
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        }
-        axios.get(`${USER_API}/verify_token/`, config)
-            .then(res => {
-                setUser({
-                    ...res.data,
-                    loading: false
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                showToastMessage(err.message,"negative");
-            })
-        
-        const accountConfig = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        }
-
         axios({
             method: "get",
             url: `${BANKING_API}/banking/api/get_categories`,
@@ -92,11 +66,14 @@ const BankingDetails = () => {
         console.log(transaction)
     }, []);
         
-    useEffect(() => {
-
-    }, [transaction]);
+    // useEffect(() => {
+    //     setTransaction({
+    //         ...transaction,
+    //         loading: false
+    //     });
+    // }, [transaction]);
     return (
-        <div className='w-3/5 mx-auto my-2'>
+        <div className='w-4/5 mx-auto my-2'>
             <BankDetails account={account} />
             <BankTransaction account={account} transaction={transaction}  category={category}/>
         </div>

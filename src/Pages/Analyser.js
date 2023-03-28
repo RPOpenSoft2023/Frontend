@@ -3,10 +3,10 @@ import StackedPlot from "../Components/StackedPlot";
 // import CardData from "../Data/CardData"
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
-import { Row, Col, Card, Table } from "antd";
+import { Card, Table, Spin } from "antd";
 import { Tabs } from "antd";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import styled from "styled-components";
+// import { Link } from "react-router-dom";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
 import { useLocation, useNavigate } from "react-router";
@@ -15,8 +15,9 @@ import LoanAnalysisChart from "../Components/Analysis/LoanAnalysisChart";
 import SummaryTab from "../Components/SummaryTab";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import useAuth from "../Components/Auth";
+// import useAuth from "../Components/Auth";
 import SuspiciousActivities from "../Components/SuspiciousActivities";
+import { showToastMessage } from "../Components/Toast";
 function averageIncome(data) {
   var avg = 0;
   for (let i = 0; i < data.analytics.length; i++) {
@@ -60,9 +61,9 @@ const Analyser = (props) => {
     location.state.StartMonth - 1
   );
   const navigate = useNavigate();
-  const [start_year, set_start_year] = useState(location.state.StartYear);
-  const [end_month, set_end_month] = useState(location.state.EndMonth - 1);
-  const [end_year, set_end_year] = useState(location.state.EndYear);
+  const [start_year, ] = useState(location.state.StartYear);
+  const [end_month, ] = useState(location.state.EndMonth - 1);
+  const [end_year, ] = useState(location.state.EndYear);
   const [data, setData] = useState({});
   const [user, setUser] = useState({ loading: true });
   const [cardBlocksData, setCardData] = useState([]);
@@ -115,11 +116,6 @@ const Analyser = (props) => {
               num: DebitFrequency(res.data).toFixed(2),
               title: "Debit Frequency",
             },
-            {
-              key: 6,
-              num: CreditDebit(res.data).toFixed(2),
-              title: "Credit/Debit",
-            },
           ]);
           setUser({
             ...user,
@@ -128,8 +124,11 @@ const Analyser = (props) => {
           setData(res.data);
         })
         .catch((error) => {
+          showToastMessage(error.response.data.message, "negative");
+          navigate("/dashboard");
           console.log(error);
         });
+        setTransactionData(location.state.transactions);
     } else {
       console.log("location.sate", location.state.file);
       axios({
@@ -149,12 +148,12 @@ const Analyser = (props) => {
             {
               key: 1,
               num: averageIncome(res.data).toFixed(2),
-              title: "Average Day wise Income",
+              title: "Average Day Income",
             },
             {
               key: 2,
               num: averageSpending(res.data).toFixed(2),
-              title: "Average Day wise Expense",
+              title: "Average Day Expense",
             },
             {
               key: 3,
@@ -170,11 +169,6 @@ const Analyser = (props) => {
               key: 5,
               num: DebitFrequency(res.data).toFixed(2),
               title: "Debit Frequency",
-            },
-            {
-              key: 6,
-              num: CreditDebit(res.data).toFixed(2),
-              title: "Credit/Debit",
             },
           ]);
           setUser({
@@ -312,9 +306,11 @@ const Analyser = (props) => {
               style={{ width: "70%", height: "auto", textAlign: "center" }}
             >
               <Table
+                size={"middle"}
                 columns={ColumnData}
-                dataSource={TableData}
-                pagination={{ pageSize: 9 }}
+                dataSource={transactionData}
+                pagination={false}
+                bordered={false}
               />
             </Card>
           </div>
@@ -354,6 +350,8 @@ const Analyser = (props) => {
         <Tabs animated defaultActiveKey="1" items={items} />
       </div>
     );
+  } else {
+    return <div className="flex justify-center items-center h-screen"><Spin size="large" /></div>;
   }
 };
 export default Analyser;

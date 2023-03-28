@@ -10,7 +10,8 @@ import {
   Modal,
   InputNumber,
   Input,
-  Select
+  Select,
+  Spin
 } from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
@@ -65,7 +66,7 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "debit",
       // sorter: (a, b) => a.debit - b.debit,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden text-red-500">{ (Math.round(text * 100) / 100).toFixed(2) }</div>
       ),
       align: "center",
       // ellipsis: true,
@@ -76,7 +77,7 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "credit",
       // sorter: (a, b) => a.credit - b.credit,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden text-green-500">{(Math.round(text * 100) / 100).toFixed(2)}</div>
       ),
       align: "center",
       // ellipsis: true,
@@ -87,7 +88,7 @@ const BankTransaction = ({ account, transaction, category }) => {
       key: "balance",
       // sorter: (a, b) => a.balance - b.balance,
       render: (text) => (
-        <div className="text-center whitespace-nowrap	overflow-hidden">{text}</div>
+        <div className="text-center whitespace-nowrap	overflow-hidden">{(Math.round(text * 100) / 100).toFixed(2)}</div>
       ),
       align: "center",
       // ellipsis: true,
@@ -149,8 +150,11 @@ const BankTransaction = ({ account, transaction, category }) => {
       },
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         console.log(res.data);
+        // setTransactionData(res.data);
+
+        
         showToastMessage("File uploaded successfully", "positive");
       })
       .catch((err) => {
@@ -289,7 +293,7 @@ const BankTransaction = ({ account, transaction, category }) => {
     console.log('categoryData', categoryData)
   }, [category.result]);
   if (!account.loading && !transaction.loading) {
-    transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // transaction.result.sort((a, b) => new Date(b.date) - new Date(a.date));
     return (
       <>
         <div>
@@ -368,6 +372,7 @@ const BankTransaction = ({ account, transaction, category }) => {
                 onClick={() => {
                   setOpenAnalyseModal(true);
                 }}
+                disabled={transactionData===null && transactionData.length === 0}
               >
                 Analyse
               </Button>
@@ -593,6 +598,8 @@ const BankTransaction = ({ account, transaction, category }) => {
         </Modal>
       </>
     );
+  } else {
+    return <div className="text-center"><Spin size="large" className="text-center" /></div>;
   }
 };
 

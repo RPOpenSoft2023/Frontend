@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Avatar, Typography } from 'antd'
+import { Avatar, Typography, Spin } from 'antd'
 const BankDetails = ({ account }) => {
   if(!account.loading){
   return (
@@ -66,7 +66,10 @@ const BankDetails = ({ account }) => {
       </div>
     </div>
   )
+  } else {
+    return <div className="text-center"><Spin size="large" className="text-center" /></div>;
   }
+      
 }
 
 BankDetails.propTypes = {
