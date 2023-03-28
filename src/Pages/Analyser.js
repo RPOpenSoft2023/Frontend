@@ -332,7 +332,7 @@ const Analyser = (props) => {
                   {start_month + 1}/{start_year}
                 </span>
               </div>
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit ml-8 lg:mx-2 flex items-center justify-items-start bg-white">
+              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit  flex items-center justify-items-start bg-white">
                 <i class="bx bx-calendar mr-2"></i>
                 <span>
                   {end_month + 1}/{end_year}

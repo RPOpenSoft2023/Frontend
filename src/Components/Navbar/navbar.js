@@ -106,21 +106,6 @@ function Navbar() {
             <Join matches={matches} />
             {localStorage.getItem("logstat") === "true" ?
               <>
-
-                <Dropdown menu={{ items }} placement="bottomLeft" arrow>
-                  <li>
-                    <Link
-                      className="md:p-4 py-2 block text-white hover:text-purple-400 font-mono"
-                      to="/"
-                    >
-                      {!matches ? (
-                        <p>Profile</p>
-                      ) : (
-                        <i className="bx bx-user bx-sm text-white"></i>
-                      )}
-                    </Link>
-                  </li>
-                </Dropdown>
                 <li
                   onClick={() => {
                     logout();
