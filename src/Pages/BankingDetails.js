@@ -94,9 +94,10 @@ const BankingDetails = () => {
         transactionConfig
       )
       .then((res) => {
-        console.log(res.data.results);
+        console.log(res.data);
         setTransaction({
           result: res.data.results,
+          count: res.data.count,
           loading: false,
         });
       })
@@ -110,7 +111,7 @@ const BankingDetails = () => {
 
   useEffect(() => {}, [transaction]);
   return (
-    <div className="w-3/5 mx-auto my-2">
+    <div className="w-4/5 mx-auto my-2">
       <BankDetails account={account} />
       <BankTransaction
         account={account}

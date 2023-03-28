@@ -32,15 +32,18 @@ const Join = ({ matches }) => {
         </div>
       ),
     },
-    {
+  ];
+
+  if(localStorage.getItem("logstat") === "true"){
+    items.push({
       key: "2",
       label: (
         <div target="_blank" rel="noopener noreferrer" to="" onClick={showModal2}>
           Add Bank Account
         </div>
       ),
-    },
-  ];
+    })
+  }
 
   return (
     <>
@@ -63,6 +66,8 @@ const Join = ({ matches }) => {
       >
         <Plus closeUploadStatementModal={handleCancel}/>
       </Modal>
+      
+      {localStorage.getItem("logstat") === "true" ? 
       <Modal
         open={open2}
         title="Add Bank Details"
@@ -71,6 +76,7 @@ const Join = ({ matches }) => {
       >
         <FormCom handleCancel={handleCancel}/>
       </Modal>
+      : <></>}
     </>
   );
 };

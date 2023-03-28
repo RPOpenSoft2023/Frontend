@@ -59,19 +59,19 @@ const Dashboard = () => {
       .catch((error) => {
         showToastMessage(error.message, "negative");
       });
+    axios({
+      method: "get",
+      url: `${process.env.REACT_APP_BANKING_API}/banking/api/get_categories`,
+      headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
+    })
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((error) => {
+        console.log("error.message", error.message);
+      });
   }, []);
 
-  axios({
-    method: "get",
-    url: `${process.env.REACT_APP_BANKING_API}/banking/api/get_categories`,
-    headers: { Authorization: "Bearer " + localStorage.getItem("jwt_token") },
-  })
-    .then((res) => {
-      setCategories(res.data);
-    })
-    .catch((error) => {
-      console.log("error.message", error.message);
-    });
 
   useAuth();
   return (

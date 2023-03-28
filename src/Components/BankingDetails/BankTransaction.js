@@ -11,18 +11,22 @@ import {
   InputNumber,
   Input,
   Select,
-  Spin
+  Spin,
+  Pagination,
 } from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useContext } from "react";
 import { BankingdetailsContext } from "../../Contexts/bankingDetailsContext/bankingDetailsContext";
+import mapping from "../../Data/mapping";
 const BANKING_API = process.env.REACT_APP_BANKING_API; // this is the URL for the banking API
 const ANALYSER_API = process.env.REACT_APP_ANALYSER_API; // this is the URL for the analyser API
 
 const BankTransaction = ({ account, transaction, category }) => {
   const navigate = useNavigate();
+  const [transactionMatrix, setTransactionMatrix] = useState([]);
+  const [transactionCount, setTransactionCount] = useState(transaction.count);
   const [OpenDeleteModal, setOpenDeleteModal] = useState(false);
   const [OpenAnalyseModal, setOpenAnalyseModal] = useState(false);
   const [open, setOpen] = useState(false);
@@ -48,6 +52,7 @@ const BankTransaction = ({ account, transaction, category }) => {
           {text}
         </div>
       ),
+      width: '10%'
       // ellipsis: true,
     },
     {
@@ -61,6 +66,7 @@ const BankTransaction = ({ account, transaction, category }) => {
         </div>
       ),
       ellipsis: true,
+      width: '25%'
     },
     {
       title: "Debit",
@@ -71,6 +77,7 @@ const BankTransaction = ({ account, transaction, category }) => {
         <div className="text-center whitespace-nowrap	overflow-hidden text-red-500">{ (Math.round(text * 100) / 100).toFixed(2) }</div>
       ),
       align: "center",
+      width: '10%'
       // ellipsis: true,
     },
     {
@@ -82,6 +89,7 @@ const BankTransaction = ({ account, transaction, category }) => {
         <div className="text-center whitespace-nowrap	overflow-hidden text-green-500">{(Math.round(text * 100) / 100).toFixed(2)}</div>
       ),
       align: "center",
+      width: '10%'
       // ellipsis: true,
     },
     {
@@ -93,6 +101,7 @@ const BankTransaction = ({ account, transaction, category }) => {
         <div className="text-center whitespace-nowrap	overflow-hidden">{(Math.round(text * 100) / 100).toFixed(2)}</div>
       ),
       align: "center",
+      width: '10%'
       // ellipsis: true,
     },
     {
@@ -102,11 +111,12 @@ const BankTransaction = ({ account, transaction, category }) => {
       // sorter: (a, b) => a.balance - b.balance,
       render: (text) => (
         <div className="text-center whitespace-nowrap	overflow-hidden">
-          {text}
+          {mapping[text]}
         </div>
       ),
       align: "center",
       ellipsis: true,
+      width: '15%'
     },
     {
       title: "Note",
@@ -120,12 +130,14 @@ const BankTransaction = ({ account, transaction, category }) => {
       ),
       align: "center",
       ellipsis: true,
+      width: '15%'
     },
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
       align: "center",
+      width: '5%',
       render: (text, record) => {
         return (
           <Button
@@ -148,6 +160,7 @@ const BankTransaction = ({ account, transaction, category }) => {
                 />
               </svg>
             }
+            className="overflow-hidden"
           />
         );
       },
@@ -262,6 +275,33 @@ const BankTransaction = ({ account, transaction, category }) => {
         showToastMessage(err.message, "negative");
       });
   };
+  const changePage = (e) => {
+    console.log("page", e);
+    if(transactionMatrix[e-1].length > 0){
+      setTransactionData(transactionMatrix[e-1])
+    } else {
+      axios({
+        method: "get",
+        url: `${BANKING_API}/banking/api/transactions?account_number=${account.AccountNo}&page=${e}`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        },
+      })
+        .then((res) => {
+          console.log('res.data', res.data)
+          console.log("res", transactionMatrix[e-1])
+          setTransactionMatrix([
+            ...transactionMatrix.slice(0, e-1),
+            res.data.results,
+            ...transactionMatrix.slice(e)
+          ])
+          setTransactionData(res.data.results);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
   const EditTransaction = () => {
     console.log(editModal);
     const token = localStorage.getItem("jwt_token");
@@ -307,7 +347,14 @@ const BankTransaction = ({ account, transaction, category }) => {
 
   useEffect(() => {
     setTransactionData(transaction.result);
-  }, [transaction.result]);
+    setTransactionCount(transaction.count)
+    const matrix = [];
+    for (let i = 0; i < transaction.count; i += 10) {
+      matrix.push([]);
+    }
+    matrix[0] = transaction.result;
+    setTransactionMatrix(matrix);
+  }, [transaction]);
   useEffect(() => {
     setCategoryData(category.result);
     console.log("categoryData", categoryData);
@@ -386,6 +433,9 @@ const BankTransaction = ({ account, transaction, category }) => {
                 dataSource={transactionData}
                 pagination={false}
               />
+              <div className="mt-2">
+              <Pagination defaultCurrent={1} total={transactionCount} onChange={changePage} hideOnSinglePage={true} showQuickJumper={true} showSizeChanger={false} />
+              </div>
               <Button
                 type="primary"
                 className="m-5 bg-blue-600 hover:bg-blue-900"
@@ -585,7 +635,7 @@ const BankTransaction = ({ account, transaction, category }) => {
                 >
                   {categoryData &&
                     categoryData.map((category) => (
-                      <Select.Option value={category}>{category}</Select.Option>
+                      <Select.Option value={category}>{mapping[category]}</Select.Option>
                     ))}
                 </Select>
               </div>
