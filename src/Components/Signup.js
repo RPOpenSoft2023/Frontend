@@ -49,8 +49,8 @@ export default function Signup() {
         showToastMessage("Successfully Registered", "positive");
       })
       .catch((error) => {
-        console.log("error.message", error.message);
-        showToastMessage(error.message, "negative");
+        console.log("error.message", error.response.data);
+        showToastMessage("Invalid Credentials", "negative");
       });
   };
   return (

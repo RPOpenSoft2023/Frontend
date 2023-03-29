@@ -46,7 +46,7 @@ const Dashboard = () => {
         });
       })
       .catch((error) => {
-        showToastMessage(error.message, "negative");
+        showToastMessage("Error Fetching Accounts", "negative");
       });
     axios({
       method: "get",
@@ -57,7 +57,7 @@ const Dashboard = () => {
         setTransactions(res.data.results);
       })
       .catch((error) => {
-        showToastMessage(error.message, "negative");
+        showToastMessage("Error Fetching Transactions", "negative");
       });
     axios({
       method: "get",

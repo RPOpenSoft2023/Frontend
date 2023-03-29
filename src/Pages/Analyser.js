@@ -89,12 +89,12 @@ const Analyser = (props) => {
             {
               key: 1,
               num: averageIncome(res.data).toFixed(2),
-              title: "Average Day wise Income",
+              title: "Average Day Income",
             },
             {
               key: 2,
               num: averageSpending(res.data).toFixed(2),
-              title: "Average Day wise Expense",
+              title: "Average Day Expense",
             },
             {
               key: 3,
@@ -270,13 +270,15 @@ const Analyser = (props) => {
         label: `Monthly Summary`,
         children: (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Card
+            <div className="w-4/5 flex justify-center">
+            {/* <Card
               bordered={true}
               style={{ width: "75%", height: "auto", textAlign: "center" }}
               // className=".overflow-scroll"
-            >
+            > */}
               <SummaryTab data={data} />
-            </Card>
+            </div>
+            {/* </Card> */}
           </div>
         ),
       },
@@ -284,9 +286,11 @@ const Analyser = (props) => {
         key: '4',
         label: `Suspicious Activities`,
         children: <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'>
-                <SuspiciousActivities data={data} />
-            </Card>
+            {/* <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'> */}
+            <div className="w-4/5 flex justify-center">
+              <SuspiciousActivities data={data} />
+            </div>
+            {/* </Card> */}
         </div>,
     },
     ];
@@ -296,10 +300,11 @@ const Analyser = (props) => {
         label: `Recent Transactions`,
         children: (
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <Card
+            {/* <Card
               bordered={true}
               style={{ width: "70%", height: "auto", textAlign: "center" }}
-            >
+            > */}
+            <div className="flex justify-center w-4/5">
               <Table
                 size={"middle"}
                 columns={ColumnData}
@@ -307,7 +312,8 @@ const Analyser = (props) => {
                 pagination={false}
                 bordered={false}
               />
-            </Card>
+            </div>
+            {/* </Card> */}
           </div>
         ),
       })

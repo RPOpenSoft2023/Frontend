@@ -13,6 +13,7 @@ import {
   Select,
   Spin,
   Pagination,
+  DatePicker
 } from "antd";
 import { showToastMessage } from "../Toast";
 import { useNavigate } from "react-router";
@@ -39,6 +40,10 @@ const BankTransaction = ({ account, transaction, category }) => {
   const [editModal, setEditModal] = useState(null);
   const [transactionData, setTransactionData] = useState(transaction.result);
   const [categoryData, setCategoryData] = useState(category.result);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [filterModal, setFilterModal] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   // console.log("transaction", transactionData);
   const columns = [
     {
@@ -46,7 +51,6 @@ const BankTransaction = ({ account, transaction, category }) => {
       dataIndex: "date",
       key: "date",
       align: "center",
-      // sorter: (a, b) => a.date > b.date ? 1 : a.date < b.date ? -1 : 0,
       render: (text) => (
         <div className="text-center whitespace-nowrap	overflow-hidden">
           {text}
@@ -191,7 +195,7 @@ const BankTransaction = ({ account, transaction, category }) => {
       })
       .catch((err) => {
         console.log(err);
-        showToastMessage(err.message, "negative");
+        showToastMessage("File upload failed", "negative");
       });
     setOpen(false);
     setSelectedFile(null);
@@ -234,7 +238,7 @@ const BankTransaction = ({ account, transaction, category }) => {
           StartYear: StartYear,
           EndYear: EndYear,
           AccountNo: account.AccountNo,
-          transactions: transactionData,
+          transactions: transaction.result,
         },
       });
     } else {
@@ -272,11 +276,12 @@ const BankTransaction = ({ account, transaction, category }) => {
       })
       .catch((err) => {
         console.log(err);
-        showToastMessage(err.message, "negative");
+        showToastMessage("Account deletion failed", "negative");
       });
   };
   const changePage = (e) => {
     console.log("page", e);
+    setPageNumber(e);
     if(transactionMatrix[e-1].length > 0){
       setTransactionData(transactionMatrix[e-1])
     } else {
@@ -302,8 +307,84 @@ const BankTransaction = ({ account, transaction, category }) => {
         });
     }
   }
+
+  const FilterTransactions = (e) => {
+    if(startDate && endDate){
+    let start_date = `${startDate.year()}`
+    let end_date = `${endDate.year()}`
+    if(startDate.month() < 10){
+      start_date = start_date + `-0${startDate.month()+1}`
+    } else {
+      start_date = start_date + `-${startDate.month()+1}`
+    }
+    if(startDate.date() < 10){
+      start_date = start_date + `-0${startDate.date()}`
+    } else {
+      start_date = start_date + `-${startDate.date()}`
+    }
+    if(endDate.month() < 10){
+      end_date = end_date + `-0${endDate.month()+1}`
+    } else {
+      end_date = end_date + `-${endDate.month()+1}`
+    }
+    if(endDate.date() < 10){
+      end_date = end_date + `-0${endDate.date()}`
+    } else {
+      end_date = end_date + `-${endDate.date()}`
+    }
+    console.log('start_date', start_date)
+    console.log('end_date', end_date)
+    // console.log('startDate', startDate)
+    axios({
+      method: "get",
+      url: `${BANKING_API}/banking/api/transactions?account_number=${account.AccountNo}&start_date=${start_date}&end_date=${end_date}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setTransactionCount(res.data.count)
+        setTransactionData(res.data.results);
+        const matrix = [];
+        for (let i = 0; i < transaction.count; i += 10) {
+          matrix.push([]);
+        }
+        matrix[0] = res.data.results;
+        setTransactionMatrix(matrix);
+        setPageNumber(1)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    } else {
+      axios({
+      method: "get",
+      url: `${BANKING_API}/banking/api/transactions?account_number=${account.AccountNo}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setTransactionCount(res.data.count)
+        setTransactionData(res.data.results);
+        const matrix = [];
+        for (let i = 0; i < transaction.count; i += 10) {
+          matrix.push([]);
+        }
+        matrix[0] = res.data.results;
+        setTransactionMatrix(matrix);
+        setPageNumber(1)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  };
+
   const EditTransaction = () => {
-    console.log(editModal);
+    // console.log(editModal);
     const token = localStorage.getItem("jwt_token");
     const config = {
       headers: {
@@ -336,12 +417,21 @@ const BankTransaction = ({ account, transaction, category }) => {
           editModal,
           ...transactionData.slice(index + 1),
         ]);
+        setTransactionMatrix([
+          ...transactionMatrix.slice(0, pageNumber-1),
+          [
+            ...transactionData.slice(0, index),
+            editModal,
+            ...transactionData.slice(index + 1),
+          ],
+          ...transactionMatrix.slice(pageNumber)
+        ])
         setEditModal(null);
       })
       .catch((err) => {
         console.log(err);
         setEditModal(null);
-        showToastMessage(err.message, "negative");
+        showToastMessage("Transaction edit failed", "negative");
       });
   };
 
@@ -426,6 +516,14 @@ const BankTransaction = ({ account, transaction, category }) => {
               </Button>
             </Tabs.TabPane>
             <Tabs.TabPane tab="Transaction History" className="mx-auto" key="1">
+              <div className="flex justify-end">
+              <Button className="m-5 items-end" onClick={() => { setFilterModal(true) } }>
+                Filter by Date 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-funnel-fill w-4 inline" viewBox="0 0 16 16">
+                  <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                </svg>
+              </Button>
+              </div>
               <Table
                 size={"middle"}
                 columns={columns}
@@ -434,7 +532,9 @@ const BankTransaction = ({ account, transaction, category }) => {
                 pagination={false}
               />
               <div className="mt-2">
-              <Pagination defaultCurrent={1} total={transactionCount} onChange={changePage} hideOnSinglePage={true} showQuickJumper={true} showSizeChanger={false} />
+              <Pagination defaultCurrent={1} 
+              current={pageNumber}
+              total={transactionCount} onChange={changePage} hideOnSinglePage={true} showQuickJumper={true} showSizeChanger={false} />
               </div>
               <Button
                 type="primary"
@@ -662,6 +762,58 @@ const BankTransaction = ({ account, transaction, category }) => {
                 }}
               >
                 Save Changes
+              </Button>
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          open={filterModal}
+          onCancel={() => {
+            setFilterModal(false);
+          }}
+          closable={false}
+          footer={[]}
+        >
+          <div className="m-0">
+            <div className="flex m-2 justify-center">
+              <div className="m-2 flex justify-between items-center w-[300px]">
+                <p className="mr-3">Start Date:</p>
+                <DatePicker
+                  value={startDate}
+                  onChange={(e) => {
+                    setStartDate(e);
+                  }}
+                />
+              </div>
+              <div className="m-2 flex justify-between items-center w-[300px]">
+                <p className="mr-3">End Date:</p>
+                <DatePicker
+                  value={endDate}
+                  onChange={(e) => {
+                    setEndDate(e);
+                  }}
+                />
+              </div>
+            </div>
+            {/* Button */}
+            <div className="flex justify-center">
+              <Button
+                className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
+                onClick={(e) => {
+                  FilterTransactions(e);
+                }}
+              >
+                Filter
+              </Button>
+              <Button
+                className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
+                onClick={(e) => {
+                  setStartDate(null);
+                  setEndDate(null);
+                  FilterTransactions(e);
+                }}
+              >
+                Clear
               </Button>
             </div>
           </div>

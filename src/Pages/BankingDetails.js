@@ -43,7 +43,7 @@ const BankingDetails = () => {
       })
       .catch((err) => {
         console.log(err);
-        showToastMessage(err.message, "negative");
+        showToastMessage("Login Credentials Expired", "negative");
       });
 
     const accountConfig = {
@@ -104,7 +104,7 @@ const BankingDetails = () => {
       .catch((err) => {
         console.log(err);
         // navigate('/dashboard');
-        showToastMessage(err.message, "negative");
+        showToastMessage("Account Number Not Found", "negative");
       });
     console.log(transaction);
   }, []);
