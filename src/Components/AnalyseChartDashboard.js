@@ -17,7 +17,7 @@ const AnalyseChartDashboard = (props) => {
   //     monthEntry2.date = String(Number(data[i].month) + 1) + "," + String(data[i].year)
   //     chartData.push(monthEntry2)
   //   }
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < data.length; i++) {
     if (Number(data[i].credit) === 0) {
       chartData.push({
         name: "debit",

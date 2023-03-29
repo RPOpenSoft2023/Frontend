@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from '@ant-design/plots';
 import data from '../Data/TransactionTypeData'
+import { Month } from '../constants/Month';
 const StackedPlot = (props) => {
   let {data} = props;
   data  = data.analytics
@@ -9,7 +10,7 @@ const StackedPlot = (props) => {
     for(let key in data[i].transactionTypes){
       let newEntry = {}
       if(data[i].transactionTypes[key] != 0){
-        newEntry.date = String(Number(data[i].month) + 1) + " " + String(data[i].year)
+        newEntry.date = Month[Number(data[i].month) + 1] + "," + String(data[i].year);
         newEntry.value = data[i].transactionTypes[key]
         newEntry.type = key
         stackData.push(newEntry)
