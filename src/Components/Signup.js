@@ -10,6 +10,7 @@ const fields = signupFields;
 let fieldsState = {};
 fields.forEach((field) => (fieldsState[field.id] = ""));
 export default function Signup() {
+  const [Consent, setConsent] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const [signupState, setSignupState] = useState(fieldsState);
@@ -76,7 +77,24 @@ export default function Signup() {
               isDisabled={field.isDisabled}
             />
           ))}
-          <FormAction handleSubmit={handleSubmit} text="Signup" />
+          <input
+            id="remember-me"
+            name="remember-me"
+            type="checkbox"
+            className="h-4 w-4 text-sky-600 focus:ring-sky-500 border-gray-300 rounded"
+            onChange={()=>{
+              setConsent(!Consent)
+            }}
+          />
+          <label
+            htmlFor="remember-me"
+            className="ml-2 inline text-sm text-gray-900"
+          >
+            Permission to analyze your bank details
+          </label>
+
+          <FormAction handleSubmit={handleSubmit} text="Signup" disabled={!Consent}/>
+
           <ToastContainer />
         </div>
       </form>
