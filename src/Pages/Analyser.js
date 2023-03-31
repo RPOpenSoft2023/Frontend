@@ -14,6 +14,7 @@ import axios from "axios";
 import SuspiciousActivities from "../Components/SuspiciousActivities";
 import { showToastMessage } from "../Components/Toast";
 import { Link } from "react-router-dom";
+import { CSVLink, CSVDownload } from "react-csv";
 function averageIncome(data) {
   var avg = 0;
   for (let i = 0; i < data.analytics.length; i++) {
@@ -53,17 +54,50 @@ function CreditDebit(data) {
 }
 const Analyser = (props) => {
   const location = useLocation();
-  const [start_month, setStartMonth] = useState(
-    location.state.StartMonth - 1
-  );
+  const [start_month, setStartMonth] = useState(location.state.StartMonth - 1);
   const navigate = useNavigate();
-  const [start_year, setStartYear ] = useState(location.state.StartYear);
-  const [end_month, setEndMonth ] = useState(location.state.EndMonth - 1);
+  const [start_year, setStartYear] = useState(location.state.StartYear);
+  const [end_month, setEndMonth] = useState(location.state.EndMonth - 1);
   const [end_year, setEndYear] = useState(location.state.EndYear);
   const [data, setData] = useState({});
   const [user, setUser] = useState({ loading: true });
   const [cardBlocksData, setCardData] = useState([]);
-  const [ transactionData, setTransactionData ] = useState([]);
+  const [transactionData, setTransactionData] = useState([]);
+  const [TableData, setTableData] = useState([]);
+  const [Download, setDownload] = useState(false);
+  const headers = [
+    { label: "Month", key: "month" },
+    { label: "Average Day Wise Expense", key: "averageDayWiseExpense" },
+    { label: "Average Day Wise Income", key: "averageDayWiseIncome" },
+    { label: "Spending Expense Ratio", key: "spendingExpenseRatio" },
+    { label: "Travelling", key: "travelling" },
+    { label: "Shopping And Food", key: "shoppingAndFood" },
+    {
+      label: "Investment And Saving",
+      key: "investmentAndSaving",
+    },
+    {
+      label: "Medical and Healthcare",
+      key: "medicalAndHealthcare",
+    },
+    { label: "Utilities", key: "utilities" },
+    { label: "Others", key: "others" },
+  ];
+  const MonthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
   useEffect(() => {
     // console.log('Hi')
     if (!location.state.file) {
@@ -128,7 +162,7 @@ const Analyser = (props) => {
           navigate("/dashboard");
           console.log(error);
         });
-        setTransactionData(location.state.transactions);
+      setTransactionData(location.state.transactions);
     } else {
       console.log("location.sate", location.state.file);
       axios({
@@ -138,12 +172,10 @@ const Analyser = (props) => {
           file: location.state.file,
         },
         headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-
+          "Content-Type": "multipart/form-data",
+        },
       })
         .then((res) => {
-          console.log(res.data);
           setCardData([
             {
               key: 1,
@@ -176,35 +208,67 @@ const Analyser = (props) => {
             loading: false,
           });
           setData(res.data);
+          const SummaryData = res.data.analytics;
+          const arr = [];
+          for (let i = 0; i < SummaryData.length; i++) {
+            arr.push({
+              key: i,
+              month:
+                MonthNames[SummaryData[i].month] + " " + SummaryData[i].year,
+              averageDayWiseExpense:
+                SummaryData[i].averageDayWiseExpense.toFixed(2),
+              averageDayWiseIncome:
+                SummaryData[i].averageDayWiseIncome.toFixed(2),
+              spendingExpenseRatio:
+                SummaryData[i].spendingExpenseRatio.toFixed(2),
+              travelling:
+                SummaryData[
+                  i
+                ].categorizedData.travelling.totalSectorMonthExpense.toFixed(2),
+              shoppingAndFood:
+                SummaryData[
+                  i
+                ].categorizedData.shoppingAndFood.totalSectorMonthExpense.toFixed(
+                  2
+                ),
+              investmentAndSaving:
+                SummaryData[
+                  i
+                ].categorizedData.investmentAndSaving.totalSectorMonthExpense.toFixed(
+                  2
+                ),
+              medicalAndHealthcare:
+                SummaryData[
+                  i
+                ].categorizedData.medicalAndHealthcare.totalSectorMonthExpense.toFixed(
+                  2
+                ),
+              utilities:
+                SummaryData[
+                  i
+                ].categorizedData.utilities.totalSectorMonthExpense.toFixed(2),
+              others:
+                SummaryData[
+                  i
+                ].categorizedData.others.totalSectorMonthExpense.toFixed(2),
+            });
+          }
+          setTableData(arr);
           location.state.file = null;
         })
         .catch((error) => {
-          console.log("error", error)
+          console.log("error", error);
           console.log("error.message", error.message);
         });
     }
-  }, [location.state]);
-
+  }, []);
   const downloadFile = (e) => {
-    // Download the webpages in pdf format
     const input1 = document.getElementById("1");
     const input2 = document.getElementById("2");
     const input3 = document.getElementById("3");
     const input4 = document.getElementById("4");
-    
-    // html2canvas(input1).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const pdf = new jsPDF("p", "mm", "a4");
-    //   const width = pdf.internal.pageSize.getWidth();
-    //   const height = pdf.internal.pageSize.getHeight();
-    //   pdf.addImage(imgData, "JPEG", 0, 0, width, height);
-    //   pdf.save("download.pdf");
-    // });
-    // window print input1 div
-    
     window.print();
-    e.preventDefault();
-  }
+  };
   // useAuth();
   if (!user.loading) {
     const items = [
@@ -296,30 +360,32 @@ const Analyser = (props) => {
         children: (
           <div style={{ display: "flex", justifyContent: "center" }} id="3">
             <div className="w-4/5 flex justify-center">
-            {/* <Card
+              {/* <Card
               bordered={true}
               style={{ width: "75%", height: "auto", textAlign: "center" }}
               // className=".overflow-scroll"
             > */}
-              <SummaryTab data={data} />
+              <SummaryTab data={TableData} />
             </div>
             {/* </Card> */}
           </div>
         ),
       },
       {
-        key: '4',
+        key: "4",
         label: `Suspicious Activities`,
-        children: <div style={{ display: 'flex', justifyContent: 'center' }} id='4'>
+        children: (
+          <div style={{ display: "flex", justifyContent: "center" }} id="4">
             {/* <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'> */}
             <div className="w-4/5 flex justify-center">
               <SuspiciousActivities data={data} />
             </div>
             {/* </Card> */}
-        </div>,
-    },
+          </div>
+        ),
+      },
     ];
-    if(transactionData && transactionData.length > 0){
+    if (transactionData && transactionData.length > 0) {
       items.push({
         key: "2",
         label: `Recent Transactions`,
@@ -341,7 +407,7 @@ const Analyser = (props) => {
             {/* </Card> */}
           </div>
         ),
-      })
+      });
     }
     return (
       <div className="p-0">
@@ -351,40 +417,81 @@ const Analyser = (props) => {
               BANK ANALYSIS
             </div>
             <div className="col-span-6 md:col-span-6 grid grid-cols-10 flex items-center ml-4 flex">
-            {start_month ? 
-            <>
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-end bg-white">
-                <i class="bx bx-calendar mr-auto"></i>
-                <span>
-                  {start_month + 1}/{start_year}
-                </span>
-              </div>
-              <div className="col-span-1 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-center bg-white">
-                <i class="bx bx-right-arrow-alt"></i>
-              </div>
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-start bg-white">
-                <i class="bx bx-calendar ml-auto"></i>
-                <span>
-                  {end_month + 1}/{end_year}
-                </span>
-              </div>
-            </>: <></>}
+              {start_month ? (
+                <>
+                  <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-end bg-white">
+                    <i class="bx bx-calendar mr-auto"></i>
+                    <span>
+                      {start_month + 1}/{start_year}
+                    </span>
+                  </div>
+                  <div className="col-span-1 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-center bg-white">
+                    <i class="bx bx-right-arrow-alt"></i>
+                  </div>
+                  <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-start bg-white">
+                    <i class="bx bx-calendar ml-auto"></i>
+                    <span>
+                      {end_month + 1}/{end_year}
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="col-span-2 md:col-span-2 flex justify-end pr-4 items-center text-xl mr-4">
               {/* <Button  className="bg-blue-800 text-white font-mono font-bold rounded-md shadow-md"> */}
-                <Link onClick={downloadFile}>
-                  <i class="bx bx-download mx-2"></i>
-                  <span>Download</span>
-                </Link>
+              {!Download && (
+                <button>
+                  <CSVLink data={TableData} headers={headers}>
+                    <i
+                      class="bx bx-download mx-2"
+                      onClick={() => {
+                        downloadFile();
+                      }}
+                    ></i>
+                    <span
+                      onClick={() => {
+                        downloadFile();
+                      }}
+                    >
+                      Download
+                    </span>
+                  </CSVLink>
+                </button>
+              )}
               {/* </Button> */}
             </div>
           </div>
         </div>
-        <Tabs animated defaultActiveKey="1" items={items} />
+        <Tabs
+          animated
+          defaultActiveKey="1"
+          items={items}
+          onTabClick={(key, event) => {
+            console.log(key);
+            if (key === "2") {
+              setDownload(true);
+            }
+            if (key === "3") {
+              setDownload(true);
+            }
+            if (key === "4") {
+              setDownload(true);
+            }
+            if (key === "1") {
+              setDownload(false);
+            }
+          }}
+        />
       </div>
     );
   } else {
-    return <div className="flex justify-center items-center h-screen"><Spin size="large" /></div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spin size="large" />
+      </div>
+    );
   }
 };
 export default Analyser;

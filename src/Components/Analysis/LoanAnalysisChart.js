@@ -19,7 +19,6 @@ const LoanAnalysisChart = (props) => {
       Month[Number(data[i].month) + 1] + "," + String(data[i].year);
     LoanChartData.push(monthEntry2);
   }
-  console.log("LoanChartData", LoanChartData);
   const config = {
     data: LoanChartData,
     xField: "date",
