@@ -77,13 +77,28 @@ export default function Signup() {
               isDisabled={field.isDisabled}
             />
           ))}
+          <div className="flex flex-row justify-center text-center">
+            <input
+              id="Biometrics"
+              name="Biometrics"
+              type="file"
+              className="text-sky-600 focus:ring-sky-500 border-gray-300 rounded"
+              isRequired
+            />
+            <label
+              htmlFor="remember-me"
+              className="w-[300px] inline text-sm text-gray-900"
+            >
+              Upload The Biometrics
+            </label>
+          </div>
           <input
             id="remember-me"
             name="remember-me"
             type="checkbox"
             className="h-4 w-4 text-sky-600 focus:ring-sky-500 border-gray-300 rounded"
-            onChange={()=>{
-              setConsent(!Consent)
+            onChange={() => {
+              setConsent(!Consent);
             }}
           />
           <label
@@ -92,8 +107,11 @@ export default function Signup() {
           >
             Permission to analyze your bank details
           </label>
-
-          <FormAction handleSubmit={handleSubmit} text="Signup" disabled={!Consent}/>
+          <FormAction
+            handleSubmit={handleSubmit}
+            text="Signup"
+            disabled={!Consent}
+          />
 
           <ToastContainer />
         </div>
