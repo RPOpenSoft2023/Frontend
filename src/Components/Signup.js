@@ -83,7 +83,6 @@ export default function Signup() {
               name="Biometrics"
               type="file"
               className="text-sky-600 focus:ring-sky-500 border-gray-300 rounded"
-              isRequired
             />
             <label
               htmlFor="remember-me"
