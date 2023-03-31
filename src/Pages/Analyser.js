@@ -2,7 +2,7 @@ import AnalyserCard from "../Components/AnalyserCard";
 import StackedPlot from "../Components/StackedPlot";
 import TableData from "../Data/TableData";
 import ColumnData from "../Data/ColumnData";
-import { Card, Table, Spin } from "antd";
+import { Card, Table, Spin, Button } from "antd";
 import { Tabs } from "antd";
 import AnalyseChart from "../Components/AnalyseChart";
 import CategoryChart from "../Components/CategoryChart";
@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SuspiciousActivities from "../Components/SuspiciousActivities";
 import { showToastMessage } from "../Components/Toast";
+import { Link } from "react-router-dom";
 function averageIncome(data) {
   var avg = 0;
   for (let i = 0; i < data.analytics.length; i++) {
@@ -184,6 +185,26 @@ const Analyser = (props) => {
     }
   }, [location.state]);
 
+  const downloadFile = (e) => {
+    // Download the webpages in pdf format
+    const input1 = document.getElementById("1");
+    const input2 = document.getElementById("2");
+    const input3 = document.getElementById("3");
+    const input4 = document.getElementById("4");
+    
+    // html2canvas(input1).then((canvas) => {
+    //   const imgData = canvas.toDataURL("image/png");
+    //   const pdf = new jsPDF("p", "mm", "a4");
+    //   const width = pdf.internal.pageSize.getWidth();
+    //   const height = pdf.internal.pageSize.getHeight();
+    //   pdf.addImage(imgData, "JPEG", 0, 0, width, height);
+    //   pdf.save("download.pdf");
+    // });
+    // window print input1 div
+    
+    window.print();
+    e.preventDefault();
+  }
   // useAuth();
   if (!user.loading) {
     const items = [
@@ -191,7 +212,7 @@ const Analyser = (props) => {
         key: "1",
         label: `Overview`,
         children: (
-          <div>
+          <div id="1">
             <div className="my-3 flex justify-center flex-wrap gap-3">
               {cardBlocksData.map((data) => (
                 <AnalyserCard
@@ -273,7 +294,7 @@ const Analyser = (props) => {
         key: "3",
         label: `Monthly Summary`,
         children: (
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center" }} id="3">
             <div className="w-4/5 flex justify-center">
             {/* <Card
               bordered={true}
@@ -289,7 +310,7 @@ const Analyser = (props) => {
       {
         key: '4',
         label: `Suspicious Activities`,
-        children: <div style={{ display: 'flex', justifyContent: 'center' }}>
+        children: <div style={{ display: 'flex', justifyContent: 'center' }} id='4'>
             {/* <Card bordered={true} style={{ width: '75%', height: 'auto', textAlign: "center" }} className='.overflow-scroll'> */}
             <div className="w-4/5 flex justify-center">
               <SuspiciousActivities data={data} />
@@ -303,7 +324,7 @@ const Analyser = (props) => {
         key: "2",
         label: `Recent Transactions`,
         children: (
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div style={{ display: "flex", justifyContent: "center" }} id="2">
             {/* <Card
               bordered={true}
               style={{ width: "70%", height: "auto", textAlign: "center" }}
@@ -329,8 +350,9 @@ const Analyser = (props) => {
             <div className="col-span-3 md:col-span-2 grid text-center text-md md:text-xl lg:text-2xl font-mono text-blue-800">
               BANK ANALYSIS
             </div>
+            <div className="col-span-6 md:col-span-6 grid grid-cols-10 flex items-center ml-4 flex">
             {start_month ? 
-            <div className="col-span-5 md:col-span-5 grid grid-cols-10 flex items-center ml-4 flex">
+            <>
               <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-end bg-white">
                 <i class="bx bx-calendar mr-auto"></i>
                 <span>
@@ -346,13 +368,16 @@ const Analyser = (props) => {
                   {end_month + 1}/{end_year}
                 </span>
               </div>
-            </div> : <></>}
-            {/* <div className="col-span-2 md:col-span-3 flex justify-end pr-4 items-center text-xl mr-4">
-              <Link>
-                <i class="bx bx-download mx-2"></i>
-                <span>Analysis</span>
-              </Link>
-            </div> */}
+            </>: <></>}
+            </div>
+            <div className="col-span-2 md:col-span-2 flex justify-end pr-4 items-center text-xl mr-4">
+              {/* <Button  className="bg-blue-800 text-white font-mono font-bold rounded-md shadow-md"> */}
+                <Link onClick={downloadFile}>
+                  <i class="bx bx-download mx-2"></i>
+                  <span>Download</span>
+                </Link>
+              {/* </Button> */}
+            </div>
           </div>
         </div>
         <Tabs animated defaultActiveKey="1" items={items} />

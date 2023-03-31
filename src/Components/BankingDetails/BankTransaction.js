@@ -199,6 +199,7 @@ const BankTransaction = ({ account, transaction, category }) => {
         })
           .then((res) => {
             console.log(res.data);
+            setTransactionCount(res.data.count)
             setTransactionData(res.data.results);
             const matrix = [];
             for (let i = 0; i < transaction.count; i += 10) {
@@ -206,9 +207,7 @@ const BankTransaction = ({ account, transaction, category }) => {
             }
             matrix[0] = res.data.results;
             setTransactionMatrix(matrix);
-            console.log(transactionMatrix);
-            setPageNumber(1)
-            setTransactionCount(res.data.count);
+            setPageNumber(1);
           })
           .catch((err) => {
             console.log(err);
@@ -304,6 +303,15 @@ const BankTransaction = ({ account, transaction, category }) => {
   const changePage = (e) => {
     console.log("page", e);
     setPageNumber(e);
+    // console.log("transactionMatrix", transactionMatrix[e-1])
+    console.log("transactionMatrix", transactionMatrix.length, transactionMatrix)
+    if(transactionMatrix.length < e){
+      const matrix = [];
+      for (let i = 0; i < transaction.count; i += 10) {
+        matrix.push([]);
+      }
+      setTransactionMatrix(matrix)
+    }
     if(transactionMatrix[e-1].length > 0){
       setTransactionData(transactionMatrix[e-1])
     } else {
