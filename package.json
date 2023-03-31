@@ -26,6 +26,7 @@
     "react-toastify": "^9.1.1",
     "recharts": "^2.5.0",
     "styled-components": "^5.3.9",
+    "vercel": "^28.18.3",
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
   },
