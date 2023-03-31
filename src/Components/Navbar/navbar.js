@@ -57,7 +57,7 @@ function Navbar() {
         "
       >
         <div className=" text-2xl tracking-wide font-['Kanit']">
-          <Link to={"/dashboard"}>Bankalyze</Link>
+          <Link to={"/dashboard"}>FinTrack</Link>
         </div>
 
         <svg

@@ -189,8 +189,30 @@ const BankTransaction = ({ account, transaction, category }) => {
         // console.log(res);
         console.log(res.data);
         // setTransactionData(res.data);
-
-        
+        axios({
+          method: "get",
+          url: `${BANKING_API}/banking/api/transactions?account_number=${account.AccountNo}`,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            console.log(res.data);
+            setTransactionData(res.data.results);
+            const matrix = [];
+            for (let i = 0; i < transaction.count; i += 10) {
+              matrix.push([]);
+            }
+            matrix[0] = res.data.results;
+            setTransactionMatrix(matrix);
+            console.log(transactionMatrix);
+            setPageNumber(1)
+            setTransactionCount(res.data.count);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         showToastMessage("File uploaded successfully", "positive");
       })
       .catch((err) => {
@@ -800,6 +822,7 @@ const BankTransaction = ({ account, transaction, category }) => {
               <Button
                 className="m-2  bg-blue-600  hover:bg-blue-900 text-white"
                 onClick={(e) => {
+                  setFilterModal(false);
                   FilterTransactions(e);
                 }}
               >
@@ -810,6 +833,7 @@ const BankTransaction = ({ account, transaction, category }) => {
                 onClick={(e) => {
                   setStartDate(null);
                   setEndDate(null);
+                  setFilterModal(false);
                   FilterTransactions(e);
                 }}
               >

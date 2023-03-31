@@ -54,7 +54,7 @@ const FormCom = ({ handleCancel }) => {
           Account_type: values.accountType,
           OpeningDate: `${values.DOP.year()}-${month}-${date}`,
           BranchName: values.branchName,
-          BankAddress: values.bankAddress,
+          BranchAddress: values.bankAddress,
         };
         setBankingdetailsContext([...BankingDetails, dataobj]);
         showToastMessage("Account Created Successfully", "positive");

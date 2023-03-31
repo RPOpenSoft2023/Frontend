@@ -52,13 +52,13 @@ function CreditDebit(data) {
 }
 const Analyser = (props) => {
   const location = useLocation();
-  const [start_month, set_start_month] = useState(
+  const [start_month, setStartMonth] = useState(
     location.state.StartMonth - 1
   );
   const navigate = useNavigate();
-  const [start_year, ] = useState(location.state.StartYear);
-  const [end_month, ] = useState(location.state.EndMonth - 1);
-  const [end_year, ] = useState(location.state.EndYear);
+  const [start_year, setStartYear ] = useState(location.state.StartYear);
+  const [end_month, setEndMonth ] = useState(location.state.EndMonth - 1);
+  const [end_year, setEndYear] = useState(location.state.EndYear);
   const [data, setData] = useState({});
   const [user, setUser] = useState({ loading: true });
   const [cardBlocksData, setCardData] = useState([]);
@@ -69,6 +69,10 @@ const Analyser = (props) => {
       console.log("location.sate", location.state);
       const account_number = location.state.AccountNo;
       console.log("account_number", account_number);
+      setStartMonth(location.state.StartMonth - 1);
+      setStartYear(location.state.StartYear);
+      setEndMonth(location.state.EndMonth - 1);
+      setEndYear(location.state.EndYear);
       axios({
         method: "get",
         url: `${process.env.REACT_APP_ANALYSER_API}/analyse/api/bank-analysis`,
@@ -322,19 +326,22 @@ const Analyser = (props) => {
       <div className="p-0">
         <div className="my-3">
           <div className="grid grid-cols-10 gap-4 font-sans">
-            <div className="col-span-3 md:col-span-2 grid justify-items-end text-md md:text-xl lg:text-2xl font-mono text-blue-800">
-              {">"} BANK ANALYSIS
+            <div className="col-span-3 md:col-span-2 grid text-center text-md md:text-xl lg:text-2xl font-mono text-blue-800">
+              BANK ANALYSIS
             </div>
             {start_month ? 
-            <div className="col-span-5 md:col-span-5 grid grid-cols-5 flex items-center ml-4 flex">
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-2 flex items-center justify-items-end bg-white">
-                <i class="bx bx-calendar mr-2"></i>
+            <div className="col-span-5 md:col-span-5 grid grid-cols-10 flex items-center ml-4 flex">
+              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-end bg-white">
+                <i class="bx bx-calendar mr-auto"></i>
                 <span>
                   {start_month + 1}/{start_year}
                 </span>
               </div>
-              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit  flex items-center justify-items-start bg-white">
-                <i class="bx bx-calendar mr-2"></i>
+              <div className="col-span-1 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-center bg-white">
+                <i class="bx bx-right-arrow-alt"></i>
+              </div>
+              <div className="col-span-2 md:col-span-1 rounded-md p-1 shadow-md w-fit mx-auto flex items-center justify-items-start bg-white">
+                <i class="bx bx-calendar ml-auto"></i>
                 <span>
                   {end_month + 1}/{end_year}
                 </span>
