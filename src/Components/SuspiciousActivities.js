@@ -1,11 +1,7 @@
-import {
-  InfoCircleOutlined,
-  QuestionCircleOutlined
-} from "@ant-design/icons";
+import { InfoCircleOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import { Badge, Dropdown, Space, Table, Button, Popover } from "antd";
 import { Tooltip } from "antd";
 const SuspiciousActivities = (props) => {
-
   const Data = props.data.Cautions;
   // console.log(Data.atmFlag[1][0].Date);
 
@@ -48,7 +44,7 @@ const SuspiciousActivities = (props) => {
     },
     {
       activity: "High credits on bank holidays",
-      incidences: `${Data.highHolidayCredit[0]}`,
+      incidences: 0,
     },
     {
       activity: "High cash deposits",
@@ -60,9 +56,9 @@ const SuspiciousActivities = (props) => {
     },
   ];
 
-  const suspiciousColumnFiltered = suspiciousData.filter((record)=>{
-    return record.incidences>0;
-  })
+  const suspiciousColumnFiltered = suspiciousData.filter((record) => {
+    return record.incidences > 0;
+  });
 
   const content = (
     <Table
@@ -108,7 +104,7 @@ const SuspiciousActivities = (props) => {
 
   const dataNeg = [];
 
-  for (let i = 0; i <Data.negativeComputedBalanceFlag[0]; ++i) {
+  for (let i = 0; i < Data.negativeComputedBalanceFlag[0]; ++i) {
     dataNeg.push({
       key: i.toString(),
       date: `${Data.negativeComputedBalanceFlag[1][i].Date}`,
@@ -120,10 +116,9 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataTax = [];
 
-  for (let i = 0; i <Data.taxFlag[0]; ++i) {
+  for (let i = 0; i < Data.taxFlag[0]; ++i) {
     dataTax.push({
       key: i.toString(),
       date: `${Data.taxFlag[1][i].Date}`,
@@ -135,10 +130,9 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataRtgs = [];
 
-  for (let i = 0; i <Data.rtgsFlag[0]; ++i) {
+  for (let i = 0; i < Data.rtgsFlag[0]; ++i) {
     dataRtgs.push({
       key: i.toString(),
       date: `${Data.rtgsFlag[1][i].Date}`,
@@ -150,10 +144,9 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataAtm = [];
 
-  for (let i = 0; i <Data.atmFlag[0]; ++i) {
+  for (let i = 0; i < Data.atmFlag[0]; ++i) {
     dataAtm.push({
       key: i.toString(),
       date: `${Data.atmFlag[1][i].Date}`,
@@ -165,10 +158,9 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataEqual = [];
 
-  for (let i = 0; i <Data.equalDebitCreditFlag[0]; ++i) {
+  for (let i = 0; i < Data.equalDebitCreditFlag[0]; ++i) {
     dataEqual.push({
       key: i.toString(),
       date: `${Data.equalDebitCreditFlag[1][i].Date}`,
@@ -180,10 +172,9 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataCheque = [];
 
-  for (let i = 0; i <Data.chequeInHolidayFlag[0]; ++i) {
+  for (let i = 0; i < Data.chequeInHolidayFlag[0]; ++i) {
     dataCheque.push({
       key: i.toString(),
       date: `${Data.chequeInHolidayFlag[1][i].Date}`,
@@ -195,25 +186,10 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataHoliday = [];
-
-  for (let i = 0; i <Data.highHolidayCredit[0]; ++i) {
-    dataHoliday.push({
-      key: i.toString(),
-      date: `${Data.highHolidayCredit[1][i].Date}`,
-      particulars: `${Data.highHolidayCredit[1][i].Particulars}`,
-      category: `${Data.highHolidayCredit[1][i].Category}`,
-      debit: `${Data.highHolidayCredit[1][i].Debit}`,
-      credit: `${Data.highHolidayCredit[1][i].Credit}`,
-      balance: `${Data.highHolidayCredit[1][i].Balance}`,
-    });
-  }
-  
-  
   const dataCash = [];
 
-  for (let i = 0; i <Data.highCashCreditFlag[0]; ++i) {
+  for (let i = 0; i < Data.highCashCreditFlag[0]; ++i) {
     dataCash.push({
       key: i.toString(),
       date: `${Data.highCashCreditFlag[1][i].Date}`,
@@ -225,10 +201,9 @@ const SuspiciousActivities = (props) => {
     });
   }
 
-
   const dataMismatch = [];
 
-  for (let i = 0; i <Data.computedBalanceError[0]; ++i) {
+  for (let i = 0; i < Data.computedBalanceError[0]; ++i) {
     dataMismatch.push({
       key: i.toString(),
       date: `${Data.computedBalanceError[1][i].Date}`,
@@ -246,8 +221,9 @@ const SuspiciousActivities = (props) => {
       dataIndex: "name",
       key: "name",
       render: (text, record) => (
-        <span style={{ display: 'flex', alignItems: 'center' }}>
-          {text}{'  '}
+        <span style={{ display: "flex", alignItems: "center" }}>
+          {text}
+          {"  "}
           <Tooltip className="mx-2" title={record.description}>
             <QuestionCircleOutlined />
           </Tooltip>
@@ -275,60 +251,60 @@ const SuspiciousActivities = (props) => {
     key: 1,
     name: "NEGATIVE COMPUTED BALANCE",
     func: dataNeg,
-    description: "hello",
+    description: "Transactions for which the total balance is negative",
   });
-  data.push({ 
-    key: 2, 
+  data.push({
+    key: 2,
     name: "ROUND FIGURE TAX PAYMENTS",
     func: dataTax,
-    description: "hello",
+    description: "If the tax is in round figures",
   });
-  data.push({ 
-    key: 3, 
+  data.push({
+    key: 3,
     name: "RTGS PAYMENTS BELOW ₹2 LAKHS",
-    func: dataRtgs, 
-    description: "hello",
+    func: dataRtgs,
+    description: "RTGS(Real Time Gross Settlement) is used to transfer large funds in real time so if funds are below 2 lakhs it raises a flag",
   });
-  data.push({ 
-    key: 4, 
+  data.push({
+    key: 4,
     name: "ATM WITHDRAWALS ABOVE ₹20,000",
-    func: dataAtm, 
-    description: "hello",
+    func: dataAtm,
+    description: "ATM cash withdrawals above 20,000 are flagged",
   });
-  data.push({ 
-    key: 5, 
+  data.push({
+    key: 5,
     name: "EQUAL DEBITS & CREDITS",
-    func: dataEqual, 
-    description: "hello",
+    func: dataEqual,
+    description: "If debit is equal to credit either in frequency or in amount in the month end",
   });
-  data.push({ 
-    key: 6, 
+  data.push({
+    key: 6,
     name: "CHEQUE DEPOSITS ON BANK HOLIDAYS",
-    func: dataCheque, 
-    description: "hello", 
+    func: dataCheque,
+    description: "Cheque deposit on bank holidays are flagged",
   });
-  data.push({ 
-    key: 7, 
+  data.push({
+    key: 7,
     name: "HIGH CREDITS ON BANK HOLIDAYS",
-    func: dataHoliday, 
-    description: "hello", 
+    func: dataHoliday,
+    description: "hello",
   });
-  data.push({ 
-    key: 8, 
+  data.push({
+    key: 8,
     name: "HIGH CASH DEPOSITS",
-    func: dataCash, 
-    description: "hello",
+    func: dataCash,
+    description: "Cash deposit above 2.5 lakhs are flagged",
   });
-  data.push({ 
-    key: 9, 
+  data.push({
+    key: 9,
     name: "BALANCE VS COMPUTED BALANCE MISMATCH",
-    func: dataMismatch, 
-    description: "hello",
+    func: dataMismatch,
+    description: "If the balance in the statement is not equal to the computed balance. It signifies inconsistency in the statement",
   });
 
-  const filteredData = data.filter((record)=>{
-    return record.func.length>0;
-  })
+  const filteredData = data.filter((record) => {
+    return record.func.length > 0;
+  });
 
   return (
     <>
@@ -336,7 +312,13 @@ const SuspiciousActivities = (props) => {
         columns={columns}
         expandable={{
           expandedRowRender: (record) => {
-            return (record.func.length>0?<Table columns={columns1} dataSource={record.func} pagination={false} />:null);
+            return record.func.length > 0 ? (
+              <Table
+                columns={columns1}
+                dataSource={record.func}
+                pagination={false}
+              />
+            ) : null;
           },
           defaultExpandedRowKeys: ["0"],
         }}
