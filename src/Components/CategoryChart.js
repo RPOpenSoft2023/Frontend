@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Pie } from "@ant-design/plots";
+import { CategoryMap } from "../Data/Categories";
 const CategoryChart = (props) => {
   let data = props.data.analytics;
   let categoryChartData = new Array();
@@ -12,7 +13,7 @@ const CategoryChart = (props) => {
       }
     }
     const newChartObj = {
-      type: key,
+      type: CategoryMap[`${key}`],
       value: sum,
     };
     categoryChartData.push(newChartObj);

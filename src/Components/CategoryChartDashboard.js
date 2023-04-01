@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Pie } from "@ant-design/plots";
 import { useContext } from "react";
+import { CategoryMap } from "../Data/Categories";
 import { BankingdetailsContext } from "../Contexts/bankingDetailsContext/bankingDetailsContext";
 const CategoryChartDashboard = (props) => {
   let type = props.type;
@@ -29,7 +30,7 @@ const CategoryChartDashboard = (props) => {
     }
     if (sum > 0) {
       categoryChartData.push({
-        type: Categories[i],
+        type: CategoryMap[`${Categories[i]}`],
         value: sum,
       });
     }
