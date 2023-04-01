@@ -41,7 +41,7 @@ export default function BankNames(props) {
       title: "Actions",
       key: "action",
       width: "15%",
-      render: (_,record) => (
+      render: (_, record) => (
         <>
           <Button
             type="primary"
@@ -55,19 +55,42 @@ export default function BankNames(props) {
               boxShadow: "none",
             }}
             icon={<RightOutlined />}
-            onClick={() => navigate("/banking",{state:record})}
+            onClick={() => navigate("/banking", { state: record })}
           ></Button>
         </>
       ),
     },
   ];
-  if (bankingDetails.length === 0) {
-    return <div className="text-center"><Spin size="large" className="text-center" /></div>;
-  } else {
+  console.log("bankingDetails.loading", bankingDetails);
+  if (bankingDetails.loading) {
     return (
-      <div className="m-1 ">
-        <Table columns={columns} dataSource={bankingDetails} pagination={false} className="p-3"/>
+      <div className="text-center">
+        <Spin size="large" className="text-center" />
       </div>
     );
+  } else {
+    if (bankingDetails.length === 0) {
+      return (
+        <div className="m-1 ">
+          <Table
+            columns={columns}
+            dataSource={null}
+            pagination={false}
+            className="p-3"
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="m-1 ">
+          <Table
+            columns={columns}
+            dataSource={bankingDetails}
+            pagination={false}
+            className="p-3"
+          />
+        </div>
+      );
+    }
   }
 }

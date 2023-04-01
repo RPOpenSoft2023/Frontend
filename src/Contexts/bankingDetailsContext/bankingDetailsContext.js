@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 export const BankingdetailsContext = createContext();
 export const BankingDetailsProvider = (props) => {
-  const [BankingDetails, setBankingdetailsContext] = useState([]);
+  const [BankingDetails, setBankingdetailsContext] = useState({loading:true});
   const [userData, setUserData] = useState();
   const [Categories, setCategories] = useState([]);
   return (

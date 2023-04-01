@@ -18,7 +18,8 @@ const Dashboard = () => {
     Categories,
     setCategories,
   ] = useContext(BankingdetailsContext);
-  const [Transactions, setTransactions] = useState([]);
+  const [Transactions, setTransactions] = useState({ loading: true });
+  console.log("Transactions", Transactions);
   useEffect(() => {
     if (location.state) setUserData(location.state);
   }, [location.state]);
@@ -42,8 +43,8 @@ const Dashboard = () => {
             BranchAddress: element.branch_address,
           };
           data.push(dataobj);
-          setBankingDetails(data);
         });
+        setBankingDetails(data);
       })
       .catch((error) => {
         showToastMessage("Error Fetching Accounts", "negative");
@@ -71,7 +72,6 @@ const Dashboard = () => {
         console.log("error.message", error.message);
       });
   }, []);
-
 
   useAuth();
   return (
