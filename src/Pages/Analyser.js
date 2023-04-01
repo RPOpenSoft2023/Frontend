@@ -156,6 +156,52 @@ const Analyser = (props) => {
             loading: false,
           });
           setData(res.data);
+          const SummaryData = res.data.analytics;
+          const arr = [];
+          for (let i = 0; i < SummaryData.length; i++) {
+            arr.push({
+              key: i,
+              month:
+                MonthNames[SummaryData[i].month] + " " + SummaryData[i].year,
+              averageDayWiseExpense:
+                SummaryData[i].averageDayWiseExpense.toFixed(2),
+              averageDayWiseIncome:
+                SummaryData[i].averageDayWiseIncome.toFixed(2),
+              spendingExpenseRatio:
+                SummaryData[i].spendingExpenseRatio.toFixed(2),
+              travelling:
+                SummaryData[
+                  i
+                ].categorizedData.travelling.totalSectorMonthExpense.toFixed(2),
+              shoppingAndFood:
+                SummaryData[
+                  i
+                ].categorizedData.shoppingAndFood.totalSectorMonthExpense.toFixed(
+                  2
+                ),
+              investmentAndSaving:
+                SummaryData[
+                  i
+                ].categorizedData.investmentAndSaving.totalSectorMonthExpense.toFixed(
+                  2
+                ),
+              medicalAndHealthcare:
+                SummaryData[
+                  i
+                ].categorizedData.medicalAndHealthcare.totalSectorMonthExpense.toFixed(
+                  2
+                ),
+              utilities:
+                SummaryData[
+                  i
+                ].categorizedData.utilities.totalSectorMonthExpense.toFixed(2),
+              others:
+                SummaryData[
+                  i
+                ].categorizedData.others.totalSectorMonthExpense.toFixed(2),
+            });
+          }
+          setTableData(arr);
         })
         .catch((error) => {
           showToastMessage(error.response.data.message, "negative");
